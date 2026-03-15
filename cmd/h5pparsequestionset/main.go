@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 
 	h5p "github.com/grokify/h5p-go"
 )
@@ -15,7 +16,7 @@ func main() {
 		os.Exit(1)
 	}
 	// Read JSON file
-	jsonData, err := os.ReadFile(os.Args[1])
+	jsonData, err := os.ReadFile(filepath.Clean(os.Args[1]))
 	if err != nil {
 		log.Fatal(err)
 	}
