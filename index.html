@@ -356,6 +356,26 @@
   
 
       
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="releases/v0.4.0/" class="md-tabs__link">
+          
+  
+  
+  Releases
+
+        </a>
+      </li>
+    
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -470,6 +490,15 @@
   <a href="#quick-start" class="md-nav__link">
     <span class="md-ellipsis">
       🚀 Quick Start
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-new-in-v040" class="md-nav__link">
+    <span class="md-ellipsis">
+      🆕 What's New in v0.4.0
     </span>
   </a>
   
@@ -1214,6 +1243,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="why-h5p-for-quizzes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Why H5P for Quizzes?
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1342,6 +1394,150 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Releases
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Releases
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="releases/v0.4.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.4.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="releases/v0.3.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.3.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="releases/v0.2.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.2.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="releases/v0.1.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    v0.1.0
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1381,6 +1577,15 @@
   <a href="#quick-start" class="md-nav__link">
     <span class="md-ellipsis">
       🚀 Quick Start
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-new-in-v040" class="md-nav__link">
+    <span class="md-ellipsis">
+      🆕 What's New in v0.4.0
     </span>
   </a>
   
@@ -1508,6 +1713,7 @@
 <li>🎯 <strong>Multiple Question Types</strong>: Support for single-answer and multi-answer questions</li>
 <li>📋 <strong>Official Schema Compliance</strong>: Uses actual H5P semantics definitions</li>
 <li>🔄 <strong>JSON Serialization</strong>: Full marshaling/unmarshaling support</li>
+<li>🏷️ <strong>Extensions Support</strong>: Vendor-specific metadata with h5pGo namespace (v0.4.0+)</li>
 </ul>
 <h2 id="quick-start">🚀 Quick Start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>go<span class="w"> </span>get<span class="w"> </span>github.com/grokify/h5p-go
@@ -1549,19 +1755,32 @@
 <a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Generated H5P Question Set:\n%s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nx">jsonData</span><span class="p">))</span>
 <a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="p">}</span>
 </code></pre></div>
+<h2 id="whats-new-in-v040">🆕 What's New in v0.4.0<a class="headerlink" href="#whats-new-in-v040" title="Permanent link">&para;</a></h2>
+<p>Extensions support for vendor-specific question metadata! Add categorization, difficulty levels, learning objectives, and custom metadata to your questions while maintaining full H5P compatibility.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">ext</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h5p</span><span class="p">.</span><span class="nx">NewH5PGoExtension</span><span class="p">(</span><span class="s">&quot;1. Overview&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nx">WithTopic</span><span class="p">(</span><span class="s">&quot;RAG Fundamentals&quot;</span><span class="p">).</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nx">WithTags</span><span class="p">(</span><span class="s">&quot;rag&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;retrieval&quot;</span><span class="p">).</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nx">WithDifficulty</span><span class="p">(</span><span class="s">&quot;medium&quot;</span><span class="p">).</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nx">WithLearningObjective</span><span class="p">(</span><span class="s">&quot;Understand RAG basics&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="nx">question</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h5p</span><span class="p">.</span><span class="nx">NewMultiChoiceQuestionWithExtensions</span><span class="p">(</span><span class="nx">text</span><span class="p">,</span><span class="w"> </span><span class="nx">answers</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">h5p</span><span class="p">.</span><span class="nx">Extensions</span><span class="p">{</span><span class="nx">H5PGo</span><span class="p">:</span><span class="w"> </span><span class="nx">ext</span><span class="p">})</span>
+</code></pre></div>
+<p>See the <a href="releases/v0.4.0/">v0.4.0 release notes</a> for details.</p>
 <h2 id="whats-next">📚 What's Next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong><a href="getting-started/installation/">Installation Guide</a></strong> - Detailed installation instructions</li>
-<li><strong><a href="getting-started/quick-start/">Quick Start Tutorial</a></strong> - Step-by-step tutorial </li>
+<li><strong><a href="getting-started/quick-start/">Quick Start Tutorial</a></strong> - Step-by-step tutorial</li>
 <li><strong><a href="getting-started/concepts/">Basic Concepts</a></strong> - Understanding H5P and this library</li>
 <li><strong><a href="guide/question-sets/">User Guide</a></strong> - Comprehensive usage documentation</li>
 <li><strong><a href="api/core-types/">API Reference</a></strong> - Complete API documentation</li>
 <li><strong><a href="examples/basic/">Examples</a></strong> - Real-world usage examples</li>
+<li><strong><a href="releases/v0.4.0/">Release Notes</a></strong> - Version history and changes</li>
 </ul>
 <h2 id="architecture">🏛️ Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h2>
 <p>The H5P Go SDK is organized into several key components:</p>
 <ul>
 <li><strong>Core Types</strong> (<code>questionset.go</code>, <code>h5p_package.go</code>) - Fundamental data structures</li>
+<li><strong>Extensions</strong> (<code>extensions.go</code>) - Vendor-specific metadata support</li>
 <li><strong>Builder Pattern</strong> (<code>builder.go</code>) - Fluent API for creating content</li>
 <li><strong>Official Schemas</strong> (<code>schemas/</code>) - Type-safe H5P content type definitions</li>
 <li><strong>Semantics Engine</strong> (<code>semantics/</code>) - Universal H5P semantics format support</li>

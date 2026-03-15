@@ -88,4 +88,20 @@
          <loc>https://grokify.github.io/h5p-go/reference/standards/</loc>
          <lastmod>2026-03-15</lastmod>
     </url>
+    <url>
+         <loc>https://grokify.github.io/h5p-go/releases/v0.1.0/</loc>
+         <lastmod>2026-03-15</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/h5p-go/releases/v0.2.0/</loc>
+         <lastmod>2026-03-15</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/h5p-go/releases/v0.3.0/</loc>
+         <lastmod>2026-03-15</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/h5p-go/releases/v0.4.0/</loc>
+         <lastmod>2026-03-15</lastmod>
+    </url>
 </urlset>
