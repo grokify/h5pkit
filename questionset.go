@@ -34,21 +34,24 @@ type Copyright struct {
 }
 
 type Question struct {
-	Library string      `json:"library"`
-	Params  interface{} `json:"params"`
+	Library    string      `json:"library"`
+	Params     interface{} `json:"params"`
+	Extensions *Extensions `json:"extensions,omitempty"`
 }
 
 // MultiChoiceQuestion represents a typed H5P MultiChoice question
 type MultiChoiceQuestion struct {
-	Library string                     `json:"library"`
-	Params  *schemas.MultiChoiceParams `json:"params"`
+	Library    string                     `json:"library"`
+	Params     *schemas.MultiChoiceParams `json:"params"`
+	Extensions *Extensions                `json:"extensions,omitempty"`
 }
 
 // ToQuestion converts a MultiChoiceQuestion to a generic Question
 func (mcq *MultiChoiceQuestion) ToQuestion() *Question {
 	return &Question{
-		Library: mcq.Library,
-		Params:  mcq.Params,
+		Library:    mcq.Library,
+		Params:     mcq.Params,
+		Extensions: mcq.Extensions,
 	}
 }
 
@@ -58,6 +61,25 @@ func NewMultiChoiceQuestion(params *schemas.MultiChoiceParams) *MultiChoiceQuest
 		Library: "H5P.MultiChoice 1.16",
 		Params:  params,
 	}
+}
+
+// NewMultiChoiceQuestionWithExtensions creates a new typed MultiChoice question with h5p-go extensions
+func NewMultiChoiceQuestionWithExtensions(params *schemas.MultiChoiceParams, ext *H5PGoExtension) *MultiChoiceQuestion {
+	return &MultiChoiceQuestion{
+		Library: "H5P.MultiChoice 1.16",
+		Params:  params,
+		Extensions: &Extensions{
+			H5PGo: ext,
+		},
+	}
+}
+
+// WithExtensions adds extensions to an existing MultiChoiceQuestion and returns it for chaining
+func (mcq *MultiChoiceQuestion) WithExtensions(ext *H5PGoExtension) *MultiChoiceQuestion {
+	mcq.Extensions = &Extensions{
+		H5PGo: ext,
+	}
+	return mcq
 }
 
 type FeedbackRange struct {
