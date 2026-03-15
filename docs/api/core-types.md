@@ -42,11 +42,105 @@ Represents a single question in a question set:
 
 ```go
 type Question struct {
-    Library    string      `json:"library"`
-    Params     interface{} `json:"params"`
-    SubContentId string    `json:"subContentId,omitempty"`
-    Metadata   *Metadata   `json:"metadata,omitempty"`
+    Library      string      `json:"library"`
+    Params       interface{} `json:"params"`
+    SubContentId string      `json:"subContentId,omitempty"`
+    Metadata     *Metadata   `json:"metadata,omitempty"`
+    Extensions   *Extensions `json:"extensions,omitempty"`
 }
+```
+
+## Extension Types
+
+Extensions allow vendor-specific metadata to be added to questions while maintaining H5P compatibility. Standard H5P parsers will ignore unknown fields.
+
+### Extensions
+
+Container for vendor-specific extensions:
+
+```go
+type Extensions struct {
+    H5PGo *H5PGoExtension `json:"h5pGo,omitempty"`
+}
+```
+
+### H5PGoExtension
+
+The h5p-go specific extension for question metadata:
+
+```go
+type H5PGoExtension struct {
+    Section           string                 `json:"section,omitempty"`
+    Topic             string                 `json:"topic,omitempty"`
+    Tags              []string               `json:"tags,omitempty"`
+    Difficulty        string                 `json:"difficulty,omitempty"`
+    QuestionNumber    int                    `json:"questionNumber,omitempty"`
+    LearningObjective string                 `json:"learningObjective,omitempty"`
+    Source            string                 `json:"source,omitempty"`
+    Custom            map[string]interface{} `json:"custom,omitempty"`
+}
+```
+
+#### Extension Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `Section` | string | Section/category the question belongs to |
+| `Topic` | string | Specific topic within a section |
+| `Tags` | []string | Flexible categorization labels |
+| `Difficulty` | string | Difficulty level (easy/medium/hard) |
+| `QuestionNumber` | int | Explicit ordering within a question set |
+| `LearningObjective` | string | What the question tests |
+| `Source` | string | Origin of the question content |
+| `Custom` | map[string]interface{} | Arbitrary additional metadata |
+
+#### Factory Functions
+
+```go
+// NewExtensions creates a new Extensions struct with an initialized H5PGoExtension
+func NewExtensions() *Extensions
+
+// NewH5PGoExtension creates a new H5PGoExtension with section and question number
+func NewH5PGoExtension(section string, questionNumber int) *H5PGoExtension
+```
+
+#### Builder Methods
+
+```go
+// WithTopic sets the topic and returns the extension for chaining
+func (e *H5PGoExtension) WithTopic(topic string) *H5PGoExtension
+
+// WithTags sets the tags and returns the extension for chaining
+func (e *H5PGoExtension) WithTags(tags ...string) *H5PGoExtension
+
+// WithDifficulty sets the difficulty and returns the extension for chaining
+func (e *H5PGoExtension) WithDifficulty(difficulty string) *H5PGoExtension
+
+// WithLearningObjective sets the learning objective
+func (e *H5PGoExtension) WithLearningObjective(objective string) *H5PGoExtension
+
+// WithSource sets the source and returns the extension for chaining
+func (e *H5PGoExtension) WithSource(source string) *H5PGoExtension
+```
+
+#### Example
+
+```go
+ext := h5p.NewH5PGoExtension("1. Overview", 1).
+    WithTopic("RAG Fundamentals").
+    WithTags("rag", "retrieval").
+    WithDifficulty("medium").
+    WithLearningObjective("Understand RAG basics").
+    WithSource("Chapter 1")
+
+question := h5p.NewMultiChoiceQuestionWithExtensions(
+    "What is RAG?",
+    []h5p.Answer{
+        {Text: "Retrieval-Augmented Generation", Correct: true},
+        {Text: "Random Answer Generator", Correct: false},
+    },
+    &h5p.Extensions{H5PGo: ext},
+)
 ```
 
 ### Answer

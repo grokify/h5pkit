@@ -68,10 +68,16 @@ nav:
     - H5P Specification: reference/h5p-spec.md
     - File Structure: reference/file-structure.md
     - Standards Compliance: reference/standards.md
+    - Why H5P for Quizzes?: why-h5p-for-quizzes.md
   - Development:
     - Contributing: development/contributing.md
     - Testing: development/testing.md
     - Roadmap: development/roadmap.md
+  - Releases:
+    - v0.4.0: releases/v0.4.0.md
+    - v0.3.0: releases/v0.3.0.md
+    - v0.2.0: releases/v0.2.0.md
+    - v0.1.0: releases/v0.1.0.md
 
 plugins:
   - search

@@ -17,6 +17,7 @@ A Go library for creating, manipulating, and validating H5P (HTML5 Package) cont
 - 🎯 **Multiple Question Types**: Support for single-answer and multi-answer questions
 - 📋 **Official Schema Compliance**: Uses actual H5P semantics definitions
 - 🔄 **JSON Serialization**: Full marshaling/unmarshaling support
+- 🏷️ **Extensions Support**: Vendor-specific metadata with h5pGo namespace (v0.4.0+)
 
 ## 🚀 Quick Start
 
@@ -63,20 +64,38 @@ func main() {
 }
 ```
 
+## 🆕 What's New in v0.4.0
+
+Extensions support for vendor-specific question metadata! Add categorization, difficulty levels, learning objectives, and custom metadata to your questions while maintaining full H5P compatibility.
+
+```go
+ext := h5p.NewH5PGoExtension("1. Overview", 1).
+    WithTopic("RAG Fundamentals").
+    WithTags("rag", "retrieval").
+    WithDifficulty("medium").
+    WithLearningObjective("Understand RAG basics")
+
+question := h5p.NewMultiChoiceQuestionWithExtensions(text, answers, &h5p.Extensions{H5PGo: ext})
+```
+
+See the [v0.4.0 release notes](releases/v0.4.0.md) for details.
+
 ## 📚 What's Next?
 
 - **[Installation Guide](getting-started/installation.md)** - Detailed installation instructions
-- **[Quick Start Tutorial](getting-started/quick-start.md)** - Step-by-step tutorial 
+- **[Quick Start Tutorial](getting-started/quick-start.md)** - Step-by-step tutorial
 - **[Basic Concepts](getting-started/concepts.md)** - Understanding H5P and this library
 - **[User Guide](guide/question-sets.md)** - Comprehensive usage documentation
 - **[API Reference](api/core-types.md)** - Complete API documentation
 - **[Examples](examples/basic.md)** - Real-world usage examples
+- **[Release Notes](releases/v0.4.0.md)** - Version history and changes
 
 ## 🏛️ Architecture
 
 The H5P Go SDK is organized into several key components:
 
 - **Core Types** (`questionset.go`, `h5p_package.go`) - Fundamental data structures
+- **Extensions** (`extensions.go`) - Vendor-specific metadata support
 - **Builder Pattern** (`builder.go`) - Fluent API for creating content
 - **Official Schemas** (`schemas/`) - Type-safe H5P content type definitions
 - **Semantics Engine** (`semantics/`) - Universal H5P semantics format support
