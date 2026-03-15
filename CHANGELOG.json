@@ -34,12 +34,66 @@
       "version": "v0.3.0",
       "date": "2025-09-02",
       "highlights": [
-        { "description": "Initial stable release with H5P QuestionSet parsing and MultiChoice schema support" }
+        { "description": "Semantics package with TrueFalse and Essay question type support" },
+        { "description": "MkDocs documentation site with comprehensive guides" }
       ],
       "added": [
-        { "description": "H5P QuestionSet parsing with typed question structures" },
-        { "description": "MultiChoice question schema with answers, tips, and feedback" },
-        { "description": "JSON marshaling/unmarshaling for H5P content" }
+        { "description": "`semantics` package with individual semantics for TrueFalse and Essay question types", "commit": "0a26542" },
+        { "description": "MkDocs documentation source in `docsrc/` directory", "commit": "67adc57" },
+        { "description": "Generated documentation site in `docs/` directory", "commit": "66042b4" }
+      ],
+      "changed": [
+        { "description": "Refactored tests for new filename conventions", "commit": "47f7444" }
+      ],
+      "documentation": [
+        { "description": "API reference for builder, core-types, schemas, and semantics", "commit": "67adc57" },
+        { "description": "Getting started guides: installation, quick-start, concepts", "commit": "67adc57" },
+        { "description": "User guides: H5P packages, question sets, typed questions, validation", "commit": "67adc57" },
+        { "description": "Reference documentation: file structure, H5P spec, standards", "commit": "67adc57" },
+        { "description": "README refactored to use MkDocs structure", "commit": "75552d3" }
+      ],
+      "security": [
+        { "description": "Add permissions to CI workflow for code scanning compliance", "commit": "70b6fec" },
+        { "description": "Add permissions to lint workflow for code scanning compliance", "commit": "44bfab1" }
+      ]
+    },
+    {
+      "version": "v0.2.0",
+      "date": "2025-09-01",
+      "highlights": [
+        { "description": "Module renamed from `go-h5p` to `h5p-go` following Go naming conventions" }
+      ],
+      "changed": [
+        { "description": "Renamed module from `github.com/grokify/go-h5p` to `github.com/grokify/h5p-go`", "commit": "b27dd94" }
+      ],
+      "documentation": [
+        { "description": "Remove redundant shields from README", "commit": "6cad7a0" }
+      ]
+    },
+    {
+      "version": "v0.1.0",
+      "date": "2025-09-01",
+      "highlights": [
+        { "description": "Initial release with H5P QuestionSet parsing and typed question support" },
+        { "description": "H5P package (zip file) management for creating and extracting H5P content" }
+      ],
+      "added": [
+        { "description": "Core `QuestionSet` type with JSON parsing and serialization", "commit": "6d14533" },
+        { "description": "H5P package (zip) management: create, extract, and manipulate H5P files", "commit": "a47df22" },
+        { "description": "`schemas` package with MultiChoice question type and params", "commit": "3a7e9f0" },
+        { "description": "`MultiChoiceQuestion` typed wrapper with `NewMultiChoiceQuestion()` factory", "commit": "3a7e9f0" },
+        { "description": "`cmd/h5pparsequestionset` CLI tool for parsing H5P question sets", "commit": "9c07a4a" },
+        { "description": "Question builder utilities for programmatic H5P content creation", "commit": "6d14533" }
+      ],
+      "documentation": [
+        { "description": "Comprehensive README with usage examples and API documentation", "commit": "d5d99b3" },
+        { "description": "Badge shields for CI status, Go Reference, and license", "commit": "1430281" },
+        { "description": "\"Why H5P for Quizzes?\" guide explaining H5P benefits", "commit": "6bbf489" }
+      ],
+      "infrastructure": [
+        { "description": "GitHub Actions CI workflows for build, lint, and SAST", "commit": "7746b68" },
+        { "description": "Dependabot configuration for automated dependency updates", "commit": "7746b68" },
+        { "description": "golangci-lint configuration", "commit": "7746b68" }
       ]
     }
   ]
