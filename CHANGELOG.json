@@ -1,0 +1,46 @@
+{
+  "irVersion": "1.0",
+  "project": "h5p-go",
+  "repository": "https://github.com/grokify/h5p-go",
+  "versioning": "semver",
+  "commitConvention": "conventional",
+  "maintainers": ["grokify", "johncwang@gmail.com"],
+  "releases": [
+    {
+      "version": "v0.4.0",
+      "date": "2026-03-15",
+      "highlights": [
+        { "description": "Extensions support for vendor-specific question metadata with h5pGo namespace" }
+      ],
+      "added": [
+        { "description": "`Extensions` and `H5PGoExtension` types for question metadata", "commit": "94ece1e" },
+        { "description": "Builder pattern methods: `WithTopic()`, `WithTags()`, `WithDifficulty()`, `WithLearningObjective()`, `WithSource()`", "commit": "94ece1e" },
+        { "description": "`Extensions` field on `Question` and `MultiChoiceQuestion` structs", "commit": "94ece1e" },
+        { "description": "`NewMultiChoiceQuestionWithExtensions()` and `WithExtensions()` helper methods", "commit": "94ece1e" },
+        { "description": "Comprehensive tests for extensions JSON parsing and round-trip validation", "commit": "94ece1e" }
+      ],
+      "infrastructure": [
+        { "description": "Update to shared CI workflows", "commit": "f267f6b" },
+        { "description": "Rename workflow files for consistency", "commit": "7be8b91" }
+      ],
+      "dependencies": [
+        { "description": "Bump actions/setup-go from 5 to 6", "commit": "f07e707" },
+        { "description": "Bump actions/checkout from 5 to 6", "commit": "623e37c" },
+        { "description": "Bump golangci/golangci-lint-action from 8 to 9", "commit": "e8f32f4" },
+        { "description": "Bump github/codeql-action from 3 to 4", "commit": "2435ff9" }
+      ]
+    },
+    {
+      "version": "v0.3.0",
+      "date": "2025-09-02",
+      "highlights": [
+        { "description": "Initial stable release with H5P QuestionSet parsing and MultiChoice schema support" }
+      ],
+      "added": [
+        { "description": "H5P QuestionSet parsing with typed question structures" },
+        { "description": "MultiChoice question schema with answers, tips, and feedback" },
+        { "description": "JSON marshaling/unmarshaling for H5P content" }
+      ]
+    }
+  ]
+}
