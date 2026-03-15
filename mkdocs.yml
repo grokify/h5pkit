@@ -6,8 +6,7 @@ site_url: https://grokify.github.io/h5p-go/
 repo_name: grokify/h5p-go
 repo_url: https://github.com/grokify/h5p-go
 
-docs_dir: docsrc
-site_dir: docs
+docs_dir: docs
 
 theme:
   name: material
