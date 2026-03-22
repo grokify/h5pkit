@@ -1,4 +1,4 @@
-# H5P Go SDK
+# H5P Kit
 
 [![Go CI][go-ci-svg]][go-ci-url]
 [![Go Lint][go-lint-svg]][go-lint-url]
@@ -25,63 +25,109 @@
  [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
  [license-url]: https://github.com/grokify/h5p-go/blob/master/LICENSE
 
-A Go library for creating, manipulating, and validating H5P (HTML5 Package) content, with support for the official H5P file format and schemas.
+A toolkit for creating, editing, and validating H5P quiz content. Includes a **Go SDK** for server-side operations and a **TypeScript Editor** for browser-based quiz editing.
 
-## ✨ Features
+| Component | Language | Package |
+|-----------|----------|---------|
+| Go SDK | Go | `github.com/grokify/h5p-go` |
+| Quiz Editor | TypeScript | `@grokify/h5p-editor` |
 
-- 📦 **Full H5P Package Support**: Create and extract `.h5p` ZIP files with proper structure
-- 🔒 **Type-Safe Schema Implementation**: Official H5P MultiChoice schema with Go structs
-- 🏗️ **Question Set Builder**: Fluent API for building interactive question sets
-- ✅ **Validation**: Built-in validation for H5P compliance
-- 🎯 **Multiple Question Types**: Support for single-answer and multi-answer questions
-- 📋 **Official Schema Compliance**: Uses actual H5P semantics definitions
-- 🔄 **JSON Serialization**: Full marshaling/unmarshaling support
-- 🏷️ **Extensions Support**: Vendor-specific metadata with h5pGo namespace (v0.4.0+)
+## Go SDK Features
 
-## 🚀 Quick Start
+- **Full H5P Package Support**: Create and extract `.h5p` ZIP files with proper structure
+- **Type-Safe Schema Implementation**: Official H5P MultiChoice schema with Go structs
+- **Question Set Builder**: Fluent API for building interactive question sets
+- **Validation**: Built-in validation for H5P compliance
+- **Multiple Question Types**: Support for single-answer and multi-answer questions
+- **Official Schema Compliance**: Uses actual H5P semantics definitions
+- **JSON Serialization**: Full marshaling/unmarshaling support
+- **Extensions Support**: Vendor-specific metadata with h5pGo namespace (v0.4.0+)
 
-```bash
-go get github.com/grokify/h5p-go
-```
+## TypeScript Editor Features
 
-```go
-package main
+- **Visual Quiz Editor**: React component for browser-based quiz creation
+- **Multiple Question Types**: Multiple Choice, True/False, Fill in the Blanks
+- **Undo/Redo**: Full history support for editing operations
+- **Validation**: Real-time validation with detailed error messages
+- **Theming**: Light and dark mode with CSS custom properties
+- **Dual API**: React component or vanilla JS via CDN
 
-import (
-    "fmt"
-    "log"
-    
-    "github.com/grokify/h5p-go"
-)
+## Quick Start
 
-func main() {
-    // Create a question set using the builder pattern
-    builder := h5p.NewQuestionSetBuilder()
-    
-    answers := []h5p.Answer{
-        h5p.CreateAnswer("Paris", true),
-        h5p.CreateAnswer("London", false),
-        h5p.CreateAnswer("Berlin", false),
-        h5p.CreateAnswer("Madrid", false),
+=== "Go SDK"
+
+    ```bash
+    go get github.com/grokify/h5p-go
+    ```
+
+    ```go
+    package main
+
+    import (
+        "fmt"
+        "log"
+
+        "github.com/grokify/h5p-go"
+    )
+
+    func main() {
+        builder := h5p.NewQuestionSetBuilder()
+
+        answers := []h5p.Answer{
+            h5p.CreateAnswer("Paris", true),
+            h5p.CreateAnswer("London", false),
+            h5p.CreateAnswer("Berlin", false),
+        }
+
+        questionSet, err := builder.
+            SetTitle("Geography Quiz").
+            SetPassPercentage(60).
+            AddMultipleChoiceQuestion("What is the capital of France?", answers).
+            Build()
+
+        if err != nil {
+            log.Fatal(err)
+        }
+
+        jsonData, _ := questionSet.ToJSON()
+        fmt.Println(string(jsonData))
     }
-    
-    questionSet, err := builder.
-        SetTitle("Geography Quiz").
-        SetProgressType("textual").
-        SetPassPercentage(60).
-        SetIntroduction("Welcome to our geography quiz!").
-        AddMultipleChoiceQuestion("What is the capital of France?", answers).
-        Build()
-    
-    if err != nil {
-        log.Fatal(err)
+    ```
+
+=== "TypeScript (React)"
+
+    ```bash
+    pnpm add @grokify/h5p-editor react react-dom
+    ```
+
+    ```tsx
+    import { QuizEditor, H5PQuiz } from '@grokify/h5p-editor';
+    import '@grokify/h5p-editor/styles.css';
+
+    function App() {
+      const handleSave = (quiz: H5PQuiz) => {
+        console.log('Quiz:', quiz);
+      };
+
+      return <QuizEditor onSave={handleSave} />;
     }
-    
-    // Export to JSON
-    jsonData, _ := questionSet.ToJSON()
-    fmt.Printf("Generated H5P Question Set:\n%s\n", string(jsonData))
-}
-```
+    ```
+
+=== "TypeScript (CDN)"
+
+    ```html
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@grokify/h5p-editor/dist/h5p-editor.css">
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@grokify/h5p-editor/dist/h5p-editor.umd.cjs"></script>
+
+    <div id="editor"></div>
+    <script>
+      const editor = H5PEditor.createQuizEditor('#editor', {
+        onSave: (quiz) => console.log(quiz)
+      });
+    </script>
+    ```
 
 ## 🆕 What's New in v0.4.0
 
@@ -99,7 +145,17 @@ question := h5p.NewMultiChoiceQuestionWithExtensions(text, answers, &h5p.Extensi
 
 See the [v0.4.0 release notes](releases/v0.4.0.md) for details.
 
-## 📚 What's Next?
+## What's Next?
+
+### TypeScript Editor
+
+- **[Editor Overview](ts-editor/overview.md)** - Introduction to the quiz editor
+- **[Installation](ts-editor/installation.md)** - npm/pnpm and CDN setup
+- **[React Usage](ts-editor/react-usage.md)** - Component props and ref API
+- **[Vanilla JS](ts-editor/vanilla-js.md)** - CDN usage without React build
+- **[API Reference](ts-editor/api-reference.md)** - Types and functions
+
+### Go SDK
 
 - **[Installation Guide](getting-started/installation.md)** - Detailed installation instructions
 - **[Quick Start Tutorial](getting-started/quick-start.md)** - Step-by-step tutorial

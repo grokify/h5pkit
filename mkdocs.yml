@@ -1,5 +1,5 @@
-site_name: H5P Go SDK Documentation
-site_description: A Go library for creating, manipulating, and validating H5P (HTML5 Package) content
+site_name: H5P Kit Documentation
+site_description: Go SDK and TypeScript Editor for creating and editing H5P quiz content
 site_author: Grokify
 site_url: https://grokify.github.io/h5p-go/
 
@@ -55,7 +55,13 @@ nav:
     - Typed Questions: guide/typed-questions.md
     - H5P Packages: guide/h5p-packages.md
     - Validation: guide/validation.md
-  - API Reference:
+  - TypeScript Editor:
+    - Overview: ts-editor/overview.md
+    - Installation: ts-editor/installation.md
+    - React Usage: ts-editor/react-usage.md
+    - Vanilla JS: ts-editor/vanilla-js.md
+    - API Reference: ts-editor/api-reference.md
+  - Go API Reference:
     - Core Types: api/core-types.md
     - Builder Pattern: api/builder.md
     - Schemas: api/schemas.md
