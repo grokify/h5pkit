@@ -32,7 +32,7 @@ if err := questionSet.Validate(); err != nil {
 ### Schema Validation
 
 ```go
-import "github.com/grokify/h5p-go/schemas"
+import "github.com/grokify/h5pkit/schemas"
 
 // Validate typed parameters
 params := &schemas.MultiChoiceParams{

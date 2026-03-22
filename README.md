@@ -1,4 +1,4 @@
-# H5P Go SDK
+# H5P Kit
 
 [![Go CI][go-ci-svg]][go-ci-url]
 [![Go Lint][go-lint-svg]][go-lint-url]
@@ -8,43 +8,53 @@
 [![Visualization][viz-svg]][viz-url]
 [![License][license-svg]][license-url]
 
- [go-ci-svg]: https://github.com/grokify/h5p-go/actions/workflows/go-ci.yaml/badge.svg?branch=main
- [go-ci-url]: https://github.com/grokify/h5p-go/actions/workflows/go-ci.yaml
- [go-lint-svg]: https://github.com/grokify/h5p-go/actions/workflows/go-lint.yaml/badge.svg?branch=main
- [go-lint-url]: https://github.com/grokify/h5p-go/actions/workflows/go-lint.yaml
- [go-sast-svg]: https://github.com/grokify/h5p-go/actions/workflows/go-sast-codeql.yaml/badge.svg?branch=main
- [go-sast-url]: https://github.com/grokify/h5p-go/actions/workflows/go-sast-codeql.yaml
- [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/h5p-go
- [goreport-url]: https://goreportcard.com/report/github.com/grokify/h5p-go
- [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/grokify/h5p-go
- [docs-godoc-url]: https://pkg.go.dev/github.com/grokify/h5p-go
+ [go-ci-svg]: https://github.com/grokify/h5pkit/actions/workflows/go-ci.yaml/badge.svg?branch=main
+ [go-ci-url]: https://github.com/grokify/h5pkit/actions/workflows/go-ci.yaml
+ [go-lint-svg]: https://github.com/grokify/h5pkit/actions/workflows/go-lint.yaml/badge.svg?branch=main
+ [go-lint-url]: https://github.com/grokify/h5pkit/actions/workflows/go-lint.yaml
+ [go-sast-svg]: https://github.com/grokify/h5pkit/actions/workflows/go-sast-codeql.yaml/badge.svg?branch=main
+ [go-sast-url]: https://github.com/grokify/h5pkit/actions/workflows/go-sast-codeql.yaml
+ [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/h5pkit
+ [goreport-url]: https://goreportcard.com/report/github.com/grokify/h5pkit
+ [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/grokify/h5pkit
+ [docs-godoc-url]: https://pkg.go.dev/github.com/grokify/h5pkit
  [viz-svg]: https://img.shields.io/badge/visualizaton-Go-blue.svg
- [viz-url]: https://mango-dune-07a8b7110.1.azurestaticapps.net/?repo=grokify%2Fh5p-go
- [loc-svg]: https://tokei.rs/b1/github/grokify/h5p-go
- [repo-url]: https://github.com/grokify/h5p-go
+ [viz-url]: https://mango-dune-07a8b7110.1.azurestaticapps.net/?repo=grokify%2Fh5pkit
+ [loc-svg]: https://tokei.rs/b1/github/grokify/h5pkit
+ [repo-url]: https://github.com/grokify/h5pkit
  [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
- [license-url]: https://github.com/grokify/h5p-go/blob/master/LICENSE
+ [license-url]: https://github.com/grokify/h5pkit/blob/master/LICENSE
 
-A Go library for creating, manipulating, and validating H5P (HTML5 Package) content with support for the official H5P file format and schemas.
+A toolkit for creating, editing, and validating H5P quiz content. Includes a **Go SDK** for server-side operations and a **TypeScript Editor** for browser-based quiz editing.
 
-## ✨ Features
+| Component | Language | Package |
+|-----------|----------|---------|
+| Go SDK | Go | `github.com/grokify/h5pkit` |
+| Quiz Editor | TypeScript | `@grokify/h5p-editor` |
 
-- 📦 **Full H5P Package Support** - Create and extract `.h5p` ZIP files
-- 🔒 **Type-Safe Schema Implementation** - Official H5P content type schemas  
-- 🏗️ **Question Set Builder** - Fluent API for building interactive content
-- ✅ **Validation** - Built-in H5P compliance validation
-- 🎯 **Multiple Question Types** - Support for various H5P content types
-- 🔄 **JSON Serialization** - Complete marshaling/unmarshaling support
+## Go SDK Features
 
-## 🚀 Quick Start
+- **Full H5P Package Support** - Create and extract `.h5p` ZIP files
+- **Type-Safe Schema Implementation** - Official H5P content type schemas
+- **Question Set Builder** - Fluent API for building interactive content
+- **Validation** - Built-in H5P compliance validation
+- **Multiple Question Types** - Support for various H5P content types
+- **JSON Serialization** - Complete marshaling/unmarshaling support
 
-### Installation
+## TypeScript Editor Features
+
+- **Visual Quiz Editor** - React component for browser-based quiz creation
+- **Multiple Question Types** - Multiple Choice, True/False, Fill in the Blanks
+- **Undo/Redo** - Full history support for editing operations
+- **Theming** - Light and dark mode with CSS custom properties
+
+## Quick Start
+
+### Go SDK
 
 ```bash
-go get github.com/grokify/h5p-go
+go get github.com/grokify/h5pkit
 ```
-
-### Create Your First Quiz
 
 ```go
 package main
@@ -52,7 +62,7 @@ package main
 import (
     "fmt"
     "log"
-    "github.com/grokify/h5p-go"
+    "github.com/grokify/h5pkit"
 )
 
 func main() {
@@ -62,7 +72,7 @@ func main() {
         h5p.CreateAnswer("London", false),
         h5p.CreateAnswer("Berlin", false),
     }
-    
+
     // Build question set
     questionSet, err := h5p.NewQuestionSetBuilder().
         SetTitle("Geography Quiz").
@@ -70,103 +80,77 @@ func main() {
         SetPassPercentage(60).
         AddMultipleChoiceQuestion("What is the capital of France?", answers).
         Build()
-    
+
     if err != nil {
         log.Fatal(err)
     }
-    
+
     // Export to JSON
     jsonData, _ := questionSet.ToJSON()
     fmt.Printf("Generated H5P content:\n%s\n", string(jsonData))
 }
 ```
 
-### Using Type-Safe Schemas
+### TypeScript Editor
 
-```go
-import "github.com/grokify/h5p-go/schemas"
-
-// Create strongly-typed content
-params := &schemas.MultiChoiceParams{
-    Question: "What is 2 + 2?",
-    Answers: []schemas.AnswerOption{
-        {Text: "4", Correct: true},
-        {Text: "5", Correct: false},
-    },
-    Behaviour: &schemas.Behaviour{
-        Type: "single",
-        EnableRetry: true,
-    },
-}
-
-question := h5p.NewMultiChoiceQuestion(params)
+```bash
+pnpm add @grokify/h5p-editor react react-dom
 ```
 
-## 📚 Documentation
+```tsx
+import { QuizEditor, H5PQuiz } from '@grokify/h5p-editor';
+import '@grokify/h5p-editor/styles.css';
 
-**[Full Documentation →](https://grokify.github.io/h5p-go/)**
+function App() {
+  const handleSave = (quiz: H5PQuiz) => {
+    console.log('Quiz:', quiz);
+  };
+
+  return <QuizEditor onSave={handleSave} />;
+}
+```
+
+## Documentation
+
+**[Full Documentation](https://grokify.github.io/h5pkit/)**
 
 ### Quick Links
 
-- **[Installation Guide](https://grokify.github.io/h5p-go/getting-started/installation/)** - Detailed setup instructions
-- **[Quick Start Tutorial](https://grokify.github.io/h5p-go/getting-started/quick-start/)** - Step-by-step examples
-- **[API Reference](https://grokify.github.io/h5p-go/api/core-types/)** - Complete API documentation
-- **[Examples](https://grokify.github.io/h5p-go/examples/basic/)** - Real-world usage examples
+- **[Go SDK Installation](https://grokify.github.io/h5pkit/getting-started/installation/)** - Setup instructions
+- **[TypeScript Editor](https://grokify.github.io/h5pkit/ts-editor/overview/)** - Browser-based editor
+- **[API Reference](https://grokify.github.io/h5pkit/api/core-types/)** - Complete API documentation
+- **[Examples](https://grokify.github.io/h5pkit/examples/basic/)** - Real-world usage examples
 
-### Key Topics
-
-- [Question Sets](https://grokify.github.io/h5p-go/guide/question-sets/) - Building interactive question collections
-- [Typed Questions](https://grokify.github.io/h5p-go/guide/typed-questions/) - Using type-safe H5P schemas
-- [H5P Packages](https://grokify.github.io/h5p-go/guide/h5p-packages/) - Creating complete `.h5p` files
-- [Semantics API](https://grokify.github.io/h5p-go/api/semantics/) - Working with H5P semantics format
-
-## 🏗️ Architecture
+## Architecture
 
 ```
-h5p-go/
+h5pkit/
 ├── schemas/          # Official H5P content type schemas
-├── semantics/        # Universal H5P semantics format  
+├── semantics/        # Universal H5P semantics format
+├── ts/               # TypeScript editor (@grokify/h5p-editor)
 ├── builder.go        # Fluent API for content creation
 ├── questionset.go    # Core question set functionality
 └── h5p_package.go    # Complete H5P package management
 ```
 
-## 🧪 Testing
+## Testing
 
 ```bash
 go test ./...
 ```
 
-Run specific tests:
-```bash
-go test -v -run TestQuestionSet    # Question set tests
-go test -v -run TestTyped          # Typed schema tests
-go test -v -run TestH5PPackage     # Package management tests
-```
-
-## 📏 Standards Compliance
+## Standards Compliance
 
 This library implements the official H5P specifications:
 
 - [H5P File Format](https://h5p.org/documentation/developers/h5p-specification)
-- [H5P Semantics](https://h5p.org/semantics) 
+- [H5P Semantics](https://h5p.org/semantics)
 - [H5P Content Types](https://github.com/h5p/)
 
-## 🤝 Contributing
+## Contributing
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+See our [Contributing Guide](https://grokify.github.io/h5pkit/development/contributing/) for detailed information.
 
-See our [Contributing Guide](https://grokify.github.io/h5p-go/development/contributing/) for detailed information.
-
-## 📜 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- [H5P Group](https://h5p.org) for the H5P framework and specifications
-- The Go community for excellent tooling and libraries

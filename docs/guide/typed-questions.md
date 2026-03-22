@@ -16,7 +16,7 @@ MultiChoice is the most commonly used H5P content type for quizzes and assessmen
 ### Basic Usage
 
 ```go
-import "github.com/grokify/h5p-go/schemas"
+import "github.com/grokify/h5pkit/schemas"
 
 // Create parameters using typed structs
 params := &schemas.MultiChoiceParams{
@@ -244,8 +244,8 @@ import (
     "fmt"
     "log"
     
-    "github.com/grokify/h5p-go"
-    "github.com/grokify/h5p-go/schemas"
+    "github.com/grokify/h5pkit"
+    "github.com/grokify/h5pkit/schemas"
 )
 
 func main() {

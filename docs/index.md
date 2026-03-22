@@ -8,28 +8,28 @@
 [![Visualization][viz-svg]][viz-url]
 [![License][license-svg]][license-url]
 
- [go-ci-svg]: https://github.com/grokify/h5p-go/actions/workflows/go-ci.yaml/badge.svg?branch=main
- [go-ci-url]: https://github.com/grokify/h5p-go/actions/workflows/go-ci.yaml
- [go-lint-svg]: https://github.com/grokify/h5p-go/actions/workflows/go-lint.yaml/badge.svg?branch=main
- [go-lint-url]: https://github.com/grokify/h5p-go/actions/workflows/go-lint.yaml
- [go-sast-svg]: https://github.com/grokify/h5p-go/actions/workflows/go-sast-codeql.yaml/badge.svg?branch=main
- [go-sast-url]: https://github.com/grokify/h5p-go/actions/workflows/go-sast-codeql.yaml
- [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/h5p-go
- [goreport-url]: https://goreportcard.com/report/github.com/grokify/h5p-go
- [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/grokify/h5p-go
- [docs-godoc-url]: https://pkg.go.dev/github.com/grokify/h5p-go
+ [go-ci-svg]: https://github.com/grokify/h5pkit/actions/workflows/go-ci.yaml/badge.svg?branch=main
+ [go-ci-url]: https://github.com/grokify/h5pkit/actions/workflows/go-ci.yaml
+ [go-lint-svg]: https://github.com/grokify/h5pkit/actions/workflows/go-lint.yaml/badge.svg?branch=main
+ [go-lint-url]: https://github.com/grokify/h5pkit/actions/workflows/go-lint.yaml
+ [go-sast-svg]: https://github.com/grokify/h5pkit/actions/workflows/go-sast-codeql.yaml/badge.svg?branch=main
+ [go-sast-url]: https://github.com/grokify/h5pkit/actions/workflows/go-sast-codeql.yaml
+ [goreport-svg]: https://goreportcard.com/badge/github.com/grokify/h5pkit
+ [goreport-url]: https://goreportcard.com/report/github.com/grokify/h5pkit
+ [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/grokify/h5pkit
+ [docs-godoc-url]: https://pkg.go.dev/github.com/grokify/h5pkit
  [viz-svg]: https://img.shields.io/badge/visualizaton-Go-blue.svg
- [viz-url]: https://mango-dune-07a8b7110.1.azurestaticapps.net/?repo=grokify%2Fh5p-go
- [loc-svg]: https://tokei.rs/b1/github/grokify/h5p-go
- [repo-url]: https://github.com/grokify/h5p-go
+ [viz-url]: https://mango-dune-07a8b7110.1.azurestaticapps.net/?repo=grokify%2Fh5pkit
+ [loc-svg]: https://tokei.rs/b1/github/grokify/h5pkit
+ [repo-url]: https://github.com/grokify/h5pkit
  [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
- [license-url]: https://github.com/grokify/h5p-go/blob/master/LICENSE
+ [license-url]: https://github.com/grokify/h5pkit/blob/master/LICENSE
 
 A toolkit for creating, editing, and validating H5P quiz content. Includes a **Go SDK** for server-side operations and a **TypeScript Editor** for browser-based quiz editing.
 
 | Component | Language | Package |
 |-----------|----------|---------|
-| Go SDK | Go | `github.com/grokify/h5p-go` |
+| Go SDK | Go | `github.com/grokify/h5pkit` |
 | Quiz Editor | TypeScript | `@grokify/h5p-editor` |
 
 ## Go SDK Features
@@ -57,7 +57,7 @@ A toolkit for creating, editing, and validating H5P quiz content. Includes a **G
 === "Go SDK"
 
     ```bash
-    go get github.com/grokify/h5p-go
+    go get github.com/grokify/h5pkit
     ```
 
     ```go
@@ -67,7 +67,7 @@ A toolkit for creating, editing, and validating H5P quiz content. Includes a **G
         "fmt"
         "log"
 
-        "github.com/grokify/h5p-go"
+        "github.com/grokify/h5pkit"
     )
 
     func main() {
@@ -129,21 +129,30 @@ A toolkit for creating, editing, and validating H5P quiz content. Includes a **G
     </script>
     ```
 
-## 🆕 What's New in v0.4.0
+## What's New in v0.5.0
 
-Extensions support for vendor-specific question metadata! Add categorization, difficulty levels, learning objectives, and custom metadata to your questions while maintaining full H5P compatibility.
+This release renames the project from `h5p-go` to `h5pkit` and introduces a **TypeScript Quiz Editor** for browser-based editing.
+
+### Module Rename
 
 ```go
-ext := h5p.NewH5PGoExtension("1. Overview", 1).
-    WithTopic("RAG Fundamentals").
-    WithTags("rag", "retrieval").
-    WithDifficulty("medium").
-    WithLearningObjective("Understand RAG basics")
+// Before
+import "github.com/grokify/h5p-go"
 
-question := h5p.NewMultiChoiceQuestionWithExtensions(text, answers, &h5p.Extensions{H5PGo: ext})
+// After
+import "github.com/grokify/h5pkit"
 ```
 
-See the [v0.4.0 release notes](releases/v0.4.0.md) for details.
+### TypeScript Quiz Editor
+
+```tsx
+import { QuizEditor } from '@grokify/h5p-editor';
+import '@grokify/h5p-editor/styles.css';
+
+<QuizEditor onSave={(quiz) => console.log(quiz)} />
+```
+
+See the [v0.5.0 release notes](releases/v0.5.0.md) for the full migration guide.
 
 ## What's Next?
 
@@ -196,4 +205,4 @@ We welcome contributions! See our [Contributing Guide](development/contributing.
 
 ## 📜 License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/grokify/h5p-go/blob/master/LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/grokify/h5pkit/blob/master/LICENSE) file for details.

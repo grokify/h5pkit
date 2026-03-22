@@ -14,7 +14,7 @@ import (
     "log"
     "os"
     
-    "github.com/grokify/h5p-go"
+    "github.com/grokify/h5pkit"
 )
 
 func main() {
@@ -117,7 +117,7 @@ import (
     "log"
     "os"
     
-    "github.com/grokify/h5p-go"
+    "github.com/grokify/h5pkit"
 )
 
 func main() {

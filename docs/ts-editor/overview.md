@@ -79,7 +79,7 @@ This TypeScript editor complements the Go SDK:
 
 | Component | Language | Purpose |
 |-----------|----------|---------|
-| `github.com/grokify/h5p-go` | Go | Server-side creation, validation, package management |
+| `github.com/grokify/h5pkit` | Go | Server-side creation, validation, package management |
 | `@grokify/h5p-editor` | TypeScript | Browser-based visual editing |
 
 Both produce the same H5P QuestionSet JSON format, ensuring full interoperability.

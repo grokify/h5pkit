@@ -24,7 +24,7 @@ example.h5p
 ### Basic Package Creation
 
 ```go
-import "github.com/grokify/h5p-go"
+import "github.com/grokify/h5pkit"
 
 // Create a new H5P package
 pkg := h5p.NewH5PPackage()
@@ -348,8 +348,8 @@ import (
     "log"
     "os"
     
-    "github.com/grokify/h5p-go"
-    "github.com/grokify/h5p-go/schemas"
+    "github.com/grokify/h5pkit"
+    "github.com/grokify/h5pkit/schemas"
 )
 
 func main() {
