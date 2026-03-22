@@ -1,11 +1,36 @@
 {
   "irVersion": "1.0",
-  "project": "h5p-go",
-  "repository": "https://github.com/grokify/h5p-go",
+  "project": "h5pkit",
+  "repository": "https://github.com/grokify/h5pkit",
   "versioning": "semver",
   "commitConvention": "conventional",
   "maintainers": ["grokify", "johncwang@gmail.com"],
   "releases": [
+    {
+      "version": "v0.5.0",
+      "date": "2026-03-22",
+      "highlights": [
+        { "description": "Module renamed from `h5p-go` to `h5pkit`" },
+        { "description": "TypeScript quiz editor (`@grokify/h5p-editor`) for browser-based editing" }
+      ],
+      "changed": [
+        { "description": "Renamed module from `github.com/grokify/h5p-go` to `github.com/grokify/h5pkit`" },
+        { "description": "Renamed repository from `h5p-go` to `h5pkit`" }
+      ],
+      "added": [
+        { "description": "TypeScript quiz editor package in `ts/packages/editor/`" },
+        { "description": "React component `QuizEditor` with ref-based API" },
+        { "description": "Vanilla JS API via `createQuizEditor()` for CDN usage" },
+        { "description": "Multiple Choice, True/False, Fill in Blanks question editors" },
+        { "description": "Undo/redo support for editing operations" },
+        { "description": "Real-time validation with detailed error messages" },
+        { "description": "Light and dark theme support" }
+      ],
+      "documentation": [
+        { "description": "TypeScript editor documentation in `docs/ts-editor/`" },
+        { "description": "Updated homepage to feature both Go SDK and TypeScript editor" }
+      ]
+    },
     {
       "version": "v0.4.0",
       "date": "2026-03-15",
