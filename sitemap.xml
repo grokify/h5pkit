@@ -1,131 +1,135 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://grokify.github.io/h5p-go/</loc>
+         <loc>https://grokify.github.io/h5pkit/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/why-h5p-for-quizzes/</loc>
+         <loc>https://grokify.github.io/h5pkit/why-h5p-for-quizzes/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/api/builder/</loc>
+         <loc>https://grokify.github.io/h5pkit/api/builder/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/api/core-types/</loc>
+         <loc>https://grokify.github.io/h5pkit/api/core-types/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/api/schemas/</loc>
+         <loc>https://grokify.github.io/h5pkit/api/schemas/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/api/semantics/</loc>
+         <loc>https://grokify.github.io/h5pkit/api/semantics/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/design/H5P_EDITOR_DESIGN/</loc>
+         <loc>https://grokify.github.io/h5pkit/design/H5P_EDITOR_DESIGN/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/development/contributing/</loc>
+         <loc>https://grokify.github.io/h5pkit/development/contributing/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/development/roadmap/</loc>
+         <loc>https://grokify.github.io/h5pkit/development/roadmap/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/development/testing/</loc>
+         <loc>https://grokify.github.io/h5pkit/development/testing/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/examples/advanced/</loc>
+         <loc>https://grokify.github.io/h5pkit/examples/advanced/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/examples/basic/</loc>
+         <loc>https://grokify.github.io/h5pkit/examples/basic/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/examples/packages/</loc>
+         <loc>https://grokify.github.io/h5pkit/examples/packages/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/getting-started/concepts/</loc>
+         <loc>https://grokify.github.io/h5pkit/getting-started/concepts/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/getting-started/installation/</loc>
+         <loc>https://grokify.github.io/h5pkit/getting-started/installation/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/getting-started/quick-start/</loc>
+         <loc>https://grokify.github.io/h5pkit/getting-started/quick-start/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/guide/h5p-packages/</loc>
+         <loc>https://grokify.github.io/h5pkit/guide/h5p-packages/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/guide/question-sets/</loc>
+         <loc>https://grokify.github.io/h5pkit/guide/question-sets/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/guide/typed-questions/</loc>
+         <loc>https://grokify.github.io/h5pkit/guide/typed-questions/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/guide/validation/</loc>
+         <loc>https://grokify.github.io/h5pkit/guide/validation/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/reference/file-structure/</loc>
+         <loc>https://grokify.github.io/h5pkit/reference/file-structure/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/reference/h5p-spec/</loc>
+         <loc>https://grokify.github.io/h5pkit/reference/h5p-spec/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/reference/standards/</loc>
+         <loc>https://grokify.github.io/h5pkit/reference/standards/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/releases/v0.1.0/</loc>
+         <loc>https://grokify.github.io/h5pkit/releases/v0.1.0/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/releases/v0.2.0/</loc>
+         <loc>https://grokify.github.io/h5pkit/releases/v0.2.0/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/releases/v0.3.0/</loc>
+         <loc>https://grokify.github.io/h5pkit/releases/v0.3.0/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/releases/v0.4.0/</loc>
+         <loc>https://grokify.github.io/h5pkit/releases/v0.4.0/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/ts-editor/api-reference/</loc>
+         <loc>https://grokify.github.io/h5pkit/releases/v0.5.0/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/ts-editor/installation/</loc>
+         <loc>https://grokify.github.io/h5pkit/ts-editor/api-reference/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/ts-editor/overview/</loc>
+         <loc>https://grokify.github.io/h5pkit/ts-editor/installation/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/ts-editor/react-usage/</loc>
+         <loc>https://grokify.github.io/h5pkit/ts-editor/overview/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
     <url>
-         <loc>https://grokify.github.io/h5p-go/ts-editor/vanilla-js/</loc>
+         <loc>https://grokify.github.io/h5pkit/ts-editor/react-usage/</loc>
+         <lastmod>2026-03-22</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/h5pkit/ts-editor/vanilla-js/</loc>
          <lastmod>2026-03-22</lastmod>
     </url>
 </urlset>
