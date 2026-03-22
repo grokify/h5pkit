@@ -1,0 +1,77 @@
+{
+  "name": "@grokify/h5p-editor",
+  "version": "0.1.0",
+  "description": "H5P Quiz Editor - Create and edit H5P quiz content",
+  "author": "John Wang",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grokify/h5pkit.git",
+    "directory": "ts/packages/editor"
+  },
+  "keywords": [
+    "h5p",
+    "quiz",
+    "editor",
+    "lms",
+    "e-learning",
+    "education"
+  ],
+  "type": "module",
+  "main": "./dist/h5p-editor.umd.cjs",
+  "module": "./dist/h5p-editor.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/h5p-editor.js",
+      "require": "./dist/h5p-editor.umd.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./styles.css": "./dist/styles.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "lint": "eslint src --ext .ts,.tsx",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "pnpm run build"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "ajv": "^8.17.0",
+    "clsx": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "eslint": "^9.0.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "typescript": "^5.7.0",
+    "vite": "^6.0.0",
+    "vite-plugin-dts": "^4.3.0",
+    "vitest": "^2.0.0"
+  }
+}
