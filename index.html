@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="A Go library for creating, manipulating, and validating H5P (HTML5 Package) content">
+        <meta name="description" content="Go SDK and TypeScript Editor for creating and editing H5P quiz content">
       
       
         <meta name="author" content="Grokify">
@@ -24,7 +24,7 @@
     
     
       
-        <title>H5P Go SDK Documentation</title>
+        <title>H5P Kit Documentation</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#h5p-go-sdk" class="md-skip">
+        <a href="#h5p-kit" class="md-skip">
           Skip to content
         </a>
       
@@ -90,7 +90,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="H5P Go SDK Documentation" class="md-header__button md-logo" aria-label="H5P Go SDK Documentation" data-md-component="logo">
+    <a href="." title="H5P Kit Documentation" class="md-header__button md-logo" aria-label="H5P Kit Documentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -104,7 +104,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            H5P Go SDK Documentation
+            H5P Kit Documentation
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -284,11 +284,31 @@
     
     
       <li class="md-tabs__item">
+        <a href="ts-editor/overview/" class="md-tabs__link">
+          
+  
+  
+  TypeScript Editor
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
         <a href="api/core-types/" class="md-tabs__link">
           
   
   
-  API Reference
+  Go API Reference
 
         </a>
       </li>
@@ -398,13 +418,13 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="H5P Go SDK Documentation" class="md-nav__button md-logo" aria-label="H5P Go SDK Documentation" data-md-component="logo">
+    <a href="." title="H5P Kit Documentation" class="md-nav__button md-logo" aria-label="H5P Kit Documentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    H5P Go SDK Documentation
+    H5P Kit Documentation
   </label>
   
     <div class="md-nav__source">
@@ -478,9 +498,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#features" class="md-nav__link">
+  <a href="#go-sdk-features" class="md-nav__link">
     <span class="md-ellipsis">
-      ✨ Features
+      Go SDK Features
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#typescript-editor-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      TypeScript Editor Features
     </span>
   </a>
   
@@ -489,7 +518,7 @@
         <li class="md-nav__item">
   <a href="#quick-start" class="md-nav__link">
     <span class="md-ellipsis">
-      🚀 Quick Start
+      Quick Start
     </span>
   </a>
   
@@ -507,9 +536,33 @@
         <li class="md-nav__item">
   <a href="#whats-next" class="md-nav__link">
     <span class="md-ellipsis">
-      📚 What's Next?
+      What's Next?
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="What&#39;s Next?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#typescript-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      TypeScript Editor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#go-sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      Go SDK
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -894,7 +947,7 @@
   
   
   <span class="md-ellipsis">
-    API Reference
+    TypeScript Editor
     
   </span>
   
@@ -905,7 +958,174 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
-            API Reference
+            TypeScript Editor
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ts-editor/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ts-editor/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ts-editor/react-usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    React Usage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ts-editor/vanilla-js/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vanilla JS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ts-editor/api-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API Reference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Go API Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Go API Reference
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -1030,10 +1250,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
@@ -1046,8 +1266,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Examples
           </label>
@@ -1151,10 +1371,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
         
           
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
             
   
   
@@ -1167,8 +1387,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             Reference
           </label>
@@ -1295,10 +1515,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
             
   
   
@@ -1311,8 +1531,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             Development
           </label>
@@ -1416,10 +1636,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
         
           
-          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
             
   
   
@@ -1432,8 +1652,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_8">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             Releases
           </label>
@@ -1565,9 +1785,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#features" class="md-nav__link">
+  <a href="#go-sdk-features" class="md-nav__link">
     <span class="md-ellipsis">
-      ✨ Features
+      Go SDK Features
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#typescript-editor-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      TypeScript Editor Features
     </span>
   </a>
   
@@ -1576,7 +1805,7 @@
         <li class="md-nav__item">
   <a href="#quick-start" class="md-nav__link">
     <span class="md-ellipsis">
-      🚀 Quick Start
+      Quick Start
     </span>
   </a>
   
@@ -1594,9 +1823,33 @@
         <li class="md-nav__item">
   <a href="#whats-next" class="md-nav__link">
     <span class="md-ellipsis">
-      📚 What's Next?
+      What's Next?
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="What&#39;s Next?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#typescript-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      TypeScript Editor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#go-sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      Go SDK
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1697,7 +1950,7 @@
   
 
 
-<h1 id="h5p-go-sdk">H5P Go SDK<a class="headerlink" href="#h5p-go-sdk" title="Permanent link">&para;</a></h1>
+<h1 id="h5p-kit">H5P Kit<a class="headerlink" href="#h5p-kit" title="Permanent link">&para;</a></h1>
 <p><a href="https://github.com/grokify/h5p-go/actions/workflows/go-ci.yaml"><img alt="Go CI" src="https://github.com/grokify/h5p-go/actions/workflows/go-ci.yaml/badge.svg?branch=main" /></a>
 <a href="https://github.com/grokify/h5p-go/actions/workflows/go-lint.yaml"><img alt="Go Lint" src="https://github.com/grokify/h5p-go/actions/workflows/go-lint.yaml/badge.svg?branch=main" /></a>
 <a href="https://github.com/grokify/h5p-go/actions/workflows/go-sast-codeql.yaml"><img alt="Go SAST" src="https://github.com/grokify/h5p-go/actions/workflows/go-sast-codeql.yaml/badge.svg?branch=main" /></a>
@@ -1705,19 +1958,52 @@
 <a href="https://pkg.go.dev/github.com/grokify/h5p-go"><img alt="Docs" src="https://pkg.go.dev/badge/github.com/grokify/h5p-go" /></a>
 <a href="https://mango-dune-07a8b7110.1.azurestaticapps.net/?repo=grokify%2Fh5p-go"><img alt="Visualization" src="https://img.shields.io/badge/visualizaton-Go-blue.svg" /></a>
 <a href="https://github.com/grokify/h5p-go/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-blue.svg" /></a></p>
-<p>A Go library for creating, manipulating, and validating H5P (HTML5 Package) content, with support for the official H5P file format and schemas.</p>
-<h2 id="features">✨ Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
+<p>A toolkit for creating, editing, and validating H5P quiz content. Includes a <strong>Go SDK</strong> for server-side operations and a <strong>TypeScript Editor</strong> for browser-based quiz editing.</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Language</th>
+<th>Package</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Go SDK</td>
+<td>Go</td>
+<td><code>github.com/grokify/h5p-go</code></td>
+</tr>
+<tr>
+<td>Quiz Editor</td>
+<td>TypeScript</td>
+<td><code>@grokify/h5p-editor</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="go-sdk-features">Go SDK Features<a class="headerlink" href="#go-sdk-features" title="Permanent link">&para;</a></h2>
 <ul>
-<li>📦 <strong>Full H5P Package Support</strong>: Create and extract <code>.h5p</code> ZIP files with proper structure</li>
-<li>🔒 <strong>Type-Safe Schema Implementation</strong>: Official H5P MultiChoice schema with Go structs</li>
-<li>🏗️ <strong>Question Set Builder</strong>: Fluent API for building interactive question sets</li>
-<li>✅ <strong>Validation</strong>: Built-in validation for H5P compliance</li>
-<li>🎯 <strong>Multiple Question Types</strong>: Support for single-answer and multi-answer questions</li>
-<li>📋 <strong>Official Schema Compliance</strong>: Uses actual H5P semantics definitions</li>
-<li>🔄 <strong>JSON Serialization</strong>: Full marshaling/unmarshaling support</li>
-<li>🏷️ <strong>Extensions Support</strong>: Vendor-specific metadata with h5pGo namespace (v0.4.0+)</li>
+<li><strong>Full H5P Package Support</strong>: Create and extract <code>.h5p</code> ZIP files with proper structure</li>
+<li><strong>Type-Safe Schema Implementation</strong>: Official H5P MultiChoice schema with Go structs</li>
+<li><strong>Question Set Builder</strong>: Fluent API for building interactive question sets</li>
+<li><strong>Validation</strong>: Built-in validation for H5P compliance</li>
+<li><strong>Multiple Question Types</strong>: Support for single-answer and multi-answer questions</li>
+<li><strong>Official Schema Compliance</strong>: Uses actual H5P semantics definitions</li>
+<li><strong>JSON Serialization</strong>: Full marshaling/unmarshaling support</li>
+<li><strong>Extensions Support</strong>: Vendor-specific metadata with h5pGo namespace (v0.4.0+)</li>
 </ul>
-<h2 id="quick-start">🚀 Quick Start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
+<h2 id="typescript-editor-features">TypeScript Editor Features<a class="headerlink" href="#typescript-editor-features" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Visual Quiz Editor</strong>: React component for browser-based quiz creation</li>
+<li><strong>Multiple Question Types</strong>: Multiple Choice, True/False, Fill in the Blanks</li>
+<li><strong>Undo/Redo</strong>: Full history support for editing operations</li>
+<li><strong>Validation</strong>: Real-time validation with detailed error messages</li>
+<li><strong>Theming</strong>: Light and dark mode with CSS custom properties</li>
+<li><strong>Dual API</strong>: React component or vanilla JS via CDN</li>
+</ul>
+<h2 id="quick-start">Quick Start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Go SDK</label><label for="__tabbed_1_2">TypeScript (React)</label><label for="__tabbed_1_3">TypeScript (CDN)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>go<span class="w"> </span>get<span class="w"> </span>github.com/grokify/h5p-go
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
@@ -1730,45 +2016,81 @@
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">)</span>
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="c1">// Create a question set using the builder pattern</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="nx">builder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h5p</span><span class="p">.</span><span class="nx">NewQuestionSetBuilder</span><span class="p">()</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="nx">answers</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nx">h5p</span><span class="p">.</span><span class="nx">Answer</span><span class="p">{</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">        </span><span class="nx">h5p</span><span class="p">.</span><span class="nx">CreateAnswer</span><span class="p">(</span><span class="s">&quot;Paris&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">),</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">        </span><span class="nx">h5p</span><span class="p">.</span><span class="nx">CreateAnswer</span><span class="p">(</span><span class="s">&quot;London&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">),</span>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">        </span><span class="nx">h5p</span><span class="p">.</span><span class="nx">CreateAnswer</span><span class="p">(</span><span class="s">&quot;Berlin&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">),</span>
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">        </span><span class="nx">h5p</span><span class="p">.</span><span class="nx">CreateAnswer</span><span class="p">(</span><span class="s">&quot;Madrid&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">),</span>
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
-<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">    </span><span class="nx">questionSet</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">builder</span><span class="p">.</span>
-<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">        </span><span class="nx">SetTitle</span><span class="p">(</span><span class="s">&quot;Geography Quiz&quot;</span><span class="p">).</span>
-<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">        </span><span class="nx">SetProgressType</span><span class="p">(</span><span class="s">&quot;textual&quot;</span><span class="p">).</span>
-<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">        </span><span class="nx">SetPassPercentage</span><span class="p">(</span><span class="mi">60</span><span class="p">).</span>
-<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">        </span><span class="nx">SetIntroduction</span><span class="p">(</span><span class="s">&quot;Welcome to our geography quiz!&quot;</span><span class="p">).</span>
-<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">        </span><span class="nx">AddMultipleChoiceQuestion</span><span class="p">(</span><span class="s">&quot;What is the capital of France?&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">answers</span><span class="p">).</span>
-<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="w">        </span><span class="nx">Build</span><span class="p">()</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="nx">builder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h5p</span><span class="p">.</span><span class="nx">NewQuestionSetBuilder</span><span class="p">()</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="nx">answers</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nx">h5p</span><span class="p">.</span><span class="nx">Answer</span><span class="p">{</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">        </span><span class="nx">h5p</span><span class="p">.</span><span class="nx">CreateAnswer</span><span class="p">(</span><span class="s">&quot;Paris&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">),</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">        </span><span class="nx">h5p</span><span class="p">.</span><span class="nx">CreateAnswer</span><span class="p">(</span><span class="s">&quot;London&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">),</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">        </span><span class="nx">h5p</span><span class="p">.</span><span class="nx">CreateAnswer</span><span class="p">(</span><span class="s">&quot;Berlin&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">),</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="nx">questionSet</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">builder</span><span class="p">.</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">        </span><span class="nx">SetTitle</span><span class="p">(</span><span class="s">&quot;Geography Quiz&quot;</span><span class="p">).</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">        </span><span class="nx">SetPassPercentage</span><span class="p">(</span><span class="mi">60</span><span class="p">).</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">        </span><span class="nx">AddMultipleChoiceQuestion</span><span class="p">(</span><span class="s">&quot;What is the capital of France?&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">answers</span><span class="p">).</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">        </span><span class="nx">Build</span><span class="p">()</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>
-<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>
-<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="w">    </span><span class="c1">// Export to JSON</span>
-<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="w">    </span><span class="nx">jsonData</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">questionSet</span><span class="p">.</span><span class="nx">ToJSON</span><span class="p">()</span>
-<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Generated H5P Question Set:\n%s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nx">jsonData</span><span class="p">))</span>
-<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="p">}</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="w">    </span><span class="nx">jsonData</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">questionSet</span><span class="p">.</span><span class="nx">ToJSON</span><span class="p">()</span>
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">jsonData</span><span class="p">))</span>
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="p">}</span>
 </code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pnpm<span class="w"> </span>add<span class="w"> </span>@grokify/h5p-editor<span class="w"> </span>react<span class="w"> </span>react-dom
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">QuizEditor</span><span class="p">,</span><span class="w"> </span><span class="nx">H5PQuiz</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@grokify/h5p-editor&#39;</span><span class="p">;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">import</span><span class="w"> </span><span class="s1">&#39;@grokify/h5p-editor/styles.css&#39;</span><span class="p">;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="kd">function</span><span class="w"> </span><span class="nx">App</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleSave</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">quiz</span><span class="o">:</span><span class="w"> </span><span class="kt">H5PQuiz</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Quiz:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">quiz</span><span class="p">);</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">  </span><span class="p">};</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">QuizEditor</span><span class="w"> </span><span class="na">onSave</span><span class="o">=</span><span class="p">{</span><span class="nx">handleSave</span><span class="p">}</span><span class="w"> </span><span class="p">/&gt;;</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://cdn.jsdelivr.net/npm/@grokify/h5p-editor/dist/h5p-editor.css&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://unpkg.com/react@18/umd/react.production.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://unpkg.com/react-dom@18/umd/react-dom.production.min.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://cdn.jsdelivr.net/npm/@grokify/h5p-editor/dist/h5p-editor.umd.cjs&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;editor&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">editor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">H5PEditor</span><span class="p">.</span><span class="nx">createQuizEditor</span><span class="p">(</span><span class="s1">&#39;#editor&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="nx">onSave</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">quiz</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">quiz</span><span class="p">)</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">  </span><span class="p">});</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
 <h2 id="whats-new-in-v040">🆕 What's New in v0.4.0<a class="headerlink" href="#whats-new-in-v040" title="Permanent link">&para;</a></h2>
 <p>Extensions support for vendor-specific question metadata! Add categorization, difficulty levels, learning objectives, and custom metadata to your questions while maintaining full H5P compatibility.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">ext</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h5p</span><span class="p">.</span><span class="nx">NewH5PGoExtension</span><span class="p">(</span><span class="s">&quot;1. Overview&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nx">WithTopic</span><span class="p">(</span><span class="s">&quot;RAG Fundamentals&quot;</span><span class="p">).</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nx">WithTags</span><span class="p">(</span><span class="s">&quot;rag&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;retrieval&quot;</span><span class="p">).</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nx">WithDifficulty</span><span class="p">(</span><span class="s">&quot;medium&quot;</span><span class="p">).</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nx">WithLearningObjective</span><span class="p">(</span><span class="s">&quot;Understand RAG basics&quot;</span><span class="p">)</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="nx">question</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h5p</span><span class="p">.</span><span class="nx">NewMultiChoiceQuestionWithExtensions</span><span class="p">(</span><span class="nx">text</span><span class="p">,</span><span class="w"> </span><span class="nx">answers</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">h5p</span><span class="p">.</span><span class="nx">Extensions</span><span class="p">{</span><span class="nx">H5PGo</span><span class="p">:</span><span class="w"> </span><span class="nx">ext</span><span class="p">})</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nx">ext</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h5p</span><span class="p">.</span><span class="nx">NewH5PGoExtension</span><span class="p">(</span><span class="s">&quot;1. Overview&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="nx">WithTopic</span><span class="p">(</span><span class="s">&quot;RAG Fundamentals&quot;</span><span class="p">).</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nx">WithTags</span><span class="p">(</span><span class="s">&quot;rag&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;retrieval&quot;</span><span class="p">).</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nx">WithDifficulty</span><span class="p">(</span><span class="s">&quot;medium&quot;</span><span class="p">).</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="nx">WithLearningObjective</span><span class="p">(</span><span class="s">&quot;Understand RAG basics&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="nx">question</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h5p</span><span class="p">.</span><span class="nx">NewMultiChoiceQuestionWithExtensions</span><span class="p">(</span><span class="nx">text</span><span class="p">,</span><span class="w"> </span><span class="nx">answers</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">h5p</span><span class="p">.</span><span class="nx">Extensions</span><span class="p">{</span><span class="nx">H5PGo</span><span class="p">:</span><span class="w"> </span><span class="nx">ext</span><span class="p">})</span>
 </code></pre></div>
 <p>See the <a href="releases/v0.4.0/">v0.4.0 release notes</a> for details.</p>
-<h2 id="whats-next">📚 What's Next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h2>
+<h2 id="whats-next">What's Next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h2>
+<h3 id="typescript-editor">TypeScript Editor<a class="headerlink" href="#typescript-editor" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong><a href="ts-editor/overview/">Editor Overview</a></strong> - Introduction to the quiz editor</li>
+<li><strong><a href="ts-editor/installation/">Installation</a></strong> - npm/pnpm and CDN setup</li>
+<li><strong><a href="ts-editor/react-usage/">React Usage</a></strong> - Component props and ref API</li>
+<li><strong><a href="ts-editor/vanilla-js/">Vanilla JS</a></strong> - CDN usage without React build</li>
+<li><strong><a href="ts-editor/api-reference/">API Reference</a></strong> - Types and functions</li>
+</ul>
+<h3 id="go-sdk">Go SDK<a class="headerlink" href="#go-sdk" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong><a href="getting-started/installation/">Installation Guide</a></strong> - Detailed installation instructions</li>
 <li><strong><a href="getting-started/quick-start/">Quick Start Tutorial</a></strong> - Step-by-step tutorial</li>
