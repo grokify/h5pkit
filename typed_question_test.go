@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/grokify/h5p-go/schemas"
+	"github.com/grokify/h5pkit/schemas"
 )
 
 func TestTypedMultiChoiceQuestion(t *testing.T) {

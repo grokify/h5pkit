@@ -1,7 +1,7 @@
 package h5p
 
 import (
-	"github.com/grokify/h5p-go/schemas"
+	"github.com/grokify/h5pkit/schemas"
 )
 
 type QuestionSet struct {

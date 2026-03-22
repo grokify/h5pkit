@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	h5p "github.com/grokify/h5p-go"
+	h5p "github.com/grokify/h5pkit"
 )
 
 func main() {

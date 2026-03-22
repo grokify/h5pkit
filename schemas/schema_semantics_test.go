@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/grokify/h5p-go/semantics"
+	"github.com/grokify/h5pkit/semantics"
 )
 
 func TestSchemaSemantics(t *testing.T) {
