@@ -5,6 +5,25 @@
   "versioning": "semver",
   "commitConvention": "conventional",
   "maintainers": ["grokify", "johncwang@gmail.com"],
+  "unreleased": {
+    "added": [
+      { "description": "`Extension.DifficultyScore`, `Skills` (`SkillRef`), and `Standards` (`StandardRef`), validated by `Extension.Validate` and `QuestionSet.Validate`", "commit": "612e5a4" },
+      { "description": "`registry` package: banks, immutable versions, licenses, lineage, and the `Store` interface with `MemoryStore`", "commit": "1fac3b2" },
+      { "description": "Publishing with skill and standard unions, `ErrImmutable`, forks with lineage, and `Descendants`", "commit": "4e343bb" },
+      { "description": "`registry/registrytest` conformance suite for `Store` implementations", "commit": "1fac3b2" },
+      { "description": "Export a bank version to a `QuestionSet` or an `.h5p` package, and import an `.h5p` question set to a draft", "commit": "bbe2b7a" }
+    ],
+    "changed": [
+      { "description": "The question metadata block is written under the `h5pkit` extension key instead of `h5pGo`; `h5pGo` is still read and promoted for one minor release, and `MigrateLegacyExtensions` rewrites a question set in place", "commit": "0abbf90", "breaking": true },
+      { "description": "`H5PGoExtension` is renamed `Extension`; `H5PGoExtension` and `NewH5PGoExtension` remain as deprecated aliases", "commit": "0abbf90" }
+    ],
+    "fixed": [
+      { "description": "`QuestionSet.Validate` names the index of a bad feedback range as a number", "commit": "43b1dcd" }
+    ],
+    "documentation": [
+      { "description": "Extensions guide covering every field, the relative-difficulty rule, and the rename", "commit": "27db33f" }
+    ]
+  },
   "releases": [
     {
       "version": "v0.5.0",
