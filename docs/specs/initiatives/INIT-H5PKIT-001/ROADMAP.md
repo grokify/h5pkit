@@ -22,13 +22,13 @@ of Phases 1 and 2. Commits implementing an item carry
 
 **Theme:** Banks, immutable versions, lineage, and a store boundary
 
-- [ ] `RMI-H5PKIT-004` `registry` types: `Bank`, `BankVersion`, `License`, `Lineage`, `Status`, `Relation`, `ListFilter`
+- [x] `RMI-H5PKIT-004` `registry` types: `Bank`, `BankVersion`, `License`, `Lineage`, `Status`, `Relation`, `ListFilter`
   - Depends on: `RMI-H5PKIT-002`
-- [ ] `RMI-H5PKIT-005` `Store` interface, `MemoryStore`, and the `registrytest` conformance suite
+- [x] `RMI-H5PKIT-005` `Store` interface, `MemoryStore`, and the `registrytest` conformance suite
   - Depends on: `RMI-H5PKIT-004`
-- [ ] `RMI-H5PKIT-006` Versioning rules: draft editing, publish freezes and computes skill and standards unions, `ErrImmutable`, new version from existing, fork with lineage and descendants lookup
+- [x] `RMI-H5PKIT-006` Versioning rules: draft editing, publish freezes and computes skill and standards unions, `ErrImmutable`, new version from existing, fork with lineage and descendants lookup
   - Depends on: `RMI-H5PKIT-005`
-- [ ] `RMI-H5PKIT-007` Interop: export a version to `QuestionSet` and `.h5p`; import an `.h5p` question set to a draft version preserving extensions
+- [x] `RMI-H5PKIT-007` Interop: export a version to `QuestionSet` and `.h5p`; import an `.h5p` question set to a draft version preserving extensions
   - Depends on: `RMI-H5PKIT-006`
 
 ## Phase 3 — Content Types
