@@ -15,6 +15,12 @@ var (
 	// ErrDraftExists means the bank already has a draft version; publish or
 	// finish it before starting another.
 	ErrDraftExists = errors.New("registry: bank already has a draft version")
+	// ErrImmutable means the version is published or archived and cannot
+	// change. Start a new version with NewVersion instead.
+	ErrImmutable = errors.New("registry: version is immutable")
+	// ErrNotPublished means the operation needs a published version, such
+	// as forking, and the version is still a draft.
+	ErrNotPublished = errors.New("registry: version is not published")
 )
 
 // Store persists banks and their versions. Every implementation must pass
@@ -26,6 +32,8 @@ var (
 //   - Returned values are copies; changing them never changes stored state.
 //   - A canceled context returns its error.
 //   - A bank has at most one draft version at a time.
+//   - A published or archived version never changes; attempts return
+//     ErrImmutable.
 type Store interface {
 	// CreateBank stores a new bank. An empty ID is assigned by the store;
 	// CreatedAt and UpdatedAt are set by the store. The bank must pass
@@ -50,8 +58,16 @@ type Store interface {
 
 	// SaveDraft replaces a draft's questions and notes. The version is
 	// identified by BankID and Version, and its Status must be empty or
-	// draft. Skills, Standards, and PublishedAt are ignored.
+	// draft. Skills, Standards, and PublishedAt are ignored. A frozen
+	// version returns ErrImmutable.
 	SaveDraft(ctx context.Context, v BankVersion) error
+
+	// Publish freezes a draft. The draft must have at least one question
+	// and pass h5p.QuestionSet validation, including every question's
+	// h5pkit block. Publish computes Skills and Standards as the sorted,
+	// de-duplicated union of the questions' references and sets
+	// PublishedAt. Publishing a frozen version returns ErrImmutable.
+	Publish(ctx context.Context, bankID, version string) (BankVersion, error)
 
 	// GetVersion returns one version of a bank, or ErrNotFound.
 	GetVersion(ctx context.Context, bankID, version string) (BankVersion, error)
@@ -59,4 +75,17 @@ type Store interface {
 	// ListVersions returns a bank's versions in ascending version order,
 	// or ErrNotFound if the bank does not exist.
 	ListVersions(ctx context.Context, bankID string) ([]BankVersion, error)
+
+	// Fork creates a bank derived from a published version of another.
+	// into is the new bank, validated as for CreateBank; its Lineage must
+	// be nil and is set by the store from the parent and rel. When into has
+	// no License.SPDX it inherits the parent's license. The new bank starts
+	// with a "1.0.0" draft holding a copy of the parent version's
+	// questions. A draft parent version returns ErrNotPublished.
+	Fork(ctx context.Context, parentBankID, parentVersion string, into Bank, rel Relation) (Bank, BankVersion, error)
+
+	// Descendants returns every bank derived from bankID, directly or
+	// through other derived banks, ordered by CreatedAt and then ID. A
+	// missing bank returns ErrNotFound.
+	Descendants(ctx context.Context, bankID string) ([]Bank, error)
 }

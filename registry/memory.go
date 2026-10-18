@@ -144,13 +144,17 @@ func (s *MemoryStore) ListBanks(ctx context.Context, f ListFilter) ([]Bank, erro
 			out = append(out, copyBank(b))
 		}
 	}
-	slices.SortFunc(out, func(a, b Bank) int {
+	sortBanks(out)
+	return out, nil
+}
+
+func sortBanks(bs []Bank) {
+	slices.SortFunc(bs, func(a, b Bank) int {
 		if c := a.CreatedAt.Compare(b.CreatedAt); c != 0 {
 			return c
 		}
 		return strings.Compare(a.ID, b.ID)
 	})
-	return out, nil
 }
 
 // matches reports whether b passes f. The caller holds mu.
@@ -167,7 +171,40 @@ func (s *MemoryStore) matches(b Bank, f ListFilter) bool {
 	case f.ParentBankID != "" && (b.Lineage == nil || b.Lineage.ParentBankID != f.ParentBankID):
 		return false
 	}
+	if f.Skill == nil && f.Standard == nil {
+		return true
+	}
+	latest := s.latestPublished(b.ID)
+	if latest == nil {
+		return false
+	}
+	if f.Skill != nil && !slices.Contains(latest.meta.Skills, *f.Skill) {
+		return false
+	}
+	if f.Standard != nil && !slices.Contains(latest.meta.Standards, *f.Standard) {
+		return false
+	}
 	return true
+}
+
+// latestPublished returns the bank's highest published version, or nil.
+// The caller holds mu.
+func (s *MemoryStore) latestPublished(bankID string) *storedVersion {
+	var best *storedVersion
+	var bestV semver
+	for v, sv := range s.versions[bankID] {
+		if sv.meta.Status != StatusPublished {
+			continue
+		}
+		p, err := parseVersion(v)
+		if err != nil {
+			continue
+		}
+		if best == nil || p.compare(bestV) > 0 {
+			best, bestV = sv, p
+		}
+	}
+	return best
 }
 
 // NewVersion implements Store.
@@ -229,10 +266,124 @@ func (s *MemoryStore) SaveDraft(ctx context.Context, v BankVersion) error {
 	if err != nil {
 		return err
 	}
+	if sv.meta.Frozen() {
+		return fmt.Errorf("%w: %s %s is %s", ErrImmutable, v.BankID, v.Version, sv.meta.Status)
+	}
 	sv.questions = questions
 	sv.meta.Notes = v.Notes
 	s.touch(v.BankID)
 	return nil
+}
+
+// Publish implements Store.
+func (s *MemoryStore) Publish(ctx context.Context, bankID, version string) (BankVersion, error) {
+	if err := ctx.Err(); err != nil {
+		return BankVersion{}, err
+	}
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	sv, err := s.version(bankID, version)
+	if err != nil {
+		return BankVersion{}, err
+	}
+	if sv.meta.Frozen() {
+		return BankVersion{}, fmt.Errorf("%w: %s %s is %s", ErrImmutable, bankID, version, sv.meta.Status)
+	}
+	v, err := sv.decode()
+	if err != nil {
+		return BankVersion{}, err
+	}
+	if len(v.Questions) == 0 {
+		return BankVersion{}, fmt.Errorf("%w: cannot publish a version with no questions", ErrInvalid)
+	}
+	qs := h5p.QuestionSet{Questions: v.Questions}
+	if err := qs.Validate(); err != nil {
+		return BankVersion{}, fmt.Errorf("%w: %w", ErrInvalid, err)
+	}
+	now := s.now()
+	sv.meta.Skills, sv.meta.Standards = Unions(v.Questions)
+	sv.meta.Status = StatusPublished
+	sv.meta.PublishedAt = &now
+	s.touch(bankID)
+	return sv.decode()
+}
+
+// Fork implements Store.
+func (s *MemoryStore) Fork(ctx context.Context, parentBankID, parentVersion string, into Bank, rel Relation) (Bank, BankVersion, error) {
+	if err := ctx.Err(); err != nil {
+		return Bank{}, BankVersion{}, err
+	}
+	if !rel.Valid() {
+		return Bank{}, BankVersion{}, fmt.Errorf("%w: unknown relation %q", ErrInvalid, rel)
+	}
+	if into.Lineage != nil {
+		return Bank{}, BankVersion{}, fmt.Errorf("%w: Fork sets the lineage; leave it nil", ErrInvalid)
+	}
+	if err := into.Validate(); err != nil {
+		return Bank{}, BankVersion{}, err
+	}
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	parent, err := s.version(parentBankID, parentVersion)
+	if err != nil {
+		return Bank{}, BankVersion{}, err
+	}
+	if parent.meta.Status == StatusDraft {
+		return Bank{}, BankVersion{}, fmt.Errorf("%w: %s %s", ErrNotPublished, parentBankID, parentVersion)
+	}
+	if into.License.SPDX == "" {
+		into.License = s.banks[parentBankID].License
+	}
+	into.Lineage = &Lineage{ParentBankID: parentBankID, ParentVersion: parentVersion, Relation: rel}
+	b, err := s.insertBank(into)
+	if err != nil {
+		return Bank{}, BankVersion{}, err
+	}
+	sv := &storedVersion{
+		meta:      BankVersion{BankID: b.ID, Version: "1.0.0", Status: StatusDraft},
+		questions: parent.questions,
+	}
+	s.versions[b.ID][sv.meta.Version] = sv
+	v, err := sv.decode()
+	if err != nil {
+		return Bank{}, BankVersion{}, err
+	}
+	return b, v, nil
+}
+
+// Descendants implements Store.
+func (s *MemoryStore) Descendants(ctx context.Context, bankID string) ([]Bank, error) {
+	if err := ctx.Err(); err != nil {
+		return nil, err
+	}
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	if _, ok := s.banks[bankID]; !ok {
+		return nil, fmt.Errorf("%w: bank %q", ErrNotFound, bankID)
+	}
+	children := make(map[string][]string)
+	for id, b := range s.banks {
+		if b.Lineage != nil {
+			children[b.Lineage.ParentBankID] = append(children[b.Lineage.ParentBankID], id)
+		}
+	}
+	out := []Bank{}
+	seen := map[string]bool{bankID: true}
+	queue := []string{bankID}
+	for len(queue) > 0 {
+		id := queue[0]
+		queue = queue[1:]
+		for _, child := range children[id] {
+			if seen[child] {
+				continue
+			}
+			seen[child] = true
+			out = append(out, copyBank(s.banks[child]))
+			queue = append(queue, child)
+		}
+	}
+	sortBanks(out)
+	return out, nil
 }
 
 // GetVersion implements Store.

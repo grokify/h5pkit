@@ -36,6 +36,14 @@ func RunStoreTests(t *testing.T, newStore func() registry.Store) {
 		{"SaveDraftRejects", testSaveDraftRejects},
 		{"ListVersions", testListVersions},
 		{"CanceledContext", testCanceledContext},
+		{"Publish", testPublish},
+		{"PublishRejects", testPublishRejects},
+		{"PublishedIsImmutable", testPublishedIsImmutable},
+		{"NewVersionFromPublished", testNewVersionFromPublished},
+		{"ListBanksBySkillAndStandard", testListBanksBySkillAndStandard},
+		{"Fork", testFork},
+		{"ForkRejects", testForkRejects},
+		{"Descendants", testDescendants},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -336,4 +344,297 @@ func testCanceledContext(t *testing.T, s registry.Store) {
 	wantErr(t, "ListBanks", err, context.Canceled)
 	_, err = s.GetVersion(ctx, "b", "1.0.0")
 	wantErr(t, "GetVersion", err, context.Canceled)
+}
+
+var (
+	skillA = h5p.SkillRef{Taxonomy: "tax", ID: "a"}
+	skillB = h5p.SkillRef{Taxonomy: "tax", ID: "b"}
+	stdA   = h5p.StandardRef{Framework: "fw", Code: "1.A"}
+	stdB   = h5p.StandardRef{Framework: "fw", Code: "2.B"}
+)
+
+// mustPublished creates a bank with one published version holding the
+// given questions and returns the bank and that version.
+func mustPublished(t *testing.T, s registry.Store, b registry.Bank, qs ...h5p.Question) (registry.Bank, registry.BankVersion) {
+	t.Helper()
+	b = mustCreate(t, s, b)
+	v := mustNewDraft(t, s, b.ID)
+	v.Questions = qs
+	mustSave(t, s, v)
+	pub, err := s.Publish(context.Background(), b.ID, v.Version)
+	if err != nil {
+		t.Fatalf("Publish: %v", err)
+	}
+	return b, pub
+}
+
+func testPublish(t *testing.T, s registry.Store) {
+	ctx := context.Background()
+	b, pub := mustPublished(t, s, registry.Bank{Title: "Pub"},
+		Question("Q1", []h5p.SkillRef{skillB, skillA}, []h5p.StandardRef{stdB}),
+		Question("Q2", []h5p.SkillRef{skillA}, []h5p.StandardRef{stdA, stdB}),
+		h5p.Question{Library: "H5P.MultiChoice 1.16", Params: map[string]any{"question": "no block"}},
+	)
+	if pub.Status != registry.StatusPublished || pub.PublishedAt == nil || pub.PublishedAt.IsZero() {
+		t.Errorf("published version = %+v", pub)
+	}
+	if !SameJSON(t, pub.Skills, []h5p.SkillRef{skillA, skillB}) {
+		t.Errorf("skills union = %v", pub.Skills)
+	}
+	if !SameJSON(t, pub.Standards, []h5p.StandardRef{stdA, stdB}) {
+		t.Errorf("standards union = %v", pub.Standards)
+	}
+	got, err := s.GetVersion(ctx, b.ID, pub.Version)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !SameJSON(t, got, pub) {
+		t.Errorf("GetVersion after publish = %+v, want %+v", got, pub)
+	}
+}
+
+func testPublishRejects(t *testing.T, s registry.Store) {
+	ctx := context.Background()
+	_, err := s.Publish(ctx, "missing", "1.0.0")
+	wantErr(t, "missing bank", err, registry.ErrNotFound)
+
+	b := mustCreate(t, s, registry.Bank{Title: "Rejects"})
+	v := mustNewDraft(t, s, b.ID)
+	_, err = s.Publish(ctx, b.ID, v.Version)
+	wantErr(t, "empty version", err, registry.ErrInvalid)
+
+	bad := Question("Q", []h5p.SkillRef{{Taxonomy: "tax"}}, nil)
+	v.Questions = []h5p.Question{bad}
+	mustSave(t, s, v)
+	_, err = s.Publish(ctx, b.ID, v.Version)
+	wantErr(t, "invalid extension block", err, registry.ErrInvalid)
+
+	got, err := s.GetVersion(ctx, b.ID, v.Version)
+	if err != nil || got.Status != registry.StatusDraft {
+		t.Errorf("a rejected publish changed the version: %+v, %v", got, err)
+	}
+}
+
+func testPublishedIsImmutable(t *testing.T, s registry.Store) {
+	ctx := context.Background()
+	b, pub := mustPublished(t, s, registry.Bank{Title: "Frozen"}, Question("Q1", nil, nil))
+
+	edit := pub
+	edit.Status = ""
+	edit.Questions = []h5p.Question{Question("changed", nil, nil)}
+	wantErr(t, "SaveDraft on published", s.SaveDraft(ctx, edit), registry.ErrImmutable)
+
+	_, err := s.Publish(ctx, b.ID, pub.Version)
+	wantErr(t, "publish twice", err, registry.ErrImmutable)
+
+	got, err := s.GetVersion(ctx, b.ID, pub.Version)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !SameJSON(t, got.Questions, pub.Questions) {
+		t.Error("published content changed")
+	}
+}
+
+func testNewVersionFromPublished(t *testing.T, s registry.Store) {
+	ctx := context.Background()
+	b, pub := mustPublished(t, s, registry.Bank{Title: "Next"}, Question("Q1", []h5p.SkillRef{skillA}, nil))
+
+	next := mustNewVersion(t, s, b.ID, pub.Version)
+	if next.Version != "1.1.0" || next.Status != registry.StatusDraft {
+		t.Errorf("next version = %s %s, want a 1.1.0 draft", next.Version, next.Status)
+	}
+	if !SameJSON(t, next.Questions, pub.Questions) {
+		t.Error("new version did not copy the questions")
+	}
+	if len(next.Skills) != 0 || next.PublishedAt != nil {
+		t.Errorf("draft carried publish-time fields: %+v", next)
+	}
+
+	next.Questions = append(next.Questions, Question("Q2", nil, nil))
+	mustSave(t, s, next)
+	orig, err := s.GetVersion(ctx, b.ID, pub.Version)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(orig.Questions) != 1 {
+		t.Error("editing the new draft changed the version it came from")
+	}
+
+	_, err = s.NewVersion(ctx, b.ID, pub.Version)
+	wantErr(t, "second draft", err, registry.ErrDraftExists)
+
+	if _, err := s.Publish(ctx, b.ID, next.Version); err != nil {
+		t.Fatal(err)
+	}
+	empty := mustNewDraft(t, s, b.ID)
+	if empty.Version != "1.2.0" || len(empty.Questions) != 0 {
+		t.Errorf("empty new version = %s with %d questions, want an empty 1.2.0", empty.Version, len(empty.Questions))
+	}
+
+	vs, err := s.ListVersions(ctx, b.ID)
+	if err != nil {
+		t.Fatal(err)
+	}
+	order := make([]string, len(vs))
+	for i, v := range vs {
+		order[i] = v.Version
+	}
+	if !SameJSON(t, order, []string{"1.0.0", "1.1.0", "1.2.0"}) {
+		t.Errorf("version order = %v", order)
+	}
+}
+
+func testListBanksBySkillAndStandard(t *testing.T, s registry.Store) {
+	ctx := context.Background()
+	a, _ := mustPublished(t, s, registry.Bank{Title: "A"}, Question("Q", []h5p.SkillRef{skillA}, []h5p.StandardRef{stdA}))
+	b, _ := mustPublished(t, s, registry.Bank{Title: "B"}, Question("Q", []h5p.SkillRef{skillB}, []h5p.StandardRef{stdA}))
+	draftOnly := mustCreate(t, s, registry.Bank{Title: "Draft only"})
+	d := mustNewDraft(t, s, draftOnly.ID)
+	d.Questions = []h5p.Question{Question("Q", []h5p.SkillRef{skillA}, nil)}
+	mustSave(t, s, d)
+
+	ids := func(f registry.ListFilter) []string {
+		got, err := s.ListBanks(ctx, f)
+		if err != nil {
+			t.Fatal(err)
+		}
+		out := []string{}
+		for _, g := range got {
+			out = append(out, g.ID)
+		}
+		return out
+	}
+	if got := ids(registry.ListFilter{Skill: &skillA}); !sameSet(got, []string{a.ID}) {
+		t.Errorf("skill a: %v, want only %s (drafts do not count)", got, a.ID)
+	}
+	if got := ids(registry.ListFilter{Standard: &stdA}); !sameSet(got, []string{a.ID, b.ID}) {
+		t.Errorf("standard: %v", got)
+	}
+	if got := ids(registry.ListFilter{Skill: &skillB, Standard: &stdA}); !sameSet(got, []string{b.ID}) {
+		t.Errorf("skill and standard: %v", got)
+	}
+
+	// The latest published version decides.
+	next := mustNewVersion(t, s, a.ID, "1.0.0")
+	next.Questions = []h5p.Question{Question("Q", []h5p.SkillRef{skillB}, nil)}
+	mustSave(t, s, next)
+	if _, err := s.Publish(ctx, a.ID, next.Version); err != nil {
+		t.Fatal(err)
+	}
+	if got := ids(registry.ListFilter{Skill: &skillA}); len(got) != 0 {
+		t.Errorf("skill a after a newer version dropped it: %v", got)
+	}
+}
+
+func testFork(t *testing.T, s registry.Store) {
+	ctx := context.Background()
+	parent, pub := mustPublished(t, s,
+		registry.Bank{Title: "Parent", License: registry.License{SPDX: "CC-BY-SA-4.0", Attribution: "Example Author"}},
+		Question("Q1", []h5p.SkillRef{skillA}, nil))
+
+	child, draft, err := s.Fork(ctx, parent.ID, pub.Version, registry.Bank{Title: "Child", Language: "es"}, registry.RelationTranslation)
+	if err != nil {
+		t.Fatalf("Fork: %v", err)
+	}
+	want := registry.Lineage{ParentBankID: parent.ID, ParentVersion: pub.Version, Relation: registry.RelationTranslation}
+	if child.Lineage == nil || *child.Lineage != want {
+		t.Errorf("lineage = %+v, want %+v", child.Lineage, want)
+	}
+	if child.License != parent.License {
+		t.Errorf("license = %+v, want the parent's %+v", child.License, parent.License)
+	}
+	if draft.BankID != child.ID || draft.Version != "1.0.0" || draft.Status != registry.StatusDraft {
+		t.Errorf("fork draft = %+v", draft)
+	}
+	if !SameJSON(t, draft.Questions, pub.Questions) {
+		t.Error("fork did not copy the parent's questions")
+	}
+
+	own, _, err := s.Fork(ctx, parent.ID, pub.Version, registry.Bank{Title: "Own license", License: registry.License{SPDX: "CC-BY-4.0"}}, registry.RelationRemix)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if own.License.SPDX != "CC-BY-4.0" {
+		t.Errorf("explicit license replaced: %+v", own.License)
+	}
+
+	got, err := s.ListBanks(ctx, registry.ListFilter{ParentBankID: parent.ID})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(got) != 2 {
+		t.Errorf("banks with parent %s: %d, want 2", parent.ID, len(got))
+	}
+}
+
+func testForkRejects(t *testing.T, s registry.Store) {
+	ctx := context.Background()
+	_, _, err := s.Fork(ctx, "missing", "1.0.0", registry.Bank{Title: "X"}, registry.RelationFork)
+	wantErr(t, "missing parent", err, registry.ErrNotFound)
+
+	parent := mustCreate(t, s, registry.Bank{Title: "Parent"})
+	d := mustNewDraft(t, s, parent.ID)
+	_, _, err = s.Fork(ctx, parent.ID, d.Version, registry.Bank{Title: "X"}, registry.RelationFork)
+	wantErr(t, "draft parent", err, registry.ErrNotPublished)
+
+	_, pub := mustPublished(t, s, registry.Bank{Title: "Published"}, Question("Q", nil, nil))
+	_, _, err = s.Fork(ctx, pub.BankID, pub.Version, registry.Bank{Title: "X"}, "copy")
+	wantErr(t, "unknown relation", err, registry.ErrInvalid)
+	_, _, err = s.Fork(ctx, pub.BankID, pub.Version, registry.Bank{Title: " "}, registry.RelationFork)
+	wantErr(t, "untitled fork", err, registry.ErrInvalid)
+	_, _, err = s.Fork(ctx, pub.BankID, pub.Version, registry.Bank{Title: "X", Lineage: &registry.Lineage{
+		ParentBankID: "other", ParentVersion: "1.0.0", Relation: registry.RelationFork,
+	}}, registry.RelationFork)
+	wantErr(t, "caller-set lineage", err, registry.ErrInvalid)
+}
+
+func testDescendants(t *testing.T, s registry.Store) {
+	ctx := context.Background()
+	_, err := s.Descendants(ctx, "missing")
+	wantErr(t, "missing bank", err, registry.ErrNotFound)
+
+	root, pub := mustPublished(t, s, registry.Bank{Title: "Root"}, Question("Q", nil, nil))
+	child, childDraft, err := s.Fork(ctx, root.ID, pub.Version, registry.Bank{Title: "Child"}, registry.RelationFork)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err := s.Publish(ctx, child.ID, childDraft.Version); err != nil {
+		t.Fatal(err)
+	}
+	grandchild, _, err := s.Fork(ctx, child.ID, childDraft.Version, registry.Bank{Title: "Grandchild"}, registry.RelationRemix)
+	if err != nil {
+		t.Fatal(err)
+	}
+	mustCreate(t, s, registry.Bank{Title: "Unrelated"})
+
+	ids := func(bankID string) []string {
+		got, err := s.Descendants(ctx, bankID)
+		if err != nil {
+			t.Fatal(err)
+		}
+		out := []string{}
+		for _, g := range got {
+			out = append(out, g.ID)
+		}
+		return out
+	}
+	if got := ids(root.ID); !sameSet(got, []string{child.ID, grandchild.ID}) {
+		t.Errorf("descendants of root = %v", got)
+	}
+	if got := ids(child.ID); !sameSet(got, []string{grandchild.ID}) {
+		t.Errorf("descendants of child = %v", got)
+	}
+	if got := ids(grandchild.ID); len(got) != 0 {
+		t.Errorf("descendants of a leaf = %v", got)
+	}
+}
+
+func mustNewVersion(t *testing.T, s registry.Store, bankID, from string) registry.BankVersion {
+	t.Helper()
+	v, err := s.NewVersion(context.Background(), bankID, from)
+	if err != nil {
+		t.Fatalf("NewVersion(%q, %q): %v", bankID, from, err)
+	}
+	return v
 }
