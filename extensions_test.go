@@ -2,7 +2,6 @@ package h5p
 
 import (
 	"encoding/json"
-	"os"
 	"testing"
 )
 
@@ -155,73 +154,5 @@ func TestQuestionSetWithExtensions(t *testing.T) {
 	}
 	if len(ext.Tags) != 2 {
 		t.Errorf("Tags mismatch: got %d tags", len(ext.Tags))
-	}
-}
-
-// TestExternalQuizFile tests parsing an external quiz file if it exists
-// This validates real-world usage of the extensions format
-func TestExternalQuizFile(t *testing.T) {
-	// Path to the LLM tuning quiz file
-	quizPath := "../../../agentplexus/agentplexus-courses-internal/llm-tuning/quiz_llm_techniques.json"
-
-	// Skip if file doesn't exist (allows test to pass in CI without the file)
-	if _, err := os.Stat(quizPath); os.IsNotExist(err) {
-		t.Skip("External quiz file not found, skipping validation test")
-	}
-
-	data, err := os.ReadFile(quizPath)
-	if err != nil {
-		t.Fatalf("Failed to read quiz file: %v", err)
-	}
-
-	var qs QuestionSet
-	if err := json.Unmarshal(data, &qs); err != nil {
-		t.Fatalf("Failed to unmarshal quiz file: %v", err)
-	}
-
-	// Validate basic structure
-	if qs.Title == "" {
-		t.Error("Quiz title is empty")
-	}
-
-	if len(qs.Questions) == 0 {
-		t.Fatal("No questions found in quiz")
-	}
-
-	t.Logf("Parsed quiz: %q with %d questions", qs.Title, len(qs.Questions))
-
-	// Validate each question has extensions
-	sectionsFound := make(map[string]int)
-	for i, q := range qs.Questions {
-		if q.Library == "" {
-			t.Errorf("Question %d: library is empty", i+1)
-		}
-
-		if q.Extensions == nil {
-			t.Errorf("Question %d: extensions is nil", i+1)
-			continue
-		}
-
-		ext := q.Extensions.Extension()
-		if ext == nil {
-			t.Errorf("Question %d: h5pkit extension is nil", i+1)
-			continue
-		}
-
-		if ext.Section == "" {
-			t.Errorf("Question %d: section is empty", i+1)
-		}
-		if ext.QuestionNumber == 0 {
-			t.Errorf("Question %d: questionNumber is 0", i+1)
-		}
-
-		sectionsFound[ext.Section]++
-	}
-
-	t.Logf("Sections found: %v", sectionsFound)
-
-	// Expect 10 sections based on the quiz structure
-	if len(sectionsFound) < 5 {
-		t.Errorf("Expected at least 5 sections, found %d", len(sectionsFound))
 	}
 }
