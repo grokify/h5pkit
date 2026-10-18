@@ -41,7 +41,7 @@ A toolkit for creating, editing, and validating H5P quiz content. Includes a **G
 - **Multiple Question Types**: Support for single-answer and multi-answer questions
 - **Official Schema Compliance**: Uses actual H5P semantics definitions
 - **JSON Serialization**: Full marshaling/unmarshaling support
-- **Extensions Support**: Vendor-specific metadata with h5pGo namespace (v0.4.0+)
+- **Extensions Support**: A documented `h5pkit` metadata block for sections, difficulty, skills, and standards
 
 ## TypeScript Editor Features
 
