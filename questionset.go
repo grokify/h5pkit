@@ -63,21 +63,21 @@ func NewMultiChoiceQuestion(params *schemas.MultiChoiceParams) *MultiChoiceQuest
 	}
 }
 
-// NewMultiChoiceQuestionWithExtensions creates a new typed MultiChoice question with h5p-go extensions
-func NewMultiChoiceQuestionWithExtensions(params *schemas.MultiChoiceParams, ext *H5PGoExtension) *MultiChoiceQuestion {
+// NewMultiChoiceQuestionWithExtensions creates a new typed MultiChoice question with an h5pkit extension block
+func NewMultiChoiceQuestionWithExtensions(params *schemas.MultiChoiceParams, ext *Extension) *MultiChoiceQuestion {
 	return &MultiChoiceQuestion{
 		Library: "H5P.MultiChoice 1.16",
 		Params:  params,
 		Extensions: &Extensions{
-			H5PGo: ext,
+			H5PKit: ext,
 		},
 	}
 }
 
 // WithExtensions adds extensions to an existing MultiChoiceQuestion and returns it for chaining
-func (mcq *MultiChoiceQuestion) WithExtensions(ext *H5PGoExtension) *MultiChoiceQuestion {
+func (mcq *MultiChoiceQuestion) WithExtensions(ext *Extension) *MultiChoiceQuestion {
 	mcq.Extensions = &Extensions{
-		H5PGo: ext,
+		H5PKit: ext,
 	}
 	return mcq
 }

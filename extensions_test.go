@@ -9,7 +9,7 @@ import (
 func TestExtensionsJSONParsing(t *testing.T) {
 	// Test that we can marshal/unmarshal Extensions correctly
 	ext := &Extensions{
-		H5PGo: &H5PGoExtension{
+		H5PKit: &Extension{
 			Section:           "1. Overview & Fundamentals",
 			Topic:             "Introduction",
 			Tags:              []string{"basics", "overview"},
@@ -30,20 +30,20 @@ func TestExtensionsJSONParsing(t *testing.T) {
 		t.Fatalf("Failed to unmarshal Extensions: %v", err)
 	}
 
-	if parsed.H5PGo == nil {
-		t.Fatal("H5PGo extension is nil after unmarshal")
+	if parsed.H5PKit == nil {
+		t.Fatal("H5PKit extension is nil after unmarshal")
 	}
 
-	if parsed.H5PGo.Section != ext.H5PGo.Section {
-		t.Errorf("Section mismatch: got %q, want %q", parsed.H5PGo.Section, ext.H5PGo.Section)
+	if parsed.H5PKit.Section != ext.H5PKit.Section {
+		t.Errorf("Section mismatch: got %q, want %q", parsed.H5PKit.Section, ext.H5PKit.Section)
 	}
 
-	if parsed.H5PGo.QuestionNumber != ext.H5PGo.QuestionNumber {
-		t.Errorf("QuestionNumber mismatch: got %d, want %d", parsed.H5PGo.QuestionNumber, ext.H5PGo.QuestionNumber)
+	if parsed.H5PKit.QuestionNumber != ext.H5PKit.QuestionNumber {
+		t.Errorf("QuestionNumber mismatch: got %d, want %d", parsed.H5PKit.QuestionNumber, ext.H5PKit.QuestionNumber)
 	}
 
-	if len(parsed.H5PGo.Tags) != len(ext.H5PGo.Tags) {
-		t.Errorf("Tags length mismatch: got %d, want %d", len(parsed.H5PGo.Tags), len(ext.H5PGo.Tags))
+	if len(parsed.H5PKit.Tags) != len(ext.H5PKit.Tags) {
+		t.Errorf("Tags length mismatch: got %d, want %d", len(parsed.H5PKit.Tags), len(ext.H5PKit.Tags))
 	}
 }
 
@@ -53,7 +53,7 @@ func TestQuestionWithExtensions(t *testing.T) {
 		Library: "H5P.MultiChoice 1.16",
 		Params:  map[string]interface{}{"question": "Test question?"},
 		Extensions: &Extensions{
-			H5PGo: &H5PGoExtension{
+			H5PKit: &Extension{
 				Section:        "Test Section",
 				QuestionNumber: 42,
 				Difficulty:     "medium",
@@ -75,17 +75,17 @@ func TestQuestionWithExtensions(t *testing.T) {
 		t.Fatal("Extensions is nil after unmarshal")
 	}
 
-	if parsed.Extensions.H5PGo == nil {
-		t.Fatal("H5PGo is nil after unmarshal")
+	if parsed.Extensions.H5PKit == nil {
+		t.Fatal("H5PKit is nil after unmarshal")
 	}
 
-	if parsed.Extensions.H5PGo.QuestionNumber != 42 {
-		t.Errorf("QuestionNumber mismatch: got %d, want 42", parsed.Extensions.H5PGo.QuestionNumber)
+	if parsed.Extensions.H5PKit.QuestionNumber != 42 {
+		t.Errorf("QuestionNumber mismatch: got %d, want 42", parsed.Extensions.H5PKit.QuestionNumber)
 	}
 }
 
-func TestNewH5PGoExtension(t *testing.T) {
-	ext := NewH5PGoExtension("Test Section", 5).
+func TestNewExtension(t *testing.T) {
+	ext := NewExtension("Test Section", 5).
 		WithTopic("Test Topic").
 		WithDifficulty("hard").
 		WithTags("tag1", "tag2").
@@ -142,11 +142,11 @@ func TestQuestionSetWithExtensions(t *testing.T) {
 		t.Fatal("Extensions is nil")
 	}
 
-	if qs.Questions[0].Extensions.H5PGo == nil {
-		t.Fatal("H5PGo is nil")
+	if qs.Questions[0].Extensions.H5PKit == nil {
+		t.Fatal("legacy h5pGo block was not promoted into H5PKit")
 	}
 
-	ext := qs.Questions[0].Extensions.H5PGo
+	ext := qs.Questions[0].Extensions.H5PKit
 	if ext.Section != "Math Basics" {
 		t.Errorf("Section mismatch: got %q", ext.Section)
 	}
@@ -202,12 +202,12 @@ func TestExternalQuizFile(t *testing.T) {
 			continue
 		}
 
-		if q.Extensions.H5PGo == nil {
-			t.Errorf("Question %d: h5pGo extension is nil", i+1)
+		ext := q.Extensions.Extension()
+		if ext == nil {
+			t.Errorf("Question %d: h5pkit extension is nil", i+1)
 			continue
 		}
 
-		ext := q.Extensions.H5PGo
 		if ext.Section == "" {
 			t.Errorf("Question %d: section is empty", i+1)
 		}
