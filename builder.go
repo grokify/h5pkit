@@ -3,6 +3,7 @@ package h5p
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 
 	"github.com/grokify/h5pkit/schemas"
 )
@@ -139,7 +140,7 @@ func (qs *QuestionSet) Validate() error {
 
 	for i, feedback := range qs.OverallFeedback {
 		if feedback.From > feedback.To {
-			return errors.New("feedback range 'from' cannot be greater than 'to' at index " + string(rune(i)))
+			return fmt.Errorf("feedback range 'from' cannot be greater than 'to' at index %d", i)
 		}
 	}
 

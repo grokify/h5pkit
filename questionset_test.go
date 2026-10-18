@@ -2,6 +2,7 @@ package h5p
 
 import (
 	"os"
+	"strings"
 	"testing"
 )
 
@@ -171,4 +172,15 @@ func TestReadSampleQuestionSetJSON(t *testing.T) {
 
 	t.Logf("Successfully parsed question set with %d questions (%d single-answer, %d multi-answer)",
 		len(questionSet.Questions), singleAnswerCount, multiAnswerCount)
+}
+
+func TestValidateReportsFeedbackRangeIndex(t *testing.T) {
+	qs := &QuestionSet{
+		Questions:       []Question{{Library: "H5P.MultiChoice 1.16"}},
+		OverallFeedback: []FeedbackRange{{From: 0, To: 50}, {From: 90, To: 10}},
+	}
+	err := qs.Validate()
+	if err == nil || !strings.Contains(err.Error(), "index 1") {
+		t.Fatalf("got %v, want an error naming index 1", err)
+	}
 }
