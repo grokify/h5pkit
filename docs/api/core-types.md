@@ -54,7 +54,7 @@ type Question struct {
 
 Extensions add h5pkit metadata to a question without affecting H5P players.
 The [Extensions guide](../guide/extensions.md) describes every field, the
-relative-difficulty rule, and the rename from `h5pGo`.
+relative-difficulty rule, and the `h5pkit` key.
 
 ### Extensions
 
@@ -63,15 +63,10 @@ Container for the metadata block, a sibling of `library` and `params`:
 ```go
 type Extensions struct {
     H5PKit *Extension `json:"h5pkit,omitempty"`
-    // Deprecated: read-only alias for the legacy "h5pGo" key.
-    H5PGo  *Extension `json:"h5pGo,omitempty"`
 }
 
-// Extension returns H5PKit, or the legacy block when H5PKit is nil.
+// Extension returns H5PKit, or nil when it is not set.
 func (e *Extensions) Extension() *Extension
-
-// MigrateLegacyExtensions moves legacy blocks into H5PKit in place.
-func MigrateLegacyExtensions(qs *QuestionSet) int
 ```
 
 ### Extension
@@ -120,8 +115,6 @@ func (e *Extension) WithStandards(standards ...StandardRef) *Extension
 func (e *Extension) WithLearningObjective(objective string) *Extension
 func (e *Extension) WithSource(source string) *Extension
 ```
-
-`H5PGoExtension` and `NewH5PGoExtension` are deprecated aliases.
 
 #### Example
 

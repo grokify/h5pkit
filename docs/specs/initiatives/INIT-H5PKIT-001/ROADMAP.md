@@ -12,7 +12,7 @@ of Phases 1 and 2. Commits implementing an item carry
 
 **Theme:** A documented, namespaced metadata block
 
-- [x] `RMI-H5PKIT-001` Rename the extension namespace to `h5pkit` with read-compat for `h5pGo`, a migration helper, and a `MarshalJSON` that never writes the legacy key
+- [x] `RMI-H5PKIT-001` Rename the extension namespace from `h5pGo` to `h5pkit`
 - [x] `RMI-H5PKIT-002` Add `difficultyScore`, `skills` (`SkillRef{Taxonomy, ID}`), and `standards` (`StandardRef{Framework, Code}`) with validation wired into `QuestionSet.Validate`
   - Depends on: `RMI-H5PKIT-001`
 - [x] `RMI-H5PKIT-003` Extensions guide: every field, the relative-difficulty rule, the rename, and guidance for other tools

@@ -103,24 +103,14 @@ if err := ext.Validate(); err != nil {
 }
 ```
 
-`Extensions.Extension()` returns the block from a question, whether it was
-read from the current or the legacy key.
+`Extensions.Extension()` returns the block from a question, or nil when it
+has none.
 
-## The rename from `h5pGo`
+## The `h5pkit` key
 
-Earlier releases wrote the block under `extensions.h5pGo`. It is now written
-under `extensions.h5pkit`:
-
-- **Reading** accepts both keys. When only `h5pGo` is present, its block is
-  promoted into `H5PKit`. When both are present, `h5pkit` wins.
-- **Writing** never produces `h5pGo`.
-- `h5p.MigrateLegacyExtensions(qs)` rewrites a loaded question set in place
-  and reports how many questions changed. Loading and saving a set has the
-  same effect on the JSON.
-- In Go, `H5PGoExtension` and `NewH5PGoExtension` remain as deprecated
-  aliases of `Extension` and `NewExtension`.
-
-Read-compatibility for `h5pGo` is kept for one minor release.
+The block is read and written only under `extensions.h5pkit`. Earlier
+releases used `extensions.h5pGo`; that key is no longer read, so rename it in
+any content that still carries it.
 
 ## Guidance for other tools
 
@@ -128,7 +118,7 @@ A tool that reads or writes H5P content should:
 
 - Preserve `extensions` when it rewrites a question, even if it does not
   understand the block.
-- Write only `h5pkit`; read `h5pGo` only as a fallback.
+- Read and write the block only under `h5pkit`.
 - Treat a missing field as unknown, not as zero or empty.
 - Never move the block into `params`, where it would reach the player.
 - Leave `custom` untouched.

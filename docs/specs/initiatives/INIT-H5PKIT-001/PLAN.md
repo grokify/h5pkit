@@ -4,8 +4,7 @@
 
 ## Entry Gate
 
-- Specs reviewed; the namespace rename (`h5pGo` to `h5pkit`, with
-  read-compat) agreed.
+- Specs reviewed; the namespace rename (`h5pGo` to `h5pkit`) agreed.
 - Upstream library versions for the six new content types confirmed against
   their current releases.
 
@@ -13,9 +12,9 @@
 
 ### Phase 1 — Extensions
 
-Rename the namespace with read-compat, add `DifficultyScore`, `SkillRef`,
+Rename the namespace, add `DifficultyScore`, `SkillRef`,
 and `StandardRef`, validate them, and write the extensions guide. Exit:
-legacy content loads and re-serializes under the new key; validation
+content round-trips under the new key; validation
 rejects malformed metadata; the guide documents every field.
 
 ### Phase 2 — Registry

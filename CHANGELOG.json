@@ -14,8 +14,8 @@
       { "description": "Export a bank version to a `QuestionSet` or an `.h5p` package, and import an `.h5p` question set to a draft", "commit": "bbe2b7a" }
     ],
     "changed": [
-      { "description": "The question metadata block is written under the `h5pkit` extension key instead of `h5pGo`; `h5pGo` is still read and promoted for one minor release, and `MigrateLegacyExtensions` rewrites a question set in place", "commit": "0abbf90", "breaking": true },
-      { "description": "`H5PGoExtension` is renamed `Extension`; `H5PGoExtension` and `NewH5PGoExtension` remain as deprecated aliases", "commit": "0abbf90" }
+      { "description": "The question metadata block is read and written only under the `h5pkit` extension key; the `h5pGo` key is no longer read", "commit": "0abbf90", "breaking": true },
+      { "description": "`H5PGoExtension` is renamed `Extension` and `NewH5PGoExtension` is renamed `NewExtension`", "commit": "0abbf90", "breaking": true }
     ],
     "fixed": [
       { "description": "`QuestionSet.Validate` names the index of a bad feedback range as a number", "commit": "43b1dcd" }
