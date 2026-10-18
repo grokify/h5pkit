@@ -47,12 +47,6 @@ func TestQuestionSetValidateChecksExtensions(t *testing.T) {
 	if err := qs.Validate(); !errors.Is(err, ErrDifficultyScoreRange) {
 		t.Fatalf("Validate() = %v, want ErrDifficultyScoreRange", err)
 	}
-	legacy := &QuestionSet{Questions: []Question{
-		{Library: "H5P.MultiChoice 1.16", Extensions: &Extensions{H5PGo: &Extension{Skills: []SkillRef{{}}}}},
-	}}
-	if err := legacy.Validate(); !errors.Is(err, ErrSkillRefIncomplete) {
-		t.Fatalf("legacy block not validated: %v", err)
-	}
 }
 
 func TestExtensionNewFieldsRoundTrip(t *testing.T) {

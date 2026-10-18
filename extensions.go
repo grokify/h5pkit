@@ -1,7 +1,6 @@
 package h5p
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
 	"math"
@@ -13,83 +12,19 @@ import (
 // players, which ignore unknown fields, never see it inside library
 // parameters.
 //
-// The h5pkit block is written under the "h5pkit" key. Content written before
-// the rename used the "h5pGo" key; it is still read, and promoted into
-// H5PKit, but it is never written.
+// The h5pkit block is written under the "h5pkit" key.
 type Extensions struct {
 	// H5PKit is the h5pkit metadata block, serialized under "h5pkit".
 	H5PKit *Extension `json:"h5pkit,omitempty"`
-
-	// H5PGo holds a block read from the legacy "h5pGo" key.
-	//
-	// Deprecated: read-only alias for content written before the rename to
-	// "h5pkit". Unmarshaling promotes it into H5PKit when "h5pkit" is absent,
-	// and marshaling never writes it. Use H5PKit.
-	H5PGo *Extension `json:"h5pGo,omitempty"`
 }
 
-// extensionsJSON mirrors Extensions without its methods, so the custom
-// marshalers can use the default encoding.
-type extensionsJSON struct {
-	H5PKit *Extension `json:"h5pkit,omitempty"`
-	H5PGo  *Extension `json:"h5pGo,omitempty"`
-}
-
-// UnmarshalJSON reads both the "h5pkit" and the legacy "h5pGo" keys. When
-// only "h5pGo" is present, its block is promoted into H5PKit.
-func (e *Extensions) UnmarshalJSON(data []byte) error {
-	var raw extensionsJSON
-	if err := json.Unmarshal(data, &raw); err != nil {
-		return err
-	}
-	e.H5PKit = raw.H5PKit
-	e.H5PGo = raw.H5PGo
-	if e.H5PKit == nil && e.H5PGo != nil {
-		e.H5PKit = e.H5PGo
-	}
-	return nil
-}
-
-// MarshalJSON writes the block under "h5pkit" only. If H5PKit is nil but
-// the legacy H5PGo field is set, that block is written under "h5pkit".
-func (e Extensions) MarshalJSON() ([]byte, error) {
-	return json.Marshal(extensionsJSON{H5PKit: e.Extension()})
-}
-
-// Extension returns the h5pkit block: H5PKit, or the legacy H5PGo block
-// when H5PKit is nil. It returns nil when neither is set, including on a nil
-// receiver.
+// Extension returns the h5pkit block, or nil when none is set, including on
+// a nil receiver.
 func (e *Extensions) Extension() *Extension {
 	if e == nil {
 		return nil
 	}
-	if e.H5PKit != nil {
-		return e.H5PKit
-	}
-	return e.H5PGo
-}
-
-// MigrateLegacyExtensions rewrites every question in qs that carries a
-// legacy "h5pGo" block so the block is held in H5PKit, and clears the legacy
-// field. A question that already has an H5PKit block keeps it. It returns
-// the number of questions changed.
-func MigrateLegacyExtensions(qs *QuestionSet) int {
-	if qs == nil {
-		return 0
-	}
-	n := 0
-	for i := range qs.Questions {
-		ext := qs.Questions[i].Extensions
-		if ext == nil || ext.H5PGo == nil {
-			continue
-		}
-		if ext.H5PKit == nil {
-			ext.H5PKit = ext.H5PGo
-		}
-		ext.H5PGo = nil
-		n++
-	}
-	return n
+	return e.H5PKit
 }
 
 // Extension is the h5pkit metadata block for a question. It is not part of
@@ -186,11 +121,6 @@ func (e *Extension) Validate() error {
 	return nil
 }
 
-// H5PGoExtension is the former name of Extension.
-//
-// Deprecated: use Extension.
-type H5PGoExtension = Extension
-
 // NewExtensions creates an Extensions with an empty h5pkit block.
 func NewExtensions() *Extensions {
 	return &Extensions{
@@ -205,14 +135,6 @@ func NewExtension(section string, questionNumber int) *Extension {
 		Section:        section,
 		QuestionNumber: questionNumber,
 	}
-}
-
-// NewH5PGoExtension creates an Extension with the given section and question
-// number.
-//
-// Deprecated: use NewExtension.
-func NewH5PGoExtension(section string, questionNumber int) *Extension {
-	return NewExtension(section, questionNumber)
 }
 
 // WithTopic sets the topic and returns the extension for chaining.

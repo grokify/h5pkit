@@ -118,7 +118,7 @@ func TestQuestionSetWithExtensions(t *testing.T) {
 				"library": "H5P.MultiChoice 1.16",
 				"params": {"question": "What is 2+2?"},
 				"extensions": {
-					"h5pGo": {
+					"h5pkit": {
 						"section": "Math Basics",
 						"questionNumber": 1,
 						"difficulty": "easy",
@@ -143,7 +143,7 @@ func TestQuestionSetWithExtensions(t *testing.T) {
 	}
 
 	if qs.Questions[0].Extensions.H5PKit == nil {
-		t.Fatal("legacy h5pGo block was not promoted into H5PKit")
+		t.Fatal("H5PKit is nil")
 	}
 
 	ext := qs.Questions[0].Extensions.H5PKit

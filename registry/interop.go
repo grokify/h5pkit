@@ -130,8 +130,7 @@ func WritePackage(w io.Writer, v BankVersion, opts ExportOptions) error {
 
 // ImportPackage reads an .h5p question set into a draft version. The
 // version's BankID and Version are empty; set them before saving it.
-// Extension blocks are preserved, and legacy h5pGo blocks are promoted to
-// h5pkit. Both the standard content.json layout, with the question set at
+// Extension blocks are preserved. Both the standard content.json layout, with the question set at
 // the top level, and the layout written by h5p.H5PPackage, with the set
 // under "questionSet", are read.
 func ImportPackage(path string) (BankVersion, error) {
@@ -166,7 +165,6 @@ func readPackage(r *zip.Reader) (BankVersion, error) {
 	if err != nil {
 		return BankVersion{}, err
 	}
-	h5p.MigrateLegacyExtensions(qs)
 	if qs.Questions == nil {
 		qs.Questions = []h5p.Question{}
 	}

@@ -138,18 +138,18 @@ func writeZip(t *testing.T, files map[string]string) string {
 
 const questionSetH5P = `{"title":"T","language":"en","mainLibrary":"H5P.QuestionSet","embedTypes":["iframe"],"preloadedDependencies":[]}`
 
-func TestImportPromotesLegacyBlocks(t *testing.T) {
+func TestImportPreservesExtensionBlocks(t *testing.T) {
 	path := writeZip(t, map[string]string{
 		"h5p.json":             questionSetH5P,
-		"content/content.json": `{"questions":[{"library":"H5P.MultiChoice 1.16","params":{"question":"Q"},"extensions":{"h5pGo":{"section":"Old","skills":[{"taxonomy":"tax","id":"a"}]}}}]}`,
+		"content/content.json": `{"questions":[{"library":"H5P.MultiChoice 1.16","params":{"question":"Q"},"extensions":{"h5pkit":{"section":"Kept","skills":[{"taxonomy":"tax","id":"a"}]}}}]}`,
 	})
 	v, err := registry.ImportPackage(path)
 	if err != nil {
 		t.Fatalf("ImportPackage: %v", err)
 	}
 	ext := v.Questions[0].Extensions
-	if ext.H5PGo != nil || ext.H5PKit == nil || ext.H5PKit.Section != "Old" || len(ext.H5PKit.Skills) != 1 {
-		t.Errorf("legacy block not promoted: %+v", ext)
+	if ext.H5PKit == nil || ext.H5PKit.Section != "Kept" || len(ext.H5PKit.Skills) != 1 {
+		t.Errorf("extension block not preserved: %+v", ext)
 	}
 }
 
