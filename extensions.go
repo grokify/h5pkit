@@ -1,6 +1,12 @@
 package h5p
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"errors"
+	"fmt"
+	"math"
+	"strings"
+)
 
 // Extensions holds metadata that is not part of the H5P specification. It is
 // serialized as a sibling of a question's "library" and "params", so H5P
@@ -106,6 +112,18 @@ type Extension struct {
 	// Suggested values: "easy", "medium", "hard"
 	Difficulty string `json:"difficulty,omitempty"`
 
+	// DifficultyScore is the question's difficulty relative to the other
+	// questions in the same bank, from 0 (easiest) to 1 (hardest). It is not
+	// comparable across banks. Nil means unscored.
+	DifficultyScore *float64 `json:"difficultyScore,omitempty"`
+
+	// Skills are the skills the question exercises.
+	Skills []SkillRef `json:"skills,omitempty"`
+
+	// Standards are the curriculum or competency standards the question is
+	// aligned to.
+	Standards []StandardRef `json:"standards,omitempty"`
+
 	// QuestionNumber provides explicit ordering within a question set.
 	QuestionNumber int `json:"questionNumber,omitempty"`
 
@@ -119,6 +137,53 @@ type Extension struct {
 
 	// Custom holds consumer-private metadata. h5pkit never interprets it.
 	Custom map[string]any `json:"custom,omitempty"`
+}
+
+// SkillRef names a skill within a taxonomy. Taxonomy identifies the skill
+// framework, and ID is the skill's identifier within it.
+type SkillRef struct {
+	Taxonomy string `json:"taxonomy"`
+	ID       string `json:"id"`
+}
+
+// StandardRef names a standard within a framework. Framework identifies the
+// standards framework, and Code is the standard's code within it.
+type StandardRef struct {
+	Framework string `json:"framework"`
+	Code      string `json:"code"`
+}
+
+// Errors returned by Extension.Validate, wrapped with the offending field.
+var (
+	ErrDifficultyScoreRange  = errors.New("difficultyScore must be between 0 and 1")
+	ErrSkillRefIncomplete    = errors.New("skill reference needs a taxonomy and an id")
+	ErrStandardRefIncomplete = errors.New("standard reference needs a framework and a code")
+)
+
+// Validate checks the block: DifficultyScore, when set, is within [0, 1];
+// every SkillRef has a Taxonomy and an ID; and every StandardRef has a
+// Framework and a Code. A nil Extension is valid.
+func (e *Extension) Validate() error {
+	if e == nil {
+		return nil
+	}
+	if e.DifficultyScore != nil {
+		d := *e.DifficultyScore
+		if math.IsNaN(d) || d < 0 || d > 1 {
+			return fmt.Errorf("%w: got %v", ErrDifficultyScoreRange, d)
+		}
+	}
+	for i, s := range e.Skills {
+		if strings.TrimSpace(s.Taxonomy) == "" || strings.TrimSpace(s.ID) == "" {
+			return fmt.Errorf("skills[%d]: %w", i, ErrSkillRefIncomplete)
+		}
+	}
+	for i, s := range e.Standards {
+		if strings.TrimSpace(s.Framework) == "" || strings.TrimSpace(s.Code) == "" {
+			return fmt.Errorf("standards[%d]: %w", i, ErrStandardRefIncomplete)
+		}
+	}
+	return nil
 }
 
 // H5PGoExtension is the former name of Extension.
@@ -179,5 +244,24 @@ func (e *Extension) WithLearningObjective(objective string) *Extension {
 // WithSource sets the source and returns the extension for chaining.
 func (e *Extension) WithSource(source string) *Extension {
 	e.Source = source
+	return e
+}
+
+// WithDifficultyScore sets the relative difficulty score and returns the
+// extension for chaining. See DifficultyScore for the scale.
+func (e *Extension) WithDifficultyScore(score float64) *Extension {
+	e.DifficultyScore = &score
+	return e
+}
+
+// WithSkills sets the skills and returns the extension for chaining.
+func (e *Extension) WithSkills(skills ...SkillRef) *Extension {
+	e.Skills = skills
+	return e
+}
+
+// WithStandards sets the standards and returns the extension for chaining.
+func (e *Extension) WithStandards(standards ...StandardRef) *Extension {
+	e.Standards = standards
 	return e
 }
