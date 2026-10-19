@@ -56,3 +56,33 @@ func ExampleQuestionSetBuilder() {
 	fmt.Printf("Number of questions: %d\n", len(loadedQuestionSet.Questions))
 	fmt.Printf("Pass percentage: %d%%\n", loadedQuestionSet.PassPercentage)
 }
+
+func ExampleQuestionSet_ScoreLikert() {
+	labels := []string{"Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"}
+	skill := SkillRef{Taxonomy: "example-skills", ID: "innovation"}
+
+	qs, err := NewQuestionSetBuilder().
+		SetTitle("Reflection").
+		AddLikertQuestion("I make room for experiments.", "agreement-5", labels, false,
+			NewExtension("Innovation", 1).WithSkills(skill)).
+		AddLikertQuestion("I prefer proven approaches.", "agreement-5", labels, true,
+			NewExtension("Innovation", 2).WithSkills(skill)).
+		Build()
+	if err != nil {
+		panic(err)
+	}
+	if err := qs.Validate(); err != nil {
+		panic(err)
+	}
+
+	// "Agree" on the first; "Disagree" on the reverse-keyed second.
+	scores, err := qs.ScoreLikert(map[int]int{0: 3, 1: 1})
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(scores[skill].Mean)
+	fmt.Println(scores[skill].Normalized)
+	// Output:
+	// 4
+	// 0.75
+}
