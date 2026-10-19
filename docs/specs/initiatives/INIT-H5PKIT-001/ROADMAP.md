@@ -36,7 +36,7 @@ in a later release. Phase 4 is independent of Phases 1 to 3. Commits implementin
 
 **Theme:** Ship the extensions and the registry
 
-- [ ] `RMI-H5PKIT-012` Question-banks guide, standards reference, published roadmap update, Go directive bump, changelog, tag v0.6.0, record the release
+- [x] `RMI-H5PKIT-012` Question-banks guide, standards reference, published roadmap update, Go directive bump, changelog, tag v0.6.0, record the release
   - Depends on: `RMI-H5PKIT-003`
   - Depends on: `RMI-H5PKIT-007`
 
