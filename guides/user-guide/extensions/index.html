@@ -867,6 +867,34 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#likert-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Likert questions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Likert questions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#building-and-scoring-in-go" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Building and scoring in Go
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#validation" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2462,6 +2490,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../releases/v0.7.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.7.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../releases/v0.6.0/" class="md-nav__link">
         
   
@@ -2718,6 +2774,34 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#likert-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Likert questions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Likert questions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#building-and-scoring-in-go" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Building and scoring in Go
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#validation" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2871,6 +2955,11 @@ without it does.</p>
 <td>Where the content came from</td>
 </tr>
 <tr>
+<td><code>scoring</code></td>
+<td>object</td>
+<td>How a question H5P cannot score is scored; see <a href="#likert-questions">Likert questions</a></td>
+</tr>
+<tr>
 <td><code>custom</code></td>
 <td>object</td>
 <td>Consumer-private data, never interpreted by h5pkit</td>
@@ -2896,26 +2985,126 @@ identifiers, because banks compute and filter on these pairs.</p>
 h5pkit and its registry carry it unchanged and never read it. If a field in
 <code>custom</code> turns out to be generally useful, propose it as a documented field
 instead.</p>
+<h2 id="likert-questions">Likert questions<a class="headerlink" href="#likert-questions" title="Permanent link">&para;</a></h2>
+<p>H5P has no Likert content type, and its Questionnaire type does not score.
+h5pkit writes a Likert item as a standard <code>H5P.MultiChoice</code> question and
+records how to score it in <code>scoring</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">&quot;library&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;H5P.MultiChoice 1.16&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">&quot;params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">&quot;question&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;I make room for experiments even when success is uncertain.&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nt">&quot;answers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Strongly disagree&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;correct&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Disagree&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;correct&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Neutral&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;correct&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Agree&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;correct&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">},</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Strongly agree&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;correct&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="p">],</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="nt">&quot;behaviour&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;single&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">      </span><span class="nt">&quot;randomAnswers&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">      </span><span class="nt">&quot;enableCheckButton&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">      </span><span class="nt">&quot;enableSolutionsButton&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">      </span><span class="nt">&quot;enableRetry&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">      </span><span class="nt">&quot;showScorePoints&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">  </span><span class="p">},</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">  </span><span class="nt">&quot;extensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">    </span><span class="nt">&quot;h5pkit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">      </span><span class="nt">&quot;skills&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> </span><span class="nt">&quot;taxonomy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;example-skills&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;innovation&quot;</span><span class="w"> </span><span class="p">}],</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">      </span><span class="nt">&quot;scoring&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;likert&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;scale&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;agreement-5&quot;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="p">}</span>
+</code></pre></div>
+<p>The question plays in any H5P player as an ungraded single choice. Every
+answer is marked correct only because <code>H5P.MultiChoice</code> requires a correct
+answer; the score H5P reports for it is meaningless and should be ignored.</p>
+<table>
+<thead>
+<tr>
+<th><code>scoring</code> field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>method</code></td>
+<td><code>likert</code>, the only method</td>
+</tr>
+<tr>
+<td><code>scale</code></td>
+<td>An identifier for the answer scale, such as <code>agreement-5</code>, so questions on the same scale can be compared</td>
+</tr>
+<tr>
+<td><code>reverse</code></td>
+<td><code>true</code> for a reverse-keyed item</td>
+</tr>
+</tbody>
+</table>
+<p>The value of a response is the chosen answer's position on the scale, 1 to
+N, in the order the answers are listed. For a reverse-keyed item it is N+1
+minus the position. Answer order is the scale, which is why the question
+must not randomize answers.</p>
+<p>A Likert question must:</p>
+<ul>
+<li>Be <code>H5P.MultiChoice</code>, with at least two answers, all marked correct.</li>
+<li>Set <code>behaviour.type</code> to <code>single</code>. Under <code>auto</code>, several correct answers
+  become checkboxes.</li>
+<li>Set <code>behaviour.randomAnswers</code> to <code>false</code>. H5P randomizes by default.</li>
+<li>Set <code>behaviour.enableCheckButton</code> to <code>false</code>, so the player never shows
+  every answer as correct.</li>
+</ul>
+<h3 id="building-and-scoring-in-go">Building and scoring in Go<a class="headerlink" href="#building-and-scoring-in-go" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">labels</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;Strongly disagree&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Disagree&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Neutral&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Agree&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Strongly agree&quot;</span><span class="p">}</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nx">skill</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h5p</span><span class="p">.</span><span class="nx">SkillRef</span><span class="p">{</span><span class="nx">Taxonomy</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;example-skills&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">ID</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;innovation&quot;</span><span class="p">}</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nx">qs</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h5p</span><span class="p">.</span><span class="nx">NewQuestionSetBuilder</span><span class="p">().</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nx">SetTitle</span><span class="p">(</span><span class="s">&quot;Reflection&quot;</span><span class="p">).</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="nx">AddLikertQuestion</span><span class="p">(</span><span class="s">&quot;I make room for experiments.&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;agreement-5&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">labels</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">        </span><span class="nx">h5p</span><span class="p">.</span><span class="nx">NewExtension</span><span class="p">(</span><span class="s">&quot;Innovation&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="nx">WithSkills</span><span class="p">(</span><span class="nx">skill</span><span class="p">)).</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nx">AddLikertQuestion</span><span class="p">(</span><span class="s">&quot;I prefer proven approaches.&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;agreement-5&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">labels</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">        </span><span class="nx">h5p</span><span class="p">.</span><span class="nx">NewExtension</span><span class="p">(</span><span class="s">&quot;Innovation&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">).</span><span class="nx">WithSkills</span><span class="p">(</span><span class="nx">skill</span><span class="p">)).</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="nx">Build</span><span class="p">()</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">err</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="p">}</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">qs</span><span class="p">.</span><span class="nx">Validate</span><span class="p">();</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">err</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="p">}</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="c1">// Responses map a question&#39;s index to the chosen answer&#39;s index.</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="nx">scores</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">qs</span><span class="p">.</span><span class="nx">ScoreLikert</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">})</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">err</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="p">}</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">scores</span><span class="p">[</span><span class="nx">skill</span><span class="p">].</span><span class="nx">Mean</span><span class="p">)</span><span class="w">       </span><span class="c1">// 4 on a 1 to 5 scale</span>
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">scores</span><span class="p">[</span><span class="nx">skill</span><span class="p">].</span><span class="nx">Normalized</span><span class="p">)</span><span class="w"> </span><span class="c1">// 0.75 on a 0 to 1 scale</span>
+</code></pre></div>
+<p><code>ScoreLikert</code> groups responses by skill. A question with several skills
+counts toward each. <code>Normalized</code> maps every value to 0 to 1 before averaging,
+so skills scored on scales of different sizes can be compared.</p>
 <h2 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
 <p><code>Extension.Validate</code> checks that <code>difficultyScore</code>, when present, is between
-0 and 1, and that every skill has a <code>taxonomy</code> and an <code>id</code> and every standard
-a <code>framework</code> and a <code>code</code>. <code>QuestionSet.Validate</code> runs it for every
-question.</p>
+0 and 1; that every skill has a <code>taxonomy</code> and an <code>id</code> and every standard a
+<code>framework</code> and a <code>code</code>; and that <code>scoring</code>, when present, has the <code>likert</code>
+method and a <code>scale</code>. <code>QuestionSet.Validate</code> runs it for every question, and
+for a question with Likert scoring also checks the Likert rules above.</p>
 <h2 id="building-the-block-in-go">Building the block in Go<a class="headerlink" href="#building-the-block-in-go" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nx">ext</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h5p</span><span class="p">.</span><span class="nx">NewExtension</span><span class="p">(</span><span class="s">&quot;Fractions&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">).</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nx">WithTopic</span><span class="p">(</span><span class="s">&quot;Adding unlike denominators&quot;</span><span class="p">).</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nx">WithTags</span><span class="p">(</span><span class="s">&quot;fractions&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;addition&quot;</span><span class="p">).</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nx">WithDifficulty</span><span class="p">(</span><span class="s">&quot;medium&quot;</span><span class="p">).</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nx">WithDifficultyScore</span><span class="p">(</span><span class="mf">0.6</span><span class="p">).</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nx">WithSkills</span><span class="p">(</span><span class="nx">h5p</span><span class="p">.</span><span class="nx">SkillRef</span><span class="p">{</span><span class="nx">Taxonomy</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;example-skills&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">ID</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fractions.add.unlike&quot;</span><span class="p">}).</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nx">WithStandards</span><span class="p">(</span><span class="nx">h5p</span><span class="p">.</span><span class="nx">StandardRef</span><span class="p">{</span><span class="nx">Framework</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;example-framework&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">Code</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;5.NF.A.1&quot;</span><span class="p">}).</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="nx">WithLearningObjective</span><span class="p">(</span><span class="s">&quot;Add fractions with unlike denominators&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="nx">question</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h5p</span><span class="p">.</span><span class="nx">NewMultiChoiceQuestionWithExtensions</span><span class="p">(</span><span class="nx">params</span><span class="p">,</span><span class="w"> </span><span class="nx">ext</span><span class="p">)</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">ext</span><span class="p">.</span><span class="nx">Validate</span><span class="p">();</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">err</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nx">ext</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h5p</span><span class="p">.</span><span class="nx">NewExtension</span><span class="p">(</span><span class="s">&quot;Fractions&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">).</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nx">WithTopic</span><span class="p">(</span><span class="s">&quot;Adding unlike denominators&quot;</span><span class="p">).</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nx">WithTags</span><span class="p">(</span><span class="s">&quot;fractions&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;addition&quot;</span><span class="p">).</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nx">WithDifficulty</span><span class="p">(</span><span class="s">&quot;medium&quot;</span><span class="p">).</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nx">WithDifficultyScore</span><span class="p">(</span><span class="mf">0.6</span><span class="p">).</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nx">WithSkills</span><span class="p">(</span><span class="nx">h5p</span><span class="p">.</span><span class="nx">SkillRef</span><span class="p">{</span><span class="nx">Taxonomy</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;example-skills&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">ID</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fractions.add.unlike&quot;</span><span class="p">}).</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="nx">WithStandards</span><span class="p">(</span><span class="nx">h5p</span><span class="p">.</span><span class="nx">StandardRef</span><span class="p">{</span><span class="nx">Framework</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;example-framework&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">Code</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;5.NF.A.1&quot;</span><span class="p">}).</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="nx">WithLearningObjective</span><span class="p">(</span><span class="s">&quot;Add fractions with unlike denominators&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="nx">question</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">h5p</span><span class="p">.</span><span class="nx">NewMultiChoiceQuestionWithExtensions</span><span class="p">(</span><span class="nx">params</span><span class="p">,</span><span class="w"> </span><span class="nx">ext</span><span class="p">)</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">ext</span><span class="p">.</span><span class="nx">Validate</span><span class="p">();</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">err</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="p">}</span>
 </code></pre></div>
 <p><code>Extensions.Extension()</code> returns the block from a question, or nil when it
 has none.</p>

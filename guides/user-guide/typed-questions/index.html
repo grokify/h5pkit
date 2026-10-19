@@ -2556,6 +2556,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../releases/v0.7.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.7.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../releases/v0.6.0/" class="md-nav__link">
         
   
@@ -3060,19 +3088,21 @@
 <h3 id="behavior-configuration">Behavior Configuration<a class="headerlink" href="#behavior-configuration" title="Permanent link">&para;</a></h3>
 <p>Control how the question behaves:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nx">behaviour</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">schemas</span><span class="p">.</span><span class="nx">Behaviour</span><span class="p">{</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="nx">Type</span><span class="p">:</span><span class="w">                  </span><span class="s">&quot;single&quot;</span><span class="p">,</span><span class="w">        </span><span class="c1">// &quot;single&quot; or &quot;multi&quot;</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nx">EnableRetry</span><span class="p">:</span><span class="w">           </span><span class="kc">true</span><span class="p">,</span><span class="w">            </span><span class="c1">// Allow retrying</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nx">EnableSolutionsButton</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">            </span><span class="c1">// Show solutions</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nx">EnableCheckButton</span><span class="p">:</span><span class="w">     </span><span class="kc">true</span><span class="p">,</span><span class="w">            </span><span class="c1">// Show check button</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nx">RandomAnswers</span><span class="p">:</span><span class="w">         </span><span class="kc">true</span><span class="p">,</span><span class="w">            </span><span class="c1">// Randomize answer order</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="nx">ShowScorePoints</span><span class="p">:</span><span class="w">       </span><span class="kc">true</span><span class="p">,</span><span class="w">            </span><span class="c1">// Display points</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="nx">AutoCheck</span><span class="p">:</span><span class="w">             </span><span class="kc">false</span><span class="p">,</span><span class="w">           </span><span class="c1">// Auto-check answers</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="nx">PassPercentage</span><span class="p">:</span><span class="w">        </span><span class="mi">75</span><span class="p">,</span><span class="w">              </span><span class="c1">// Pass threshold</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="nx">ShowResultsOnQuizEnd</span><span class="p">:</span><span class="w">  </span><span class="kc">true</span><span class="p">,</span><span class="w">            </span><span class="c1">// Show results at end</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="p">}</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="nx">params</span><span class="p">.</span><span class="nx">Behaviour</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">behaviour</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="nx">Type</span><span class="p">:</span><span class="w">                  </span><span class="s">&quot;single&quot;</span><span class="p">,</span><span class="w">              </span><span class="c1">// &quot;auto&quot;, &quot;single&quot; or &quot;multi&quot;</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nx">EnableRetry</span><span class="p">:</span><span class="w">           </span><span class="nx">schemas</span><span class="p">.</span><span class="nx">Bool</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span><span class="w">    </span><span class="c1">// Allow retrying</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="nx">EnableSolutionsButton</span><span class="p">:</span><span class="w"> </span><span class="nx">schemas</span><span class="p">.</span><span class="nx">Bool</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span><span class="w">    </span><span class="c1">// Show solutions</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="nx">EnableCheckButton</span><span class="p">:</span><span class="w">     </span><span class="nx">schemas</span><span class="p">.</span><span class="nx">Bool</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span><span class="w">    </span><span class="c1">// Show check button</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nx">RandomAnswers</span><span class="p">:</span><span class="w">         </span><span class="nx">schemas</span><span class="p">.</span><span class="nx">Bool</span><span class="p">(</span><span class="kc">false</span><span class="p">),</span><span class="w">   </span><span class="c1">// Keep answers in order</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="nx">ShowScorePoints</span><span class="p">:</span><span class="w">       </span><span class="nx">schemas</span><span class="p">.</span><span class="nx">Bool</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span><span class="w">    </span><span class="c1">// Display points</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="nx">PassPercentage</span><span class="p">:</span><span class="w">        </span><span class="mi">75</span><span class="p">,</span><span class="w">                    </span><span class="c1">// Pass threshold</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="p">}</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="nx">params</span><span class="p">.</span><span class="nx">Behaviour</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">behaviour</span>
 </code></pre></div>
+<p>Fields whose H5P default is <code>true</code> are <code>*bool</code>. Leave one nil to use the
+player's default, or set it with <code>schemas.Bool</code> to write an explicit value. A
+plain <code>bool</code> with <code>omitempty</code> could not write <code>false</code>, so the player would
+fall back to <code>true</code>.</p>
 <h3 id="overall-feedback">Overall Feedback<a class="headerlink" href="#overall-feedback" title="Permanent link">&para;</a></h3>
 <p>Provide feedback based on score ranges:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nx">overallFeedback</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nx">schemas</span><span class="p">.</span><span class="nx">OverallFeedback</span><span class="p">{</span>
@@ -3245,10 +3275,10 @@
 <a id="__codelineno-10-81" name="__codelineno-10-81" href="#__codelineno-10-81"></a>
 <a id="__codelineno-10-82" name="__codelineno-10-82" href="#__codelineno-10-82"></a><span class="w">        </span><span class="nx">Behaviour</span><span class="p">:</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">schemas</span><span class="p">.</span><span class="nx">Behaviour</span><span class="p">{</span>
 <a id="__codelineno-10-83" name="__codelineno-10-83" href="#__codelineno-10-83"></a><span class="w">            </span><span class="nx">Type</span><span class="p">:</span><span class="w">                  </span><span class="s">&quot;multi&quot;</span><span class="p">,</span>
-<a id="__codelineno-10-84" name="__codelineno-10-84" href="#__codelineno-10-84"></a><span class="w">            </span><span class="nx">EnableRetry</span><span class="p">:</span><span class="w">           </span><span class="kc">true</span><span class="p">,</span>
-<a id="__codelineno-10-85" name="__codelineno-10-85" href="#__codelineno-10-85"></a><span class="w">            </span><span class="nx">EnableSolutionsButton</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<a id="__codelineno-10-86" name="__codelineno-10-86" href="#__codelineno-10-86"></a><span class="w">            </span><span class="nx">RandomAnswers</span><span class="p">:</span><span class="w">         </span><span class="kc">true</span><span class="p">,</span>
-<a id="__codelineno-10-87" name="__codelineno-10-87" href="#__codelineno-10-87"></a><span class="w">            </span><span class="nx">ShowScorePoints</span><span class="p">:</span><span class="w">       </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-10-84" name="__codelineno-10-84" href="#__codelineno-10-84"></a><span class="w">            </span><span class="nx">EnableRetry</span><span class="p">:</span><span class="w">           </span><span class="nx">schemas</span><span class="p">.</span><span class="nx">Bool</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span>
+<a id="__codelineno-10-85" name="__codelineno-10-85" href="#__codelineno-10-85"></a><span class="w">            </span><span class="nx">EnableSolutionsButton</span><span class="p">:</span><span class="w"> </span><span class="nx">schemas</span><span class="p">.</span><span class="nx">Bool</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span>
+<a id="__codelineno-10-86" name="__codelineno-10-86" href="#__codelineno-10-86"></a><span class="w">            </span><span class="nx">RandomAnswers</span><span class="p">:</span><span class="w">         </span><span class="nx">schemas</span><span class="p">.</span><span class="nx">Bool</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span>
+<a id="__codelineno-10-87" name="__codelineno-10-87" href="#__codelineno-10-87"></a><span class="w">            </span><span class="nx">ShowScorePoints</span><span class="p">:</span><span class="w">       </span><span class="nx">schemas</span><span class="p">.</span><span class="nx">Bool</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span>
 <a id="__codelineno-10-88" name="__codelineno-10-88" href="#__codelineno-10-88"></a><span class="w">            </span><span class="nx">PassPercentage</span><span class="p">:</span><span class="w">        </span><span class="mi">75</span><span class="p">,</span>
 <a id="__codelineno-10-89" name="__codelineno-10-89" href="#__codelineno-10-89"></a><span class="w">        </span><span class="p">},</span>
 <a id="__codelineno-10-90" name="__codelineno-10-90" href="#__codelineno-10-90"></a>
