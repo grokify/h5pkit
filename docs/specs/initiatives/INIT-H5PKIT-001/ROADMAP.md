@@ -5,8 +5,8 @@
 
 Stay inside H5P where H5P has an answer; extend only where it does not, and
 document each extension so other tools can use it. The extensions and the
-registry release first, as v0.6.0; the content types and the editor follow
-in a later release. Phase 4 is independent of Phases 1 to 3. Commits implementing an item carry
+registry release first, as v0.6.0, and Likert scoring as v0.7.0; the content
+types and the editor follow in a later release. Phase 4 is independent of Phases 1 to 3. Commits implementing an item carry
 `Refs: RMI-H5PKIT-<NNN>`.
 
 ## Phase 1 — Extensions
@@ -61,3 +61,18 @@ in a later release. Phase 4 is independent of Phases 1 to 3. Commits implementin
   - Depends on: `RMI-H5PKIT-010`
   - Depends on: `RMI-H5PKIT-011`
   - Depends on: `RMI-H5PKIT-012`
+
+## Phase 6 — Likert Scoring
+
+**Theme:** Scored scales on standard H5P.MultiChoice
+
+- [x] `RMI-H5PKIT-014` Make the MultiChoice behaviour fields that default to true `*bool`, so an explicit false is written
+- [x] `RMI-H5PKIT-015` `scoring` on the `h5pkit` block: `likert` method, scale, and reverse flag, with validation
+  - Depends on: `RMI-H5PKIT-002`
+- [x] `RMI-H5PKIT-016` Likert overlay on `H5P.MultiChoice`: params builder, `AddLikertQuestion`, Likert validation in `QuestionSet.Validate`, and `ScoreLikert`
+  - Depends on: `RMI-H5PKIT-014`
+  - Depends on: `RMI-H5PKIT-015`
+- [x] `RMI-H5PKIT-017` Likert section in the extensions guide
+  - Depends on: `RMI-H5PKIT-016`
+- [ ] `RMI-H5PKIT-018` Changelog and release notes, tag v0.7.0 with Likert scoring, record the release
+  - Depends on: `RMI-H5PKIT-017`

@@ -8,6 +8,35 @@
   "unreleased": {},
   "releases": [
     {
+      "version": "v0.7.0",
+      "date": "2026-10-19",
+      "highlights": [
+        { "description": "Likert questions on standard `H5P.MultiChoice`: build, validate, and score them by skill, and they play ungraded in any H5P player", "commit": "22b2ee7", "rmis": ["RMI-H5PKIT-016"] },
+        { "description": "MultiChoice behaviour fields that default to true can now be set to false", "commit": "9260682", "rmis": ["RMI-H5PKIT-014"] }
+      ],
+      "added": [
+        { "description": "`Extension.Scoring` (`Scoring`, `NewLikertScoring`, `WithScoring`), with the `likert` method, a scale, and a reverse flag, validated by `Extension.Validate`", "commit": "9367cba", "rmis": ["RMI-H5PKIT-015"] },
+        { "description": "`NewLikertParams`, `QuestionSetBuilder.AddLikertQuestion`, and `ValidateLikertParams`; `QuestionSet.Validate` checks questions with Likert scoring", "commit": "22b2ee7", "rmis": ["RMI-H5PKIT-016"] },
+        { "description": "`LikertValue` and `QuestionSet.ScoreLikert`, returning a `LikertScore` with count, mean, and normalized score per skill", "commit": "22b2ee7", "rmis": ["RMI-H5PKIT-016"] },
+        { "description": "`schemas.Bool` for setting the pointer behaviour fields", "commit": "9260682", "rmis": ["RMI-H5PKIT-014"] }
+      ],
+      "changed": [
+        { "description": "`schemas.Behaviour` fields `EnableRetry`, `EnableSolutionsButton`, `EnableCheckButton`, `RandomAnswers`, and `ShowScorePoints` are `*bool` instead of `bool`", "commit": "9260682", "rmis": ["RMI-H5PKIT-014"], "breaking": true }
+      ],
+      "fixed": [
+        { "description": "Setting a MultiChoice behaviour field that defaults to true to false is written to JSON; it was dropped, so players used true", "commit": "9260682", "rmis": ["RMI-H5PKIT-014"] }
+      ],
+      "documentation": [
+        { "description": "Likert questions and the `scoring` field in the extensions guide", "commit": "13dea9d", "rmis": ["RMI-H5PKIT-017"] },
+        { "description": "The typed-questions guide shows the pointer behaviour fields and lists only fields the type has", "commit": "9260682", "rmis": ["RMI-H5PKIT-014"] },
+        { "description": "INIT-H5PKIT-001 Likert scoring phase and the v0.7.0 release item", "commit": "d5a55cb", "rmis": ["RMI-H5PKIT-018"] },
+        { "description": "v0.7.0 release notes" }
+      ],
+      "tests": [
+        { "description": "Likert scoring, validation, and JSON round trip, and a runnable Likert scoring example", "commit": "11c2230", "rmis": ["RMI-H5PKIT-016"] }
+      ]
+    },
+    {
       "version": "v0.6.0",
       "date": "2026-10-19",
       "highlights": [

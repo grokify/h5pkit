@@ -70,6 +70,10 @@ type Extension struct {
 	// Example: "PRESENTATION.md", "Chapter 3"
 	Source string `json:"source,omitempty"`
 
+	// Scoring describes how a question with no correct answer is scored,
+	// such as a Likert item. Nil means the question is scored by H5P.
+	Scoring *Scoring `json:"scoring,omitempty"`
+
 	// Custom holds consumer-private metadata. h5pkit never interprets it.
 	Custom map[string]any `json:"custom,omitempty"`
 }
@@ -88,16 +92,51 @@ type StandardRef struct {
 	Code      string `json:"code"`
 }
 
+// ScoringMethodLikert scores a question by the position of the chosen
+// answer on an ordered scale. See Scoring.
+const ScoringMethodLikert = "likert"
+
+// Scoring describes how a consumer scores a question that H5P cannot score.
+//
+// For ScoringMethodLikert, the question is an H5P.MultiChoice whose answers
+// are an ordered scale, all marked correct so that H5P accepts them. The
+// value of the chosen answer is its position, 1 to N. When Reverse is true,
+// the value is N+1 minus the position.
+type Scoring struct {
+	// Method is the scoring method. The only method is "likert".
+	Method string `json:"method"`
+
+	// Scale identifies the answer scale, so that questions sharing a scale
+	// can be compared. Example: "agreement-5"
+	Scale string `json:"scale"`
+
+	// Reverse marks a reverse-keyed item, whose scale runs the other way.
+	Reverse bool `json:"reverse,omitempty"`
+}
+
+// NewLikertScoring returns Likert scoring on the given scale.
+func NewLikertScoring(scale string, reverse bool) *Scoring {
+	return &Scoring{Method: ScoringMethodLikert, Scale: scale, Reverse: reverse}
+}
+
+// IsLikert reports whether s is Likert scoring. It is false for nil.
+func (s *Scoring) IsLikert() bool {
+	return s != nil && s.Method == ScoringMethodLikert
+}
+
 // Errors returned by Extension.Validate, wrapped with the offending field.
 var (
 	ErrDifficultyScoreRange  = errors.New("difficultyScore must be between 0 and 1")
 	ErrSkillRefIncomplete    = errors.New("skill reference needs a taxonomy and an id")
 	ErrStandardRefIncomplete = errors.New("standard reference needs a framework and a code")
+	ErrScoringMethod         = errors.New("scoring method must be likert")
+	ErrScoringScale          = errors.New("scoring needs a scale")
 )
 
 // Validate checks the block: DifficultyScore, when set, is within [0, 1];
-// every SkillRef has a Taxonomy and an ID; and every StandardRef has a
-// Framework and a Code. A nil Extension is valid.
+// every SkillRef has a Taxonomy and an ID; every StandardRef has a
+// Framework and a Code; and Scoring, when set, has the likert method and a
+// scale. A nil Extension is valid.
 func (e *Extension) Validate() error {
 	if e == nil {
 		return nil
@@ -116,6 +155,14 @@ func (e *Extension) Validate() error {
 	for i, s := range e.Standards {
 		if strings.TrimSpace(s.Framework) == "" || strings.TrimSpace(s.Code) == "" {
 			return fmt.Errorf("standards[%d]: %w", i, ErrStandardRefIncomplete)
+		}
+	}
+	if e.Scoring != nil {
+		if e.Scoring.Method != ScoringMethodLikert {
+			return fmt.Errorf("scoring: %w: got %q", ErrScoringMethod, e.Scoring.Method)
+		}
+		if strings.TrimSpace(e.Scoring.Scale) == "" {
+			return fmt.Errorf("scoring: %w", ErrScoringScale)
 		}
 	}
 	return nil
@@ -179,6 +226,12 @@ func (e *Extension) WithDifficultyScore(score float64) *Extension {
 // WithSkills sets the skills and returns the extension for chaining.
 func (e *Extension) WithSkills(skills ...SkillRef) *Extension {
 	e.Skills = skills
+	return e
+}
+
+// WithScoring sets the scoring and returns the extension for chaining.
+func (e *Extension) WithScoring(scoring *Scoring) *Extension {
+	e.Scoring = scoring
 	return e
 }
 

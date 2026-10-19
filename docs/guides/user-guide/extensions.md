@@ -48,6 +48,7 @@ without it does.
 | `questionNumber` | integer | Explicit ordering within a question set |
 | `learningObjective` | string | What the question tests |
 | `source` | string | Where the content came from |
+| `scoring` | object | How a question H5P cannot score is scored; see [Likert questions](#likert-questions) |
 | `custom` | object | Consumer-private data, never interpreted by h5pkit |
 
 Every field is optional.
@@ -77,12 +78,106 @@ h5pkit and its registry carry it unchanged and never read it. If a field in
 `custom` turns out to be generally useful, propose it as a documented field
 instead.
 
+## Likert questions
+
+H5P has no Likert content type, and its Questionnaire type does not score.
+h5pkit writes a Likert item as a standard `H5P.MultiChoice` question and
+records how to score it in `scoring`:
+
+```json
+{
+  "library": "H5P.MultiChoice 1.16",
+  "params": {
+    "question": "I make room for experiments even when success is uncertain.",
+    "answers": [
+      { "text": "Strongly disagree", "correct": true },
+      { "text": "Disagree", "correct": true },
+      { "text": "Neutral", "correct": true },
+      { "text": "Agree", "correct": true },
+      { "text": "Strongly agree", "correct": true }
+    ],
+    "behaviour": {
+      "type": "single",
+      "randomAnswers": false,
+      "enableCheckButton": false,
+      "enableSolutionsButton": false,
+      "enableRetry": false,
+      "showScorePoints": false
+    }
+  },
+  "extensions": {
+    "h5pkit": {
+      "skills": [{ "taxonomy": "example-skills", "id": "innovation" }],
+      "scoring": { "method": "likert", "scale": "agreement-5" }
+    }
+  }
+}
+```
+
+The question plays in any H5P player as an ungraded single choice. Every
+answer is marked correct only because `H5P.MultiChoice` requires a correct
+answer; the score H5P reports for it is meaningless and should be ignored.
+
+| `scoring` field | Meaning |
+|-----------------|---------|
+| `method` | `likert`, the only method |
+| `scale` | An identifier for the answer scale, such as `agreement-5`, so questions on the same scale can be compared |
+| `reverse` | `true` for a reverse-keyed item |
+
+The value of a response is the chosen answer's position on the scale, 1 to
+N, in the order the answers are listed. For a reverse-keyed item it is N+1
+minus the position. Answer order is the scale, which is why the question
+must not randomize answers.
+
+A Likert question must:
+
+- Be `H5P.MultiChoice`, with at least two answers, all marked correct.
+- Set `behaviour.type` to `single`. Under `auto`, several correct answers
+  become checkboxes.
+- Set `behaviour.randomAnswers` to `false`. H5P randomizes by default.
+- Set `behaviour.enableCheckButton` to `false`, so the player never shows
+  every answer as correct.
+
+### Building and scoring in Go
+
+```go
+labels := []string{"Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"}
+skill := h5p.SkillRef{Taxonomy: "example-skills", ID: "innovation"}
+
+qs, err := h5p.NewQuestionSetBuilder().
+    SetTitle("Reflection").
+    AddLikertQuestion("I make room for experiments.", "agreement-5", labels, false,
+        h5p.NewExtension("Innovation", 1).WithSkills(skill)).
+    AddLikertQuestion("I prefer proven approaches.", "agreement-5", labels, true,
+        h5p.NewExtension("Innovation", 2).WithSkills(skill)).
+    Build()
+if err != nil {
+    return err
+}
+if err := qs.Validate(); err != nil {
+    return err
+}
+
+// Responses map a question's index to the chosen answer's index.
+scores, err := qs.ScoreLikert(map[int]int{0: 3, 1: 1})
+if err != nil {
+    return err
+}
+fmt.Println(scores[skill].Mean)       // 4 on a 1 to 5 scale
+fmt.Println(scores[skill].Normalized) // 0.75 on a 0 to 1 scale
+```
+
+`ScoreLikert` groups responses by skill. A question with several skills
+counts toward each. `Normalized` maps every value to 0 to 1 before averaging,
+so skills scored on scales of different sizes can be compared.
+
 ## Validation
 
 `Extension.Validate` checks that `difficultyScore`, when present, is between
-0 and 1, and that every skill has a `taxonomy` and an `id` and every standard
-a `framework` and a `code`. `QuestionSet.Validate` runs it for every
-question.
+0 and 1; that every skill has a `taxonomy` and an `id` and every standard a
+`framework` and a `code`; and that `scoring`, when present, has the `likert`
+method and a `scale`. `QuestionSet.Validate` runs it for every question, and
+for a question with Likert scoring also checks the Likert rules above.
 
 ## Building the block in Go
 

@@ -38,13 +38,13 @@ func TestTypedMultiChoiceQuestion(t *testing.T) {
 			},
 		},
 		Behaviour: &schemas.Behaviour{
-			EnableRetry:           true,
-			EnableSolutionsButton: true,
+			EnableRetry:           schemas.Bool(true),
+			EnableSolutionsButton: schemas.Bool(true),
 			Type:                  "single",
 			SinglePoint:           false,
-			RandomAnswers:         true,
+			RandomAnswers:         schemas.Bool(true),
 			PassPercentage:        100,
-			ShowScorePoints:       true,
+			ShowScorePoints:       schemas.Bool(true),
 		},
 		UI: &schemas.UITranslations{
 			CheckAnswerButton:  "Check",

@@ -174,8 +174,10 @@ question types in the editor in this initiative; the Go SDK leads.
 
 ### 7. Versioning
 
-Release the extensions and the registry as v0.6.0, and the content types and
-the editor metadata in the next minor release. The namespace rename and the
+Release the extensions and the registry as v0.6.0, Likert scoring as
+v0.7.0, and the content types and the editor metadata in the next minor
+release after that. Likert scoring makes the MultiChoice behaviour fields
+that default to true `*bool`, which is breaking. The namespace rename and the
 `Extension` type rename are breaking changes; everything else is additive. The `go` directive is raised to
 the organization's current minimum as part of the release item, subject to
 CI toolchain availability.

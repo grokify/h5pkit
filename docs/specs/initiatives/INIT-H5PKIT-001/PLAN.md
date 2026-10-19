@@ -46,6 +46,14 @@ Expose the metadata fields in the TypeScript editor; document the new
 content types; changelog and tag the next minor release; record the
 release. Exit: PRD success criteria hold.
 
+### Phase 6 — Likert Scoring
+
+Write explicit false for the MultiChoice behaviour fields that default to
+true; add `scoring` to the `h5pkit` block; build, validate, and score Likert
+questions on `H5P.MultiChoice`; document them; changelog and tag v0.7.0;
+record the release. Exit: a Likert question set validates, plays ungraded
+in a standard H5P player, and scores by skill.
+
 ## Risks and Mitigations
 
 | Risk | Mitigation |

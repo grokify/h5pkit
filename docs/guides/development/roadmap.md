@@ -14,6 +14,7 @@ The H5P Go SDK currently supports:
 - ✅ Builder pattern for content creation
 - ✅ Question metadata extensions under the `h5pkit` key: relative difficulty, skills, and standards ([Extensions](../user-guide/extensions.md))
 - ✅ Question bank registry: banks, immutable versions, licenses, lineage, a `Store` interface with an in-memory store and a conformance suite, and `.h5p` import and export ([Question Banks](../user-guide/question-banks.md))
+- ✅ Likert questions on standard `H5P.MultiChoice`, with `scoring` on the `h5pkit` block and per-skill scoring ([Extensions](../user-guide/extensions.md#likert-questions))
 
 The question bank work is planned in
 [INIT-H5PKIT-001](../../specs/initiatives/INIT-H5PKIT-001/ROADMAP.md).
