@@ -139,7 +139,7 @@ The SDK includes comprehensive validation:
 
 ## Next Steps
 
-- [Question Sets Guide](../guide/question-sets.md) - Working with question collections
-- [Typed Questions](../guide/typed-questions.md) - Using type-safe schemas
-- [H5P Packages](../guide/h5p-packages.md) - Creating complete H5P files
+- [Question Sets Guide](../user-guide/question-sets.md) - Working with question collections
+- [Typed Questions](../user-guide/typed-questions.md) - Using type-safe schemas
+- [H5P Packages](../user-guide/h5p-packages.md) - Creating complete H5P files
 - [API Reference](../api/core-types.md) - Detailed API documentation

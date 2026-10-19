@@ -158,20 +158,20 @@ See the [v0.5.0 release notes](releases/v0.5.0.md) for the full migration guide.
 
 ### TypeScript Editor
 
-- **[Editor Overview](ts-editor/overview.md)** - Introduction to the quiz editor
-- **[Installation](ts-editor/installation.md)** - npm/pnpm and CDN setup
-- **[React Usage](ts-editor/react-usage.md)** - Component props and ref API
-- **[Vanilla JS](ts-editor/vanilla-js.md)** - CDN usage without React build
-- **[API Reference](ts-editor/api-reference.md)** - Types and functions
+- **[Editor Overview](guides/ts-editor/overview.md)** - Introduction to the quiz editor
+- **[Installation](guides/ts-editor/installation.md)** - npm/pnpm and CDN setup
+- **[React Usage](guides/ts-editor/react-usage.md)** - Component props and ref API
+- **[Vanilla JS](guides/ts-editor/vanilla-js.md)** - CDN usage without React build
+- **[API Reference](guides/ts-editor/api-reference.md)** - Types and functions
 
 ### Go SDK
 
-- **[Installation Guide](getting-started/installation.md)** - Detailed installation instructions
-- **[Quick Start Tutorial](getting-started/quick-start.md)** - Step-by-step tutorial
-- **[Basic Concepts](getting-started/concepts.md)** - Understanding H5P and this library
-- **[User Guide](guide/question-sets.md)** - Comprehensive usage documentation
-- **[API Reference](api/core-types.md)** - Complete API documentation
-- **[Examples](examples/basic.md)** - Real-world usage examples
+- **[Installation Guide](guides/getting-started/installation.md)** - Detailed installation instructions
+- **[Quick Start Tutorial](guides/getting-started/quick-start.md)** - Step-by-step tutorial
+- **[Basic Concepts](guides/getting-started/concepts.md)** - Understanding H5P and this library
+- **[User Guide](guides/user-guide/question-sets.md)** - Comprehensive usage documentation
+- **[API Reference](guides/api/core-types.md)** - Complete API documentation
+- **[Examples](guides/examples/basic.md)** - Real-world usage examples
 - **[Release Notes](releases/v0.4.0.md)** - Version history and changes
 
 ## 🏛️ Architecture
@@ -201,7 +201,7 @@ Full compliance with official H5P specifications and content type definitions.
 
 ## 🤝 Contributing
 
-We welcome contributions! See our [Contributing Guide](development/contributing.md) for details.
+We welcome contributions! See our [Contributing Guide](guides/development/contributing.md) for details.
 
 ## 📜 License
 

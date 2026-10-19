@@ -38,7 +38,9 @@ markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.inlinehilite
-  - pymdownx.snippets
+  - pymdownx.snippets:
+      base_path: .
+      check_paths: true
   - pymdownx.tabbed:
       alternate_style: true
   - toc:
@@ -46,41 +48,57 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - Getting Started:
-    - Installation: getting-started/installation.md
-    - Quick Start: getting-started/quick-start.md
-    - Basic Concepts: getting-started/concepts.md
   - User Guide:
-    - Question Sets: guide/question-sets.md
-    - Typed Questions: guide/typed-questions.md
-    - Extensions: guide/extensions.md
-    - H5P Packages: guide/h5p-packages.md
-    - Validation: guide/validation.md
-  - TypeScript Editor:
-    - Overview: ts-editor/overview.md
-    - Installation: ts-editor/installation.md
-    - React Usage: ts-editor/react-usage.md
-    - Vanilla JS: ts-editor/vanilla-js.md
-    - API Reference: ts-editor/api-reference.md
-  - Go API Reference:
-    - Core Types: api/core-types.md
-    - Builder Pattern: api/builder.md
-    - Schemas: api/schemas.md
-    - Semantics: api/semantics.md
-  - Examples:
-    - Basic Usage: examples/basic.md
-    - Advanced Usage: examples/advanced.md
-    - Package Creation: examples/packages.md
-  - Reference:
-    - H5P Specification: reference/h5p-spec.md
-    - File Structure: reference/file-structure.md
-    - Standards Compliance: reference/standards.md
-    - Why H5P for Quizzes?: why-h5p-for-quizzes.md
-  - Development:
-    - Contributing: development/contributing.md
-    - Testing: development/testing.md
-    - Roadmap: development/roadmap.md
+    - guides/index.md
+    - Getting Started:
+      - Installation: guides/getting-started/installation.md
+      - Quick Start: guides/getting-started/quick-start.md
+      - Basic Concepts: guides/getting-started/concepts.md
+    - Using the SDK:
+      - Question Sets: guides/user-guide/question-sets.md
+      - Typed Questions: guides/user-guide/typed-questions.md
+      - Extensions: guides/user-guide/extensions.md
+      - H5P Packages: guides/user-guide/h5p-packages.md
+      - Validation: guides/user-guide/validation.md
+    - TypeScript Editor:
+      - Overview: guides/ts-editor/overview.md
+      - Installation: guides/ts-editor/installation.md
+      - React Usage: guides/ts-editor/react-usage.md
+      - Vanilla JS: guides/ts-editor/vanilla-js.md
+      - API Reference: guides/ts-editor/api-reference.md
+    - Go API Reference:
+      - Core Types: guides/api/core-types.md
+      - Builder Pattern: guides/api/builder.md
+      - Schemas: guides/api/schemas.md
+      - Semantics: guides/api/semantics.md
+    - Examples:
+      - Basic Usage: guides/examples/basic.md
+      - Advanced Usage: guides/examples/advanced.md
+      - Package Creation: guides/examples/packages.md
+    - Reference:
+      - H5P Specification: guides/reference/h5p-spec.md
+      - File Structure: guides/reference/file-structure.md
+      - Standards Compliance: guides/reference/standards.md
+      - Why H5P for Quizzes?: guides/reference/why-h5p-for-quizzes.md
+    - Development:
+      - Contributing: guides/development/contributing.md
+      - Testing: guides/development/testing.md
+      - Roadmap: guides/development/roadmap.md
+  - Design:
+    - design/index.md
+    - Architecture:
+      - H5P Editor: design/architecture/h5p-editor.md
+    - Architecture Decisions: design/adrs/index.md
+  - Specifications:
+    - specs/index.md
+    - "INIT-H5PKIT-001: Question Banks":
+      - PRD: specs/initiatives/INIT-H5PKIT-001/PRD.md
+      - TRD: specs/initiatives/INIT-H5PKIT-001/TRD.md
+      - PLAN: specs/initiatives/INIT-H5PKIT-001/PLAN.md
+      - ROADMAP: specs/initiatives/INIT-H5PKIT-001/ROADMAP.md
   - Releases:
+    - releases/index.md
+    - Changelog: releases/changelog.md
     - v0.5.0: releases/v0.5.0.md
     - v0.4.0: releases/v0.4.0.md
     - v0.3.0: releases/v0.3.0.md

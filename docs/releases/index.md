@@ -1,0 +1,13 @@
+# Releases
+
+Release notes, one file per version, newest first. The
+[changelog](changelog.md) is generated from `CHANGELOG.json` and lists every
+change with its commit.
+
+| Version | Release date |
+|---|---|
+| [v0.5.0](v0.5.0.md) | 2026-03-22 |
+| [v0.4.0](v0.4.0.md) | 2026-03-15 |
+| [v0.3.0](v0.3.0.md) | 2025-09-02 |
+| [v0.2.0](v0.2.0.md) | 2025-09-01 |
+| [v0.1.0](v0.1.0.md) | 2025-09-01 |

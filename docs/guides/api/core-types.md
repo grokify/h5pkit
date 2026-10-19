@@ -53,7 +53,7 @@ type Question struct {
 ## Extension Types
 
 Extensions add h5pkit metadata to a question without affecting H5P players.
-The [Extensions guide](../guide/extensions.md) describes every field, the
+The [Extensions guide](../user-guide/extensions.md) describes every field, the
 relative-difficulty rule, and the `h5pkit` key.
 
 ### Extensions

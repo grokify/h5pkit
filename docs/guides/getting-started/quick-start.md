@@ -262,6 +262,6 @@ func validateAndExport(questionSet *h5p.QuestionSet) error {
 Now that you've created your first H5P content, explore:
 
 - [Basic Concepts](concepts.md) - Understand H5P fundamentals
-- [Question Sets Guide](../guide/question-sets.md) - Advanced question set features
-- [Typed Questions](../guide/typed-questions.md) - Using type-safe schemas
-- [Validation](../guide/validation.md) - Ensuring content quality
+- [Question Sets Guide](../user-guide/question-sets.md) - Advanced question set features
+- [Typed Questions](../user-guide/typed-questions.md) - Using type-safe schemas
+- [Validation](../user-guide/validation.md) - Ensuring content quality
