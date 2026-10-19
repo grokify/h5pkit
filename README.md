@@ -37,6 +37,8 @@ A toolkit for creating, editing, and validating H5P quiz content. Includes a **G
 - **Validation** - Built-in H5P compliance validation
 - **Multiple Question Types** - Support for various H5P content types
 - **JSON Serialization** - Complete marshaling/unmarshaling support
+- **Question Metadata** - An `h5pkit` extension block with relative difficulty, skills, and standards, kept out of player parameters
+- **Question Bank Registry** - The `registry` package: licensed banks with immutable published versions, forks with lineage, a `Store` interface with an in-memory store and a conformance suite, and `.h5p` import and export
 
 ## TypeScript Editor Features
 
@@ -113,10 +115,12 @@ function App() {
 
 ### Quick Links
 
-- **[Go SDK Installation](https://grokify.github.io/h5pkit/getting-started/installation/)** - Setup instructions
-- **[TypeScript Editor](https://grokify.github.io/h5pkit/ts-editor/overview/)** - Browser-based editor
-- **[API Reference](https://grokify.github.io/h5pkit/api/core-types/)** - Complete API documentation
-- **[Examples](https://grokify.github.io/h5pkit/examples/basic/)** - Real-world usage examples
+- **[Go SDK Installation](https://grokify.github.io/h5pkit/guides/getting-started/installation/)** - Setup instructions
+- **[TypeScript Editor](https://grokify.github.io/h5pkit/guides/ts-editor/overview/)** - Browser-based editor
+- **[API Reference](https://grokify.github.io/h5pkit/guides/api/core-types/)** - Complete API documentation
+- **[Examples](https://grokify.github.io/h5pkit/guides/examples/basic/)** - Real-world usage examples
+- **[Question Banks](https://grokify.github.io/h5pkit/guides/user-guide/question-banks/)** - The registry: banks, versions, forks, and interop
+- **[Release Notes](https://grokify.github.io/h5pkit/releases/)** - What changed in each version
 
 ## Architecture
 
@@ -124,6 +128,8 @@ function App() {
 h5pkit/
 ├── schemas/          # Official H5P content type schemas
 ├── semantics/        # Universal H5P semantics format
+├── registry/         # Question banks: versions, lineage, Store, .h5p interop
+├── extensions.go     # The h5pkit metadata block
 ├── ts/               # TypeScript editor (@grokify/h5p-editor)
 ├── builder.go        # Fluent API for content creation
 ├── questionset.go    # Core question set functionality
@@ -146,7 +152,7 @@ This library implements the official H5P specifications:
 
 ## Contributing
 
-See our [Contributing Guide](https://grokify.github.io/h5pkit/development/contributing/) for detailed information.
+See our [Contributing Guide](https://grokify.github.io/h5pkit/guides/development/contributing/) for detailed information.
 
 ## License
 
