@@ -63,7 +63,7 @@ if err != nil {
 ## Extension Builder
 
 `Extension` setters return the extension for chaining. See the
-[Extensions guide](../guide/extensions.md) for what each field means.
+[Extensions guide](../user-guide/extensions.md) for what each field means.
 
 ```go
 ext := h5p.NewExtension("1. Overview & Fundamentals", 1).

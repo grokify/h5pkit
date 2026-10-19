@@ -4,8 +4,9 @@
 **Repository:** `github.com/grokify/h5pkit`
 
 Stay inside H5P where H5P has an answer; extend only where it does not, and
-document each extension so other tools can use it. Phase 3 is independent
-of Phases 1 and 2. Commits implementing an item carry
+document each extension so other tools can use it. The extensions and the
+registry release first, as v0.6.0; the content types and the editor follow
+in a later release. Phase 4 is independent of Phases 1 to 3. Commits implementing an item carry
 `Refs: RMI-H5PKIT-<NNN>`.
 
 ## Phase 1 — Extensions
@@ -31,7 +32,15 @@ of Phases 1 and 2. Commits implementing an item carry
 - [x] `RMI-H5PKIT-007` Interop: export a version to `QuestionSet` and `.h5p`; import an `.h5p` question set to a draft version preserving extensions
   - Depends on: `RMI-H5PKIT-006`
 
-## Phase 3 — Content Types
+## Phase 3 — Documentation and First Release
+
+**Theme:** Ship the extensions and the registry
+
+- [ ] `RMI-H5PKIT-012` Question-banks guide, standards reference, published roadmap update, Go directive bump, changelog, tag v0.6.0, record the release
+  - Depends on: `RMI-H5PKIT-003`
+  - Depends on: `RMI-H5PKIT-007`
+
+## Phase 4 — Content Types
 
 **Theme:** Native H5P types instead of invented formats
 
@@ -41,15 +50,14 @@ of Phases 1 and 2. Commits implementing an item carry
 - [ ] `RMI-H5PKIT-010` `H5P.DragText` and `H5P.DragQuestion` for ordering and matching: typed params, semantics, validation, builder methods
   - Depends on: `RMI-H5PKIT-008`
 
-## Phase 4 — Editor, Documentation, Release
+## Phase 5 — Editor and Next Release
 
-**Theme:** Make it usable and ship it
+**Theme:** The metadata in the editor, and the content types shipped
 
 - [ ] `RMI-H5PKIT-011` TypeScript editor metadata section for difficulty score, skills, and standards on the `h5pkit` block
   - Depends on: `RMI-H5PKIT-002`
-- [ ] `RMI-H5PKIT-012` Question-banks guide, standards reference, published roadmap update, Go directive bump, changelog, tag v0.6.0, record the release
-  - Depends on: `RMI-H5PKIT-003`
-  - Depends on: `RMI-H5PKIT-007`
+- [ ] `RMI-H5PKIT-013` Content-types and editor guides, changelog, tag the next minor release, record the release
   - Depends on: `RMI-H5PKIT-009`
   - Depends on: `RMI-H5PKIT-010`
   - Depends on: `RMI-H5PKIT-011`
+  - Depends on: `RMI-H5PKIT-012`

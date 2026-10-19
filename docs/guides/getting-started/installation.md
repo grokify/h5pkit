@@ -2,7 +2,7 @@
 
 ## Requirements
 
-- Go 1.19 or later
+- Go 1.26 or later
 - Git (for fetching the module)
 
 ## Install via Go Modules

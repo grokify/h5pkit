@@ -25,26 +25,32 @@ import to and from `QuestionSet` and `.h5p`. Exit: the suite passes against
 `MemoryStore`; a published version is immutable; a fork records lineage; an
 exported package opens in a standard H5P player.
 
-### Phase 3 — Content Types
+### Phase 3 — Documentation and First Release
+
+Write the question-banks guide and the standards reference; update the
+published roadmap; raise the Go directive; changelog and tag v0.6.0 with the
+extensions and the registry; record the release. Exit: the registry and
+extensions are usable from a tagged module.
+
+### Phase 4 — Content Types
 
 Add typed params, validation, and builder methods for true/false, blanks,
 single choice set, essay, drag text, and drag question. This phase is
-independent of Phases 1 and 2 and may run in parallel. Exit: each type
+independent of Phases 1 to 3 and may run in parallel. Exit: each type
 validates against its pinned semantics and round-trips through JSON and
 `.h5p`.
 
-### Phase 4 — Editor, Documentation, Release
+### Phase 5 — Editor and Next Release
 
-Expose the metadata fields in the TypeScript editor; write the
-question-banks guide and the standards reference; update the published
-roadmap; raise the Go directive; changelog and tag v0.6.0; record the
+Expose the metadata fields in the TypeScript editor; document the new
+content types; changelog and tag the next minor release; record the
 release. Exit: PRD success criteria hold.
 
 ## Risks and Mitigations
 
 | Risk | Mitigation |
 |---|---|
-| Rename surprises an external user | Read-compat for one release, release notes, migration helper |
+| Rename surprises an external user | No stored content depends on the old key; the release notes name the rename |
 | Content-type work expands to the whole H5P catalog | The six types are the list; others are new roadmap items |
 | Registry absorbs consumer concerns | `Store` interface is the boundary; consumer fields live in the consumer |
 

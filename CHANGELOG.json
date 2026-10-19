@@ -5,26 +5,47 @@
   "versioning": "semver",
   "commitConvention": "conventional",
   "maintainers": ["grokify", "johncwang@gmail.com"],
-  "unreleased": {
-    "added": [
-      { "description": "`Extension.DifficultyScore`, `Skills` (`SkillRef`), and `Standards` (`StandardRef`), validated by `Extension.Validate` and `QuestionSet.Validate`", "commit": "612e5a4" },
-      { "description": "`registry` package: banks, immutable versions, licenses, lineage, and the `Store` interface with `MemoryStore`", "commit": "1fac3b2" },
-      { "description": "Publishing with skill and standard unions, `ErrImmutable`, forks with lineage, and `Descendants`", "commit": "4e343bb" },
-      { "description": "`registry/registrytest` conformance suite for `Store` implementations", "commit": "1fac3b2" },
-      { "description": "Export a bank version to a `QuestionSet` or an `.h5p` package, and import an `.h5p` question set to a draft", "commit": "bbe2b7a" }
-    ],
-    "changed": [
-      { "description": "The question metadata block is read and written only under the `h5pkit` extension key; the `h5pGo` key is no longer read", "commit": "0abbf90", "breaking": true },
-      { "description": "`H5PGoExtension` is renamed `Extension` and `NewH5PGoExtension` is renamed `NewExtension`", "commit": "0abbf90", "breaking": true }
-    ],
-    "fixed": [
-      { "description": "`QuestionSet.Validate` names the index of a bad feedback range as a number", "commit": "43b1dcd" }
-    ],
-    "documentation": [
-      { "description": "Extensions guide covering every field, the relative-difficulty rule, and the rename", "commit": "27db33f" }
-    ]
-  },
+  "unreleased": {},
   "releases": [
+    {
+      "version": "v0.6.0",
+      "date": "2026-10-19",
+      "highlights": [
+        { "description": "Question bank registry: banks, immutable published versions, licenses, lineage, and a `Store` interface with an in-memory store and a conformance suite", "commit": "1fac3b2", "rmis": ["RMI-H5PKIT-005"] },
+        { "description": "Question metadata gains relative difficulty, skills, and standards, under the renamed `h5pkit` extension key", "commit": "612e5a4", "rmis": ["RMI-H5PKIT-002"] },
+        { "description": "Export a bank version to an `.h5p` package and import `.h5p` question sets", "commit": "bbe2b7a", "rmis": ["RMI-H5PKIT-007"] },
+        { "description": "Documentation reorganized into guides, design, specifications, and releases, with a question banks guide" }
+      ],
+      "added": [
+        { "description": "`Extension.DifficultyScore`, `Skills` (`SkillRef`), and `Standards` (`StandardRef`), validated by `Extension.Validate` and `QuestionSet.Validate`", "commit": "612e5a4", "rmis": ["RMI-H5PKIT-002"] },
+        { "description": "`registry` types: `Bank`, `BankVersion`, `License`, `Lineage`, `Status`, `Relation`, and `ListFilter`", "commit": "ca82eed", "rmis": ["RMI-H5PKIT-004"] },
+        { "description": "`registry.Store` with `MemoryStore`, and the `registry/registrytest` conformance suite for other implementations", "commit": "1fac3b2", "rmis": ["RMI-H5PKIT-005"] },
+        { "description": "Publishing with skill and standard unions, `ErrImmutable`, new versions from existing ones, forks with lineage, and `Descendants`", "commit": "4e343bb", "rmis": ["RMI-H5PKIT-006"] },
+        { "description": "`ExportQuestionSet`, `ExportPackage`, `WritePackage`, and `ImportPackage` for `.h5p` interop, plus `Unions` and `CompareVersions`", "commit": "bbe2b7a", "rmis": ["RMI-H5PKIT-007"] }
+      ],
+      "changed": [
+        { "description": "The question metadata block is read and written only under the `h5pkit` extension key; the `h5pGo` key is no longer read", "commit": "0abbf90", "rmis": ["RMI-H5PKIT-001"], "breaking": true},
+        { "description": "`H5PGoExtension` is renamed `Extension` and `NewH5PGoExtension` is renamed `NewExtension`; the old names are removed", "commit": "cc1ffe4", "rmis": ["RMI-H5PKIT-001"], "breaking": true},
+        { "description": "The `go` directive is 1.26", "commit": "995e6d5", "rmis": ["RMI-H5PKIT-012"] }
+      ],
+      "fixed": [
+        { "description": "`QuestionSet.Validate` names the index of a bad feedback range as a number", "commit": "43b1dcd" }
+      ],
+      "documentation": [
+        { "description": "Extensions guide covering every field, the relative-difficulty rule, and the `h5pkit` key", "commit": "27db33f", "rmis": ["RMI-H5PKIT-003"] },
+        { "description": "Question banks guide and standards reference", "commit": "0c33584", "rmis": ["RMI-H5PKIT-012"] },
+        { "description": "Site reorganized into `docs/guides/`, `docs/design/`, `docs/specs/`, and `docs/releases/`, with index pages and the changelog", "commit": "ef74eec" },
+        { "description": "INIT-H5PKIT-001 specifications for the question bank registry and extensions", "commit": "c979101" },
+        { "description": "v0.6.0 release notes" }
+      ],
+      "tests": [
+        { "description": "A runnable registry example", "commit": "3503bf2" },
+        { "description": "Removed a test that read a file outside the repository", "commit": "90b5989" }
+      ],
+      "infrastructure": [
+        { "description": "Shared CI, lint, and CodeQL workflows updated", "commit": "a0b8029" }
+      ]
+    },
     {
       "version": "v0.5.0",
       "date": "2026-03-22",

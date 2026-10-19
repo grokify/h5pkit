@@ -162,20 +162,21 @@ question types in the editor in this initiative; the Go SDK leads.
 
 ### 6. Documentation
 
-- `docs/guide/extensions.md`: the block, every field, the relative-difficulty
+- `docs/guides/user-guide/extensions.md`: the block, every field, the relative-difficulty
   rule, the `h5pkit` key, and how another tool should treat the
   block.
-- `docs/guide/question-banks.md`: registry concepts, immutability, lineage,
+- `docs/guides/user-guide/question-banks.md`: registry concepts, immutability, lineage,
   conformance suite, and interop.
-- `docs/reference/standards.md`: replace the placeholder with how
+- `docs/guides/reference/standards.md`: replace the placeholder with how
   `StandardRef` is used and the H5P specification points h5pkit follows.
-- `docs/development/roadmap.md`: mark the content types delivered and link
+- `docs/guides/development/roadmap.md`: mark the content types delivered and link
   the registry.
 
 ### 7. Versioning
 
-Release as v0.6.0. The namespace rename and the `Extension` type rename are
-breaking changes; everything else is additive. The `go` directive is raised to
+Release the extensions and the registry as v0.6.0, and the content types and
+the editor metadata in the next minor release. The namespace rename and the
+`Extension` type rename are breaking changes; everything else is additive. The `go` directive is raised to
 the organization's current minimum as part of the release item, subject to
 CI toolchain availability.
 

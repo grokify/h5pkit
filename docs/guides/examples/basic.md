@@ -533,4 +533,4 @@ These examples demonstrate the most common usage patterns for the H5P Go SDK. Th
 
 - [Advanced Examples](advanced.md) - More complex usage patterns
 - [Package Examples](packages.md) - Creating complete H5P packages  
-- [User Guide](../guide/question-sets.md) - Comprehensive documentation
+- [User Guide](../user-guide/question-sets.md) - Comprehensive documentation
