@@ -12,6 +12,11 @@ The H5P Go SDK currently supports:
 - ✅ Comprehensive validation system
 - ✅ Polymorphic semantics field handling
 - ✅ Builder pattern for content creation
+- ✅ Question metadata extensions under the `h5pkit` key: relative difficulty, skills, and standards ([Extensions](../user-guide/extensions.md))
+- ✅ Question bank registry: banks, immutable versions, licenses, lineage, a `Store` interface with an in-memory store and a conformance suite, and `.h5p` import and export ([Question Banks](../user-guide/question-banks.md))
+
+The question bank work is planned in
+[INIT-H5PKIT-001](../../specs/initiatives/INIT-H5PKIT-001/ROADMAP.md).
 
 ## Short Term (Next 3-6 months)
 

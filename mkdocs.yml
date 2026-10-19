@@ -58,6 +58,7 @@ nav:
       - Question Sets: guides/user-guide/question-sets.md
       - Typed Questions: guides/user-guide/typed-questions.md
       - Extensions: guides/user-guide/extensions.md
+      - Question Banks: guides/user-guide/question-banks.md
       - H5P Packages: guides/user-guide/h5p-packages.md
       - Validation: guides/user-guide/validation.md
     - TypeScript Editor:
