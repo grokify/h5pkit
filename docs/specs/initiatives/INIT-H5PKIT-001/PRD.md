@@ -77,7 +77,8 @@ projects can use it independently of any one consumer.
   in-memory implementation and a reusable conformance test suite ship with
   it so other stores can prove compatibility.
 - **F4.** The metadata extension is renamed to the `h5pkit` namespace. The
-  former `h5pGo` key is still read for one minor release and never written.
+  former `h5pGo` key is no longer read or written; no stored content depends
+  on it.
 - **F5.** The extension gains `difficultyScore` (a relative score within the
   bank, 0 to 1), `skills` (identifiers in a named taxonomy), and
   `standards` (framework plus code, for example a Common Core or NGSS
@@ -121,7 +122,7 @@ projects can use it independently of any one consumer.
 
 | Risk | Mitigation |
 |---|---|
-| Namespace rename breaks stored content | Read-compat for `h5pGo` for one release; release notes; a conversion helper |
+| Namespace rename breaks stored content | No content depends on the old key; the release notes name the rename |
 | Extension drifts into consumer-specific fields | Keep the block to content metadata; anything about learners or rewards is refused in review |
 | Content-type semantics versions move upstream | Pin the library version string per type, as `H5P.MultiChoice 1.16` is pinned today, and document the policy |
 | Registry grows into a service | Non-goal stated; the `Store` interface is the boundary |

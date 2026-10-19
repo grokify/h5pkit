@@ -29,8 +29,6 @@ Rename the block to the `h5pkit` key and give it a documented shape:
 ```go
 type Extensions struct {
     H5PKit *Extension `json:"h5pkit,omitempty"`
-    // Deprecated: read-only alias for content written before the rename.
-    H5PGo  *Extension `json:"h5pGo,omitempty"`
 }
 
 type Extension struct {
@@ -51,9 +49,8 @@ type SkillRef    struct { Taxonomy, ID string }
 type StandardRef struct { Framework, Code string }
 ```
 
-- `UnmarshalJSON` on `Extensions` promotes `h5pGo` into `H5PKit` when
-  `h5pkit` is absent; `MarshalJSON` never writes `h5pGo`. A
-  `MigrateLegacyExtensions(*QuestionSet)` helper rewrites in place.
+- The `h5pGo` key is neither read nor written, and `Extensions` uses the
+  default JSON encoding.
 - Validation: `DifficultyScore` in `[0,1]`; each `SkillRef` has non-empty
   `Taxonomy` and `ID`; each `StandardRef` has non-empty `Framework` and
   `Code`. `Validate` on `QuestionSet` calls it.
@@ -135,8 +132,7 @@ consumer, for example) proves conformance.
   builds a playable set; `ExportPackage` wraps it in an `.h5p` with the
   required library dependencies.
 - `registry.ImportPackage(path) (BankVersion, error)` loads an `.h5p`
-  question set into a draft version, preserving extension blocks and
-  promoting legacy `h5pGo` data.
+  question set into a draft version, preserving extension blocks.
 
 ### 4. Content types
 
@@ -167,7 +163,7 @@ question types in the editor in this initiative; the Go SDK leads.
 ### 6. Documentation
 
 - `docs/guide/extensions.md`: the block, every field, the relative-difficulty
-  rule, the rename and read-compat, and how another tool should treat the
+  rule, the `h5pkit` key, and how another tool should treat the
   block.
 - `docs/guide/question-banks.md`: registry concepts, immutability, lineage,
   conformance suite, and interop.
@@ -178,8 +174,8 @@ question types in the editor in this initiative; the Go SDK leads.
 
 ### 7. Versioning
 
-Release as v0.6.0. The namespace rename is noted as a behavior change with
-read-compat; everything else is additive. The `go` directive is raised to
+Release as v0.6.0. The namespace rename and the `Extension` type rename are
+breaking changes; everything else is additive. The `go` directive is raised to
 the organization's current minimum as part of the release item, subject to
 CI toolchain availability.
 
@@ -205,7 +201,7 @@ CI toolchain availability.
 
 ## Testing Strategy
 
-- Extension: JSON round-trip for new and legacy keys; validation table tests.
+- Extension: JSON round-trip under the `h5pkit` key; validation table tests.
 - Registry: `registrytest` suite run against `MemoryStore`; immutability,
   version copy, fork lineage, filter semantics.
 - Interop: export then import yields an equal `BankVersion` (ignoring

@@ -12,23 +12,23 @@ of Phases 1 and 2. Commits implementing an item carry
 
 **Theme:** A documented, namespaced metadata block
 
-- [ ] `RMI-H5PKIT-001` Rename the extension namespace to `h5pkit` with read-compat for `h5pGo`, a migration helper, and a `MarshalJSON` that never writes the legacy key
-- [ ] `RMI-H5PKIT-002` Add `difficultyScore`, `skills` (`SkillRef{Taxonomy, ID}`), and `standards` (`StandardRef{Framework, Code}`) with validation wired into `QuestionSet.Validate`
+- [x] `RMI-H5PKIT-001` Rename the extension namespace from `h5pGo` to `h5pkit`
+- [x] `RMI-H5PKIT-002` Add `difficultyScore`, `skills` (`SkillRef{Taxonomy, ID}`), and `standards` (`StandardRef{Framework, Code}`) with validation wired into `QuestionSet.Validate`
   - Depends on: `RMI-H5PKIT-001`
-- [ ] `RMI-H5PKIT-003` Extensions guide: every field, the relative-difficulty rule, the rename, and guidance for other tools
+- [x] `RMI-H5PKIT-003` Extensions guide: every field, the relative-difficulty rule, the rename, and guidance for other tools
   - Depends on: `RMI-H5PKIT-002`
 
 ## Phase 2 — Registry
 
 **Theme:** Banks, immutable versions, lineage, and a store boundary
 
-- [ ] `RMI-H5PKIT-004` `registry` types: `Bank`, `BankVersion`, `License`, `Lineage`, `Status`, `Relation`, `ListFilter`
+- [x] `RMI-H5PKIT-004` `registry` types: `Bank`, `BankVersion`, `License`, `Lineage`, `Status`, `Relation`, `ListFilter`
   - Depends on: `RMI-H5PKIT-002`
-- [ ] `RMI-H5PKIT-005` `Store` interface, `MemoryStore`, and the `registrytest` conformance suite
+- [x] `RMI-H5PKIT-005` `Store` interface, `MemoryStore`, and the `registrytest` conformance suite
   - Depends on: `RMI-H5PKIT-004`
-- [ ] `RMI-H5PKIT-006` Versioning rules: draft editing, publish freezes and computes skill and standards unions, `ErrImmutable`, new version from existing, fork with lineage and descendants lookup
+- [x] `RMI-H5PKIT-006` Versioning rules: draft editing, publish freezes and computes skill and standards unions, `ErrImmutable`, new version from existing, fork with lineage and descendants lookup
   - Depends on: `RMI-H5PKIT-005`
-- [ ] `RMI-H5PKIT-007` Interop: export a version to `QuestionSet` and `.h5p`; import an `.h5p` question set to a draft version preserving extensions
+- [x] `RMI-H5PKIT-007` Interop: export a version to `QuestionSet` and `.h5p`; import an `.h5p` question set to a draft version preserving extensions
   - Depends on: `RMI-H5PKIT-006`
 
 ## Phase 3 — Content Types

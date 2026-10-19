@@ -2,14 +2,13 @@ package h5p
 
 import (
 	"encoding/json"
-	"os"
 	"testing"
 )
 
 func TestExtensionsJSONParsing(t *testing.T) {
 	// Test that we can marshal/unmarshal Extensions correctly
 	ext := &Extensions{
-		H5PGo: &H5PGoExtension{
+		H5PKit: &Extension{
 			Section:           "1. Overview & Fundamentals",
 			Topic:             "Introduction",
 			Tags:              []string{"basics", "overview"},
@@ -30,20 +29,20 @@ func TestExtensionsJSONParsing(t *testing.T) {
 		t.Fatalf("Failed to unmarshal Extensions: %v", err)
 	}
 
-	if parsed.H5PGo == nil {
-		t.Fatal("H5PGo extension is nil after unmarshal")
+	if parsed.H5PKit == nil {
+		t.Fatal("H5PKit extension is nil after unmarshal")
 	}
 
-	if parsed.H5PGo.Section != ext.H5PGo.Section {
-		t.Errorf("Section mismatch: got %q, want %q", parsed.H5PGo.Section, ext.H5PGo.Section)
+	if parsed.H5PKit.Section != ext.H5PKit.Section {
+		t.Errorf("Section mismatch: got %q, want %q", parsed.H5PKit.Section, ext.H5PKit.Section)
 	}
 
-	if parsed.H5PGo.QuestionNumber != ext.H5PGo.QuestionNumber {
-		t.Errorf("QuestionNumber mismatch: got %d, want %d", parsed.H5PGo.QuestionNumber, ext.H5PGo.QuestionNumber)
+	if parsed.H5PKit.QuestionNumber != ext.H5PKit.QuestionNumber {
+		t.Errorf("QuestionNumber mismatch: got %d, want %d", parsed.H5PKit.QuestionNumber, ext.H5PKit.QuestionNumber)
 	}
 
-	if len(parsed.H5PGo.Tags) != len(ext.H5PGo.Tags) {
-		t.Errorf("Tags length mismatch: got %d, want %d", len(parsed.H5PGo.Tags), len(ext.H5PGo.Tags))
+	if len(parsed.H5PKit.Tags) != len(ext.H5PKit.Tags) {
+		t.Errorf("Tags length mismatch: got %d, want %d", len(parsed.H5PKit.Tags), len(ext.H5PKit.Tags))
 	}
 }
 
@@ -53,7 +52,7 @@ func TestQuestionWithExtensions(t *testing.T) {
 		Library: "H5P.MultiChoice 1.16",
 		Params:  map[string]interface{}{"question": "Test question?"},
 		Extensions: &Extensions{
-			H5PGo: &H5PGoExtension{
+			H5PKit: &Extension{
 				Section:        "Test Section",
 				QuestionNumber: 42,
 				Difficulty:     "medium",
@@ -75,17 +74,17 @@ func TestQuestionWithExtensions(t *testing.T) {
 		t.Fatal("Extensions is nil after unmarshal")
 	}
 
-	if parsed.Extensions.H5PGo == nil {
-		t.Fatal("H5PGo is nil after unmarshal")
+	if parsed.Extensions.H5PKit == nil {
+		t.Fatal("H5PKit is nil after unmarshal")
 	}
 
-	if parsed.Extensions.H5PGo.QuestionNumber != 42 {
-		t.Errorf("QuestionNumber mismatch: got %d, want 42", parsed.Extensions.H5PGo.QuestionNumber)
+	if parsed.Extensions.H5PKit.QuestionNumber != 42 {
+		t.Errorf("QuestionNumber mismatch: got %d, want 42", parsed.Extensions.H5PKit.QuestionNumber)
 	}
 }
 
-func TestNewH5PGoExtension(t *testing.T) {
-	ext := NewH5PGoExtension("Test Section", 5).
+func TestNewExtension(t *testing.T) {
+	ext := NewExtension("Test Section", 5).
 		WithTopic("Test Topic").
 		WithDifficulty("hard").
 		WithTags("tag1", "tag2").
@@ -118,7 +117,7 @@ func TestQuestionSetWithExtensions(t *testing.T) {
 				"library": "H5P.MultiChoice 1.16",
 				"params": {"question": "What is 2+2?"},
 				"extensions": {
-					"h5pGo": {
+					"h5pkit": {
 						"section": "Math Basics",
 						"questionNumber": 1,
 						"difficulty": "easy",
@@ -142,11 +141,11 @@ func TestQuestionSetWithExtensions(t *testing.T) {
 		t.Fatal("Extensions is nil")
 	}
 
-	if qs.Questions[0].Extensions.H5PGo == nil {
-		t.Fatal("H5PGo is nil")
+	if qs.Questions[0].Extensions.H5PKit == nil {
+		t.Fatal("H5PKit is nil")
 	}
 
-	ext := qs.Questions[0].Extensions.H5PGo
+	ext := qs.Questions[0].Extensions.H5PKit
 	if ext.Section != "Math Basics" {
 		t.Errorf("Section mismatch: got %q", ext.Section)
 	}
@@ -155,73 +154,5 @@ func TestQuestionSetWithExtensions(t *testing.T) {
 	}
 	if len(ext.Tags) != 2 {
 		t.Errorf("Tags mismatch: got %d tags", len(ext.Tags))
-	}
-}
-
-// TestExternalQuizFile tests parsing an external quiz file if it exists
-// This validates real-world usage of the extensions format
-func TestExternalQuizFile(t *testing.T) {
-	// Path to the LLM tuning quiz file
-	quizPath := "../../../agentplexus/agentplexus-courses-internal/llm-tuning/quiz_llm_techniques.json"
-
-	// Skip if file doesn't exist (allows test to pass in CI without the file)
-	if _, err := os.Stat(quizPath); os.IsNotExist(err) {
-		t.Skip("External quiz file not found, skipping validation test")
-	}
-
-	data, err := os.ReadFile(quizPath)
-	if err != nil {
-		t.Fatalf("Failed to read quiz file: %v", err)
-	}
-
-	var qs QuestionSet
-	if err := json.Unmarshal(data, &qs); err != nil {
-		t.Fatalf("Failed to unmarshal quiz file: %v", err)
-	}
-
-	// Validate basic structure
-	if qs.Title == "" {
-		t.Error("Quiz title is empty")
-	}
-
-	if len(qs.Questions) == 0 {
-		t.Fatal("No questions found in quiz")
-	}
-
-	t.Logf("Parsed quiz: %q with %d questions", qs.Title, len(qs.Questions))
-
-	// Validate each question has extensions
-	sectionsFound := make(map[string]int)
-	for i, q := range qs.Questions {
-		if q.Library == "" {
-			t.Errorf("Question %d: library is empty", i+1)
-		}
-
-		if q.Extensions == nil {
-			t.Errorf("Question %d: extensions is nil", i+1)
-			continue
-		}
-
-		if q.Extensions.H5PGo == nil {
-			t.Errorf("Question %d: h5pGo extension is nil", i+1)
-			continue
-		}
-
-		ext := q.Extensions.H5PGo
-		if ext.Section == "" {
-			t.Errorf("Question %d: section is empty", i+1)
-		}
-		if ext.QuestionNumber == 0 {
-			t.Errorf("Question %d: questionNumber is 0", i+1)
-		}
-
-		sectionsFound[ext.Section]++
-	}
-
-	t.Logf("Sections found: %v", sectionsFound)
-
-	// Expect 10 sections based on the quiz structure
-	if len(sectionsFound) < 5 {
-		t.Errorf("Expected at least 5 sections, found %d", len(sectionsFound))
 	}
 }

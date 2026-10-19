@@ -60,95 +60,44 @@ if err != nil {
 }
 ```
 
-## H5PGoExtension Builder
+## Extension Builder
 
-The `H5PGoExtension` type provides builder methods for constructing question metadata extensions.
-
-### Creating an Extension
-
-```go
-// Create with section and question number
-ext := h5p.NewH5PGoExtension("1. Overview", 1)
-
-// Or create empty extensions container
-extensions := h5p.NewExtensions()
-```
-
-### Builder Methods
-
-All builder methods return the extension for method chaining:
+`Extension` setters return the extension for chaining. See the
+[Extensions guide](../guide/extensions.md) for what each field means.
 
 ```go
-// WithTopic sets the topic within a section
-func (e *H5PGoExtension) WithTopic(topic string) *H5PGoExtension
-
-// WithTags sets categorization tags (variadic)
-func (e *H5PGoExtension) WithTags(tags ...string) *H5PGoExtension
-
-// WithDifficulty sets the difficulty level
-func (e *H5PGoExtension) WithDifficulty(difficulty string) *H5PGoExtension
-
-// WithLearningObjective sets what the question tests
-func (e *H5PGoExtension) WithLearningObjective(objective string) *H5PGoExtension
-
-// WithSource sets the origin of the question content
-func (e *H5PGoExtension) WithSource(source string) *H5PGoExtension
-```
-
-### Complete Example
-
-```go
-// Build extension with all metadata
-ext := h5p.NewH5PGoExtension("1. Overview & Fundamentals", 1).
+ext := h5p.NewExtension("1. Overview & Fundamentals", 1).
     WithTopic("RAG Fundamentals").
     WithTags("rag", "retrieval", "llm").
     WithDifficulty("medium").
+    WithDifficultyScore(0.4).
+    WithSkills(h5p.SkillRef{Taxonomy: "example-skills", ID: "rag.basics"}).
     WithLearningObjective("Understand the difference between RAG and fine-tuning").
-    WithSource("PRESENTATION.md")
-
-// Create question with extensions
-question := h5p.NewMultiChoiceQuestionWithExtensions(
-    "What does RAG stand for?",
-    []h5p.Answer{
-        {Text: "Retrieval-Augmented Generation", Correct: true},
-        {Text: "Random Answer Generator", Correct: false},
-        {Text: "Real-time AI Gateway", Correct: false},
-    },
-    &h5p.Extensions{H5PGo: ext},
-)
+    WithSource("Chapter 1")
 ```
 
 ## MultiChoiceQuestion Builder
 
-Create MultiChoice questions with or without extensions:
+Create typed MultiChoice questions with or without an extension block:
 
 ```go
-// Without extensions
-question := h5p.NewMultiChoiceQuestion(
-    "What is 2 + 2?",
-    []h5p.Answer{
+params := &schemas.MultiChoiceParams{
+    Question: "What is 2 + 2?",
+    Answers: []schemas.AnswerOption{
         {Text: "4", Correct: true},
         {Text: "5", Correct: false},
     },
-)
+}
+
+// Without extensions
+question := h5p.NewMultiChoiceQuestion(params)
 
 // With extensions
-question := h5p.NewMultiChoiceQuestionWithExtensions(
-    "What is 2 + 2?",
-    []h5p.Answer{
-        {Text: "4", Correct: true},
-        {Text: "5", Correct: false},
-    },
-    &h5p.Extensions{
-        H5PGo: h5p.NewH5PGoExtension("Math", 1).
-            WithDifficulty("easy"),
-    },
-)
+question = h5p.NewMultiChoiceQuestionWithExtensions(params,
+    h5p.NewExtension("Math", 1).WithDifficulty("easy"))
 
-// Add extensions to existing question
-question.WithExtensions(&h5p.Extensions{
-    H5PGo: h5p.NewH5PGoExtension("Math", 1),
-})
+// Add extensions to an existing question
+question.WithExtensions(h5p.NewExtension("Math", 1))
 ```
 
 ## Error Handling

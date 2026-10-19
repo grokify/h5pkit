@@ -52,95 +52,80 @@ type Question struct {
 
 ## Extension Types
 
-Extensions allow vendor-specific metadata to be added to questions while maintaining H5P compatibility. Standard H5P parsers will ignore unknown fields.
+Extensions add h5pkit metadata to a question without affecting H5P players.
+The [Extensions guide](../guide/extensions.md) describes every field, the
+relative-difficulty rule, and the `h5pkit` key.
 
 ### Extensions
 
-Container for vendor-specific extensions:
+Container for the metadata block, a sibling of `library` and `params`:
 
 ```go
 type Extensions struct {
-    H5PGo *H5PGoExtension `json:"h5pGo,omitempty"`
+    H5PKit *Extension `json:"h5pkit,omitempty"`
 }
+
+// Extension returns H5PKit, or nil when it is not set.
+func (e *Extensions) Extension() *Extension
 ```
 
-### H5PGoExtension
-
-The h5p-go specific extension for question metadata:
+### Extension
 
 ```go
-type H5PGoExtension struct {
-    Section           string                 `json:"section,omitempty"`
-    Topic             string                 `json:"topic,omitempty"`
-    Tags              []string               `json:"tags,omitempty"`
-    Difficulty        string                 `json:"difficulty,omitempty"`
-    QuestionNumber    int                    `json:"questionNumber,omitempty"`
-    LearningObjective string                 `json:"learningObjective,omitempty"`
-    Source            string                 `json:"source,omitempty"`
-    Custom            map[string]interface{} `json:"custom,omitempty"`
+type Extension struct {
+    Section           string         `json:"section,omitempty"`
+    Topic             string         `json:"topic,omitempty"`
+    Tags              []string       `json:"tags,omitempty"`
+    Difficulty        string         `json:"difficulty,omitempty"`
+    DifficultyScore   *float64       `json:"difficultyScore,omitempty"`
+    Skills            []SkillRef     `json:"skills,omitempty"`
+    Standards         []StandardRef  `json:"standards,omitempty"`
+    QuestionNumber    int            `json:"questionNumber,omitempty"`
+    LearningObjective string         `json:"learningObjective,omitempty"`
+    Source            string         `json:"source,omitempty"`
+    Custom            map[string]any `json:"custom,omitempty"`
 }
+
+type SkillRef struct {
+    Taxonomy string `json:"taxonomy"`
+    ID       string `json:"id"`
+}
+
+type StandardRef struct {
+    Framework string `json:"framework"`
+    Code      string `json:"code"`
+}
+
+// Validate checks the score range and that references are complete.
+func (e *Extension) Validate() error
 ```
 
-#### Extension Fields
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `Section` | string | Section/category the question belongs to |
-| `Topic` | string | Specific topic within a section |
-| `Tags` | []string | Flexible categorization labels |
-| `Difficulty` | string | Difficulty level (easy/medium/hard) |
-| `QuestionNumber` | int | Explicit ordering within a question set |
-| `LearningObjective` | string | What the question tests |
-| `Source` | string | Origin of the question content |
-| `Custom` | map[string]interface{} | Arbitrary additional metadata |
-
-#### Factory Functions
+#### Constructors and setters
 
 ```go
-// NewExtensions creates a new Extensions struct with an initialized H5PGoExtension
 func NewExtensions() *Extensions
+func NewExtension(section string, questionNumber int) *Extension
 
-// NewH5PGoExtension creates a new H5PGoExtension with section and question number
-func NewH5PGoExtension(section string, questionNumber int) *H5PGoExtension
-```
-
-#### Builder Methods
-
-```go
-// WithTopic sets the topic and returns the extension for chaining
-func (e *H5PGoExtension) WithTopic(topic string) *H5PGoExtension
-
-// WithTags sets the tags and returns the extension for chaining
-func (e *H5PGoExtension) WithTags(tags ...string) *H5PGoExtension
-
-// WithDifficulty sets the difficulty and returns the extension for chaining
-func (e *H5PGoExtension) WithDifficulty(difficulty string) *H5PGoExtension
-
-// WithLearningObjective sets the learning objective
-func (e *H5PGoExtension) WithLearningObjective(objective string) *H5PGoExtension
-
-// WithSource sets the source and returns the extension for chaining
-func (e *H5PGoExtension) WithSource(source string) *H5PGoExtension
+func (e *Extension) WithTopic(topic string) *Extension
+func (e *Extension) WithTags(tags ...string) *Extension
+func (e *Extension) WithDifficulty(difficulty string) *Extension
+func (e *Extension) WithDifficultyScore(score float64) *Extension
+func (e *Extension) WithSkills(skills ...SkillRef) *Extension
+func (e *Extension) WithStandards(standards ...StandardRef) *Extension
+func (e *Extension) WithLearningObjective(objective string) *Extension
+func (e *Extension) WithSource(source string) *Extension
 ```
 
 #### Example
 
 ```go
-ext := h5p.NewH5PGoExtension("1. Overview", 1).
+ext := h5p.NewExtension("1. Overview", 1).
     WithTopic("RAG Fundamentals").
     WithTags("rag", "retrieval").
     WithDifficulty("medium").
-    WithLearningObjective("Understand RAG basics").
-    WithSource("Chapter 1")
+    WithDifficultyScore(0.4)
 
-question := h5p.NewMultiChoiceQuestionWithExtensions(
-    "What is RAG?",
-    []h5p.Answer{
-        {Text: "Retrieval-Augmented Generation", Correct: true},
-        {Text: "Random Answer Generator", Correct: false},
-    },
-    &h5p.Extensions{H5PGo: ext},
-)
+question := h5p.NewMultiChoiceQuestionWithExtensions(params, ext)
 ```
 
 ### Answer
