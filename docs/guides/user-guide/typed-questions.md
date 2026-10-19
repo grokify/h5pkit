@@ -112,19 +112,22 @@ Control how the question behaves:
 
 ```go
 behaviour := &schemas.Behaviour{
-    Type:                  "single",        // "single" or "multi"
-    EnableRetry:           true,            // Allow retrying
-    EnableSolutionsButton: true,            // Show solutions
-    EnableCheckButton:     true,            // Show check button
-    RandomAnswers:         true,            // Randomize answer order
-    ShowScorePoints:       true,            // Display points
-    AutoCheck:             false,           // Auto-check answers
-    PassPercentage:        75,              // Pass threshold
-    ShowResultsOnQuizEnd:  true,            // Show results at end
+    Type:                  "single",              // "auto", "single" or "multi"
+    EnableRetry:           schemas.Bool(true),    // Allow retrying
+    EnableSolutionsButton: schemas.Bool(true),    // Show solutions
+    EnableCheckButton:     schemas.Bool(true),    // Show check button
+    RandomAnswers:         schemas.Bool(false),   // Keep answers in order
+    ShowScorePoints:       schemas.Bool(true),    // Display points
+    PassPercentage:        75,                    // Pass threshold
 }
 
 params.Behaviour = behaviour
 ```
+
+Fields whose H5P default is `true` are `*bool`. Leave one nil to use the
+player's default, or set it with `schemas.Bool` to write an explicit value. A
+plain `bool` with `omitempty` could not write `false`, so the player would
+fall back to `true`.
 
 ### Overall Feedback
 
@@ -321,10 +324,10 @@ func createAdvancedQuestion() *h5p.MultiChoiceQuestion {
         
         Behaviour: &schemas.Behaviour{
             Type:                  "multi",
-            EnableRetry:           true,
-            EnableSolutionsButton: true,
-            RandomAnswers:         true,
-            ShowScorePoints:       true,
+            EnableRetry:           schemas.Bool(true),
+            EnableSolutionsButton: schemas.Bool(true),
+            RandomAnswers:         schemas.Bool(true),
+            ShowScorePoints:       schemas.Bool(true),
             PassPercentage:        75,
         },
         

@@ -47,17 +47,23 @@ type FeedbackRange struct {
 	Feedback string `json:"feedback,omitempty"`
 }
 
-// Behaviour controls how the MultiChoice question behaves
+// Behaviour controls how the MultiChoice question behaves.
+//
+// Fields whose H5P default is true are pointers, so that an explicit false
+// is serialized. A nil pointer is omitted and the player uses its default.
 type Behaviour struct {
-	EnableRetry           bool   `json:"enableRetry,omitempty"`
-	EnableSolutionsButton bool   `json:"enableSolutionsButton,omitempty"`
-	EnableCheckButton     bool   `json:"enableCheckButton,omitempty"`
-	Type                  string `json:"type,omitempty"` // "auto", "multi", "single"
+	EnableRetry           *bool  `json:"enableRetry,omitempty"`           // H5P default: true
+	EnableSolutionsButton *bool  `json:"enableSolutionsButton,omitempty"` // H5P default: true
+	EnableCheckButton     *bool  `json:"enableCheckButton,omitempty"`     // H5P default: true
+	Type                  string `json:"type,omitempty"`                  // "auto", "multi", "single"
 	SinglePoint           bool   `json:"singlePoint,omitempty"`
-	RandomAnswers         bool   `json:"randomAnswers,omitempty"`
+	RandomAnswers         *bool  `json:"randomAnswers,omitempty"` // H5P default: true
 	PassPercentage        int    `json:"passPercentage,omitempty"`
-	ShowScorePoints       bool   `json:"showScorePoints,omitempty"`
+	ShowScorePoints       *bool  `json:"showScorePoints,omitempty"` // H5P default: true
 }
+
+// Bool returns a pointer to b, for the pointer fields of Behaviour.
+func Bool(b bool) *bool { return &b }
 
 // UITranslations contains user interface text labels
 type UITranslations struct {
