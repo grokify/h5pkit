@@ -139,8 +139,14 @@ func (qs *QuestionSet) Validate() error {
 	}
 
 	for i, q := range qs.Questions {
-		if err := q.Extensions.Extension().Validate(); err != nil {
+		ext := q.Extensions.Extension()
+		if err := ext.Validate(); err != nil {
 			return fmt.Errorf("question %d extensions: %w", i, err)
+		}
+		if ext != nil && ext.Scoring.IsLikert() {
+			if err := validateLikert(q); err != nil {
+				return fmt.Errorf("question %d likert: %w", i, err)
+			}
 		}
 	}
 
