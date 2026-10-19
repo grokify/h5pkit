@@ -74,5 +74,5 @@ types and the editor follow in a later release. Phase 4 is independent of Phases
   - Depends on: `RMI-H5PKIT-015`
 - [x] `RMI-H5PKIT-017` Likert section in the extensions guide
   - Depends on: `RMI-H5PKIT-016`
-- [ ] `RMI-H5PKIT-018` Changelog and release notes, tag v0.7.0 with Likert scoring, record the release
+- [x] `RMI-H5PKIT-018` Changelog and release notes, tag v0.7.0 with Likert scoring, record the release
   - Depends on: `RMI-H5PKIT-017`
