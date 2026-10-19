@@ -28,6 +28,10 @@ func TestExtensionValidate(t *testing.T) {
 		{"standard ok", &Extension{Standards: []StandardRef{{Framework: "fw", Code: "1.A"}}}, nil},
 		{"standard no framework", &Extension{Standards: []StandardRef{{Code: "1.A"}}}, ErrStandardRefIncomplete},
 		{"standard no code", &Extension{Standards: []StandardRef{{Framework: "fw"}}}, ErrStandardRefIncomplete},
+		{"scoring likert", &Extension{Scoring: NewLikertScoring("agreement-5", true)}, nil},
+		{"scoring no method", &Extension{Scoring: &Scoring{Scale: "agreement-5"}}, ErrScoringMethod},
+		{"scoring unknown method", &Extension{Scoring: &Scoring{Method: "rank", Scale: "s"}}, ErrScoringMethod},
+		{"scoring no scale", &Extension{Scoring: &Scoring{Method: ScoringMethodLikert, Scale: " "}}, ErrScoringScale},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
