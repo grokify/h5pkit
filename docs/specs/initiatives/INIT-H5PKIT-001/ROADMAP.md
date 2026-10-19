@@ -61,3 +61,16 @@ in a later release. Phase 4 is independent of Phases 1 to 3. Commits implementin
   - Depends on: `RMI-H5PKIT-010`
   - Depends on: `RMI-H5PKIT-011`
   - Depends on: `RMI-H5PKIT-012`
+
+## Phase 6 — Likert Scoring
+
+**Theme:** Scored scales on standard H5P.MultiChoice
+
+- [x] `RMI-H5PKIT-014` Make the MultiChoice behaviour fields that default to true `*bool`, so an explicit false is written
+- [x] `RMI-H5PKIT-015` `scoring` on the `h5pkit` block: `likert` method, scale, and reverse flag, with validation
+  - Depends on: `RMI-H5PKIT-002`
+- [x] `RMI-H5PKIT-016` Likert overlay on `H5P.MultiChoice`: params builder, `AddLikertQuestion`, Likert validation in `QuestionSet.Validate`, and `ScoreLikert`
+  - Depends on: `RMI-H5PKIT-014`
+  - Depends on: `RMI-H5PKIT-015`
+- [x] `RMI-H5PKIT-017` Likert section in the extensions guide
+  - Depends on: `RMI-H5PKIT-016`
