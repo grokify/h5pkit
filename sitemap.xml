@@ -2,190 +2,190 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://grokify.github.io/h5pkit/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/design/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/design/adrs/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/design/architecture/h5p-editor/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/api/builder/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/api/core-types/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/api/schemas/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/api/semantics/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/development/contributing/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/development/roadmap/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/development/testing/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/examples/advanced/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/examples/basic/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/examples/packages/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/getting-started/concepts/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/getting-started/installation/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/getting-started/quick-start/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/reference/file-structure/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/reference/h5p-spec/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/reference/standards/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/reference/why-h5p-for-quizzes/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/ts-editor/api-reference/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/ts-editor/installation/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/ts-editor/overview/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/ts-editor/react-usage/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/ts-editor/vanilla-js/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/user-guide/extensions/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/user-guide/h5p-packages/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/user-guide/question-banks/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/user-guide/question-sets/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/user-guide/typed-questions/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/guides/user-guide/validation/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/releases/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/releases/changelog/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/releases/v0.1.0/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/releases/v0.2.0/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/releases/v0.3.0/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/releases/v0.4.0/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/releases/v0.5.0/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/releases/v0.6.0/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/releases/v0.7.0/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/specs/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/specs/initiatives/INIT-H5PKIT-001/PLAN/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/specs/initiatives/INIT-H5PKIT-001/PRD/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/specs/initiatives/INIT-H5PKIT-001/ROADMAP/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
     <url>
          <loc>https://grokify.github.io/h5pkit/specs/initiatives/INIT-H5PKIT-001/TRD/</loc>
-         <lastmod>2026-10-19</lastmod>
+         <lastmod>2026-10-21</lastmod>
     </url>
 </urlset>
